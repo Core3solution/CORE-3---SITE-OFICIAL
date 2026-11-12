@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div role="img" aria-label="{{ label }}" style="position:relative;width:{{ size }}px;height:{{ size }}px;">
+  <canvas ref="{{ cv }}" width="{{ px }}" height="{{ px }}" style="position:absolute;left:-10%;top:-10%;width:120%;height:120%;display:block;pointer-events:none;"></canvas>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:460},&quot;progress&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:6,&quot;min&quot;:0,&quot;max&quot;:6,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:420,&quot;tsType&quot;:&quot;number&quot;},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Escultura metálica em montagem&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  cv = React.createRef();
+  PARTS = [
+    { k: 1, T: 10.5, N: 160, a: 13.5, b: -8.4, c: -42.9, off: [-6, -3], from: [16, -40], fn: t => [64.4 * Math.cos(t), 43.6 * Math.sin(t), 18.5 * Math.sin(2 * t + 3.1135) + 0.16 * Math.sin(3 * t + 0.6)] },
+    { k: 2, T: 3.4, N: 110, a: 13.5, b: -8.4, c: -42.9, off: [0, 0], from: [24, 30], fn: t => [0.58 * 64.4 * Math.cos(t), 0.58 * 43.6 * Math.sin(t), 0.58 * 18.5 * Math.sin(2 * t + 3.1135)], g: 1 },
+    { k: 3, T: 10.5, N: 160, a: 16.1, b: -16.1, c: 23, off: [6, -3], from: [14, 44], fn: t => [61.7 * Math.cos(t), 42.5 * Math.sin(t), 20.1 * Math.sin(2 * t + 2.821) + 0.77 * Math.sin(3 * t + 2.55)] },
+    { k: 4, T: 10.5, N: 160, a: -0.55, b: -9.9, c: 86.8, off: [0, 6], from: [-26, 30], fn: t => [59.3 * Math.cos(t), 39.7 * Math.sin(t), 21.7 * Math.sin(2 * t + 2.926) + 2.48 * Math.sin(3 * t + 5.83)] }
+  ];
+  renderVals() {
+    const size = this.props.size ?? 420;
+    return { cv: this.cv, size, px: Math.round(size * 1.2 * Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1)), label: this.props.label ?? 'Escultura metálica em montagem' };
+  }
+  componentDidMount() { this.draw(); }
+  componentDidUpdate() { this.draw(); }
+  draw() {
+    const cv = this.cv.current; if (!cv) return;
+    const ctx = cv.getContext('2d'), W = cv.width, u = W / 240;
+    const P = Math.max(0, Math.min(6, Number(this.props.progress ?? 6)));
+    const cl = v => Math.max(0, Math.min(1, v)), ease = t => t * t * (3 - 2 * t), sm = (a, b, x) => ease(cl((x - a) / (b - a)));
+    const b = k => cl((P - k) / 0.5);
+    const f = ease(b(5)), core = ease(cl((P + 0.25) / 0.5));
+    const rad = Math.PI / 180, V = -28 * rad;
+    const rot = (x, y, z, a, bb, c) => {
+      const y1 = y * Math.cos(a) - z * Math.sin(a), z1 = y * Math.sin(a) + z * Math.cos(a);
+      const x2 = x * Math.cos(bb) + z1 * Math.sin(bb), z2 = -x * Math.sin(bb) + z1 * Math.cos(bb);
+      const x3 = x2 * Math.cos(c) - y1 * Math.sin(c), y3 = x2 * Math.sin(c) + y1 * Math.cos(c);
+      return [x3, y3 * Math.cos(V) - z2 * Math.sin(V), y3 * Math.sin(V) + z2 * Math.cos(V)];
+    };
+    const nrm = v => { const l = Math.hypot(...v); return v.map(x => x / l); };
+    const K1 = nrm([-0.45, -0.7, 0.55]), K2 = nrm([0.75, 0.3, 0.55]), K3 = nrm([0.1, 0.9, 0.4]);
+    const L = [-0.6, -0.8], dot = (a, c) => a[0] * c[0] + a[1] * c[1] + a[2] * c[2];
+    const env = (nx, ny, s) => {
+      const Nz = Math.sqrt(Math.max(0, 1 - s * s)), R = [2 * Nz * nx * s, 2 * Nz * ny * s, 2 * Nz * Nz - 1];
+      let v = 0.03 + 0.78 * sm(-0.1, 0.14, -R[1]);
+      v += 1.1 * Math.pow(Math.max(0, dot(R, K1)), 10) + 0.5 * Math.pow(Math.max(0, dot(R, K2)), 16) + 0.16 * Math.pow(Math.max(0, dot(R, K3)), 6);
+      v *= 0.42 + 0.58 * sm(-0.25, 0.45, Math.sin(R[0] * 4.2 + R[1] * 2.6 + 0.8));
+      return cl(v * (0.2 + 0.8 * sm(-0.95, 0.35, R[2])));
+    };
+    const gr = v => { const g = Math.round(255 * Math.pow(cl(v), 0.85)); return `rgb(${g},${g},${g})`; };
+    const FR = [0.92, 0.72, 0.54, 0.38, 0.24, 0.12];
+    const segs = [], tips = [];
+    this.PARTS.forEach(p => {
+      let g = b(p.k); if (p.g) g = cl(g * 1.2);
+      if (g <= 0) return;
+      const e = ease(g), sc = (1 + (1 - f) * 0.04) * (0.9 + 0.1 * e);
+      const a = (p.a + (1 - e) * p.from[0]) * rad, bb = p.b * rad, c = (p.c + (1 - e) * p.from[1]) * rad;
+      const ox = 120 + p.off[0] * (1 - f), oy = 120 + p.off[1] * (1 - f), closed = e > 0.999;
+      const tot = Math.max(2, Math.ceil(p.N * e)), span = Math.PI * 2 * e, th0 = -Math.PI * 0.6, pts = [];
+      for (let i = 0; i <= tot; i++) {
+        const q0 = p.fn(th0 + span * (i / tot)), q = rot(q0[0] * sc, q0[1] * sc, q0[2] * sc, a, bb, c), s = 560 / (560 - q[2]);
+        pts.push({ x: ox + q[0] * s, y: oy + q[1] * s, z: q[2], s });
+      }
+      if (closed) pts.pop();
+      const n = pts.length, cnt = closed ? n : n - 1;
+      for (let i = 0; i < cnt; i++) {
+        const A = pts[i], B = pts[(i + 1) % n];
+        const dx = B.x - A.x, dy = B.y - A.y, l = Math.hypot(dx, dy) || 1;
+        segs.push({ A, B, dx, dy, nx: -dy / l, ny: dx / l, z: (A.z + B.z) / 2, T: p.T });
+      }
+      if (g < 1) { const t = pts[n - 1]; tips.push({ x: t.x, y: t.y, r: p.T * 1.1, op: Math.sin(g * Math.PI) * 0.9 + 0.1 }); }
+    });
+    segs.sort((m, q) => m.z - q.z);
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, W);
+    ctx.setTransform(u, 0, 0, u, 0, 0);
+    const glow = (x, y, r, al, sy = 1) => {
+      ctx.save(); ctx.translate(x, y); ctx.scale(1, sy);
+      const gg = ctx.createRadialGradient(0, 0, 0, 0, 0, r); gg.addColorStop(0, `rgba(255,255,255,${al})`); gg.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fill(); ctx.restore();
+    };
+    glow(120, 120, 98, 0.05 + 0.06 * core + 0.1 * f);
+    glow(120, 212, 76, 0.06 + 0.3 * f, 0.1);
+    if (core > 0) {
+      const r = 4.5 * core;
+      ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.beginPath(); ctx.arc(120, 120, r * 1.6, 0, 7); ctx.fill();
+      const gg = ctx.createRadialGradient(120 - r * 0.3, 120 - r * 0.4, 0, 120, 120, r);
+      gg.addColorStop(0, '#FFFFFF'); gg.addColorStop(0.3, '#BDBDBD'); gg.addColorStop(0.7, '#2A2A2A'); gg.addColorStop(1, '#0C0C0C');
+      ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(120, 120, r, 0, 7); ctx.fill();
+    }
+    ctx.lineCap = 'butt';
+    const stroke = (S, off, w, col, al, x = 0.3) => {
+      ctx.globalAlpha = al; ctx.strokeStyle = col; ctx.lineWidth = w;
+      ctx.beginPath(); ctx.moveTo(S.A.x - x * S.dx + S.nx * off, S.A.y - x * S.dy + S.ny * off);
+      ctx.lineTo(S.B.x + x * S.dx + S.nx * off, S.B.y + x * S.dy + S.ny * off); ctx.stroke();
+    };
+    segs.forEach(S => {
+      const Tm = S.T * (S.A.s + S.B.s) / 2, d = S.nx * L[0] + S.ny * L[1], dep = 0.76 + 0.24 * cl(0.5 + S.z / 120);
+      stroke(S, 0, Tm * 1.5, '#000000', 0.18, 0);
+      stroke(S, 0, Tm * 1.0, '#050505', 1, 0.04);
+      FR.forEach(fr => { const s = (1 - fr) * 0.8 * d; stroke(S, s * Tm / 2, Tm * fr, gr(env(S.nx, S.ny, s) * dep * (0.82 + 0.18 * f)), 1); });
+      const rim = cl((d - 0.15) * 1.2) * (0.45 + 0.45 * f);
+      if (rim > 0.04 && Tm > 7) { const so = d * 0.72, ub = env(S.nx, S.ny, so) * dep, vv = ub + (1 - ub) * rim; stroke(S, so * Tm / 2, Math.max(0.5, Tm * 0.09), gr(vv), 1, 0.3); }
+    });
+    ctx.globalAlpha = 1;
+    tips.forEach(t => { glow(t.x, t.y, t.r, t.op); ctx.fillStyle = '#FFFFFF'; ctx.globalAlpha = t.op; ctx.beginPath(); ctx.arc(t.x, t.y, 1.2, 0, 7); ctx.fill(); ctx.globalAlpha = 1; });
+  }
+}
+</script>
+</body>
+</html>

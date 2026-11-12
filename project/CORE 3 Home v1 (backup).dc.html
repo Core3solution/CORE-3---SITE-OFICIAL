@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>CORE 3 — Tecnologia que impulsiona seu negócio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Orbitron:wght@500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#000000;color:#FFFFFF;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit;opacity:.8}
+button{font-family:inherit}
+:focus-visible{outline:2px solid #6B6B6B;outline-offset:3px}
+input::placeholder{color:#6B6B6B}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:0.01ms !important}}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08);">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="#inicio" aria-label="CORE 3 — início" style="display:flex;align-items:center;gap:10px;">
+      <img src="assets/c3-symbol.png" alt="" style="height:22px;width:auto;display:block;">
+      <span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:18px;letter-spacing:0.04em;color:#FFFFFF;">CORE 3</span>
+    </a>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Principal" style="display:flex;align-items:center;gap:clamp(18px,2.6vw,40px);">
+        <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" onClick="{{ n.onClick }}" style="font-size:14px;font-weight:500;color:{{ n.color }};padding:8px 0;border-bottom:1px solid {{ n.line }};transition:color .2s, border-color .2s;">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <button onClick="{{ openDiagTop }}" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#FFFFFF;border:1px solid #FFFFFF;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s,color .2s;" style-hover="background:#FFFFFF;color:#000000;">Fale com a Clara <span aria-hidden="true">→</span></button>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);border-radius:12px;cursor:pointer;">
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}"><img src="https://unpkg.com/lucide-static@0.454.0/icons/x.svg" alt="" style="width:20px;filter:invert(1);"></sc-if>
+        <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}"><img src="https://unpkg.com/lucide-static@0.454.0/icons/menu.svg" alt="" style="width:20px;filter:invert(1);"></sc-if>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Menu móvel" style="border-top:1px solid rgba(255,255,255,0.1);padding:12px 20px 24px;display:flex;flex-direction:column;gap:4px;background:#000000;">
+      <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ n.onClick }}" style="font-size:17px;font-weight:500;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,0.08);color:#FFFFFF;">{{ n.label }}</a>
+      </sc-for>
+      <button onClick="{{ openDiagTop }}" style="margin-top:14px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 18px;font-size:15px;font-weight:600;cursor:pointer;">Fale com a Clara →</button>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+<!-- 02 HERO -->
+<section id="inicio" data-screen-label="02 Hero" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 80% at 72% 40%,#1A1A1A 0%,#000000 70%);scroll-margin-top:64px;">
+  <svg viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;bottom:0;width:100%;height:62%;pointer-events:none;">
+    <defs><linearGradient id="wv" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.75"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"></stop></linearGradient></defs>
+    <path d="M0,330 C320,250 560,400 860,300 S1260,170 1440,220" fill="none" stroke="url(#wv)" stroke-width="1.4"></path>
+    <path d="M0,350 C340,270 600,410 900,318 S1270,200 1440,250" fill="none" stroke="url(#wv)" stroke-width="0.8" opacity="0.6"></path>
+    <path d="M0,372 C360,300 640,420 940,340 S1290,240 1440,282" fill="none" stroke="url(#wv)" stroke-width="0.6" opacity="0.4"></path>
+    <path d="M0,300 C300,230 520,380 820,282 S1240,140 1440,190" fill="none" stroke="url(#wv)" stroke-width="0.5" opacity="0.35"></path>
+  </svg>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,4vw,48px) 28px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;">
+      <div style="flex:1 1 440px;min-width:0;max-width:640px;position:relative;z-index:2;">
+        <p style="margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#D1D1D1;">Tecnologia que impulsiona seu negócio</p>
+        <h1 style="margin:0;font-family:Orbitron,sans-serif;font-weight:800;font-size:clamp(38px,5.2vw,74px);line-height:1.04;letter-spacing:-0.02em;color:#FFFFFF;text-wrap:balance;">Seu negócio no próximo nível.</h1>
+        <p style="margin:22px 0 0;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:#D1D1D1;max-width:520px;text-wrap:pretty;">Sites, automações, inteligência artificial e um sistema completo para organizar, atender, vender e crescer.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;">
+          <button onClick="{{ openDiagTop }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 0 30px rgba(255,255,255,0.18);transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-1px);box-shadow:0 0 40px rgba(255,255,255,0.32);">Solicitar diagnóstico <span aria-hidden="true">→</span></button>
+          <a href="#solucoes" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);color:#FFFFFF;border:1px solid rgba(255,255,255,0.55);border-radius:999px;padding:13px 24px;font-size:15px;font-weight:600;transition:background .2s;" style-hover="background:rgba(255,255,255,0.12);opacity:1;">Conhecer soluções</a>
+        </div>
+        <button onClick="{{ whatsClick }}" style="margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:transparent;border:0;color:#D1D1D1;font-size:14px;cursor:pointer;padding:6px 0;" style-hover="color:#FFFFFF;">
+          <img src="https://unpkg.com/lucide-static@0.454.0/icons/message-circle.svg" alt="" style="width:18px;filter:invert(1);">Converse com a nossa especialista no WhatsApp
+        </button>
+      </div>
+      <div style="flex:1 1 420px;min-width:0;position:relative;height:{{ heroH }}px;">
+        <div ref="{{ heroParallax }}" style="position:absolute;inset:0;will-change:transform;">
+          <div style="position:absolute;left:50%;top:0;width:560px;height:500px;margin-left:-280px;transform:scale({{ heroScale }});transform-origin:50% 0;">
+            <div aria-hidden="true" style="position:absolute;left:80px;top:60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.22) 0%,rgba(255,255,255,0.05) 40%,rgba(255,255,255,0) 70%);"></div>
+            <div aria-hidden="true" style="position:absolute;left:-40px;top:250px;width:640px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.6),rgba(255,255,255,0));transform:rotate(-14deg);"></div>
+            <div aria-hidden="true" style="position:absolute;left:20px;top:150px;width:520px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.35),rgba(255,255,255,0));transform:rotate(22deg);"></div>
+            <dc-import name="GlassCube" size="{{ 46 }}" spin="{{ 14 }}" rx="{{ -24 }}" ry="{{ 20 }}" parallax="{{ 30 }}" assemble="{{ true }}" delay="{{ 700 }}" logo="{{ false }}" style="position:absolute;left:300px;top:24px;" hint-size="46px,46px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 116 }}" spin="{{ 6 }}" rx="{{ -18 }}" ry="{{ -30 }}" parallax="{{ 22 }}" scroll-factor="{{ -0.05 }}" assemble="{{ true }}" delay="{{ 500 }}" logo="{{ false }}" style="position:absolute;left:400px;top:52px;" hint-size="116px,116px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 92 }}" spin="{{ -8 }}" rx="{{ -16 }}" ry="{{ 28 }}" parallax="{{ 26 }}" assemble="{{ true }}" delay="{{ 400 }}" logo="{{ false }}" glyph="&lt;/&gt;" style="position:absolute;left:36px;top:118px;" hint-size="92px,92px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 232 }}" spin="{{ 0 }}" rx="{{ -20 }}" ry="{{ 32 }}" parallax="{{ 18 }}" scroll-factor="{{ 0.06 }}" assemble="{{ true }}" delay="{{ 150 }}" logo="{{ true }}" glow="{{ true }}" style="position:absolute;left:164px;top:132px;" hint-size="232px,232px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 78 }}" spin="{{ 10 }}" rx="{{ -22 }}" ry="{{ 10 }}" parallax="{{ 34 }}" assemble="{{ true }}" delay="{{ 800 }}" logo="{{ false }}" glyph="IA" style="position:absolute;left:432px;top:330px;" hint-size="78px,78px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 58 }}" spin="{{ -12 }}" rx="{{ -20 }}" ry="{{ 40 }}" parallax="{{ 30 }}" assemble="{{ true }}" delay="{{ 900 }}" logo="{{ false }}" style="position:absolute;left:96px;top:372px;" hint-size="58px,58px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <div aria-hidden="true" style="position:absolute;right:clamp(20px,4vw,48px);top:72px;text-align:left;font-size:12px;letter-spacing:0.22em;line-height:1.9;color:#D1D1D1;text-transform:uppercase;">Ideias<br>Estratégia<br>Tecnologia<br>Resultados.<div style="width:28px;height:1px;background:#D1D1D1;margin-top:14px;"></div></div>
+    </sc-if>
+    <!-- 03 SERVICE BAR -->
+    <nav aria-label="Serviços" data-screen-label="03 Barra de serviços" style="position:relative;z-index:3;margin-top:clamp(20px,3vw,36px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));background:rgba(26,26,26,0.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.14);border-radius:16px;overflow:hidden;">
+      <sc-for list="{{ services }}" as="sv" hint-placeholder-count="0">
+        <a href="{{ sv.href }}" style="display:flex;align-items:center;gap:16px;padding:18px 22px;border-right:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.06);transition:background .2s;" style-hover="background:rgba(255,255,255,0.06);opacity:1;">
+          <img src="{{ sv.icon }}" alt="" style="width:28px;height:28px;filter:invert(1);flex:none;opacity:0.9;">
+          <span style="flex:1;min-width:0;">
+            <span style="display:block;font-size:15px;font-weight:600;color:#FFFFFF;">{{ sv.title }}</span>
+            <span style="display:block;font-size:13px;color:#D1D1D1;margin-top:3px;">{{ sv.desc }}</span>
+          </span>
+          <span aria-hidden="true" style="width:28px;height:28px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFFFFF;">→</span>
+        </a>
+      </sc-for>
+    </nav>
+  </div>
+</section>
+
+<!-- 04 PROBLEMAS -->
+<section id="problemas" data-screen-label="04 Problemas" style="background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 60%,#D1D1D1 220%);color:#000000;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:flex-start;">
+      <div style="flex:1 1 300px;max-width:420px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Problemas que resolvemos</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Seu negócio merece mais do que improviso.</h2>
+        <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Identificamos os principais desafios que travam o crescimento da sua empresa e entregamos soluções reais para superá-los. Selecione o que mais parece com a sua realidade.</p>
+      </div>
+      <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;" role="group" aria-label="Problemas">
+        <sc-for list="{{ problems }}" as="p" hint-placeholder-count="0">
+          <button onClick="{{ p.onClick }}" aria-pressed="{{ p.pressed }}" style="text-align:left;display:flex;flex-direction:column;gap:18px;padding:22px 20px;min-height:150px;border-radius:16px;border:1px solid {{ p.bd }};background:{{ p.bg }};color:{{ p.fg }};box-shadow:{{ p.shadow }};cursor:pointer;transition:all .25s ease;" style-hover="transform:translateY(-2px);">
+            <img src="{{ p.icon }}" alt="" style="width:28px;height:28px;filter:{{ p.filter }};">
+            <span style="font-size:16px;font-weight:600;line-height:1.3;text-wrap:balance;">{{ p.title }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div aria-live="polite" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between;padding:clamp(20px,3vw,28px) clamp(20px,3vw,32px);border-radius:18px;background:#000000;color:#FFFFFF;">
+      <div style="flex:1 1 420px;min-width:0;">
+        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Como a CORE 3 resolve</p>
+        <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:600;font-size:clamp(17px,1.6vw,21px);line-height:1.35;">{{ problemSol.title }}</p>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">{{ problemSol.text }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
+          <sc-for list="{{ problemSol.chips }}" as="c" hint-placeholder-count="2">
+            <a href="{{ c.href }}" style="font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);color:#FFFFFF;">{{ c.label }}</a>
+          </sc-for>
+        </div>
+      </div>
+      <button onClick="{{ continueProblem }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 22px;font-size:15px;font-weight:600;cursor:pointer;flex:none;" style-hover="background:#D1D1D1;">Continuar para o diagnóstico <span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SOLUÇÕES -->
+<section id="solucoes" data-screen-label="05 Soluções" style="background:#FFFFFF;color:#000000;padding:clamp(56px,7vw,96px) 0;border-top:1px solid #D1D1D1;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:stretch;">
+      <div style="flex:1 1 300px;max-width:400px;display:flex;flex-direction:column;justify-content:center;padding-right:12px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Nossas soluções</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Tudo o que seu negócio precisa para evoluir.</h2>
+        <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Da presença digital à gestão completa da sua empresa. Soluções que simplificam sua rotina, conectam sua operação e ajudam você a crescer.</p>
+        <a href="#operacao" style="align-self:flex-start;margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:600;">Ver todas as soluções <span aria-hidden="true">→</span></a>
+      </div>
+      <!-- Sites -->
+      <article id="sol-sites" style="flex:1 1 300px;min-width:0;scroll-margin-top:80px;border-radius:20px;border:1px solid #D1D1D1;background:linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 200%);box-shadow:0 18px 40px rgba(0,0,0,0.06);padding:24px;display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <img src="https://unpkg.com/lucide-static@0.454.0/icons/globe.svg" alt="" style="width:28px;flex:none;">
+          <h3 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:17px;line-height:1.3;">Sites que trabalham pelo seu negócio</h3>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#6B6B6B;">Presença digital profissional, com páginas que atraem visitantes e transformam interesse em clientes.</p>
+        <div aria-hidden="true" style="position:relative;margin-top:auto;height:180px;">
+          <div style="position:absolute;left:4%;right:22%;bottom:16px;height:150px;border-radius:10px 10px 0 0;border:6px solid #1A1A1A;border-bottom:0;background:radial-gradient(circle at 75% 50%,#1A1A1A,#000000 70%);overflow:hidden;padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><img src="assets/c3-symbol.png" alt="" style="height:8px;"><div style="display:flex;gap:6px;"><span style="width:16px;height:3px;background:#6B6B6B;border-radius:2px;"></span><span style="width:16px;height:3px;background:#6B6B6B;border-radius:2px;"></span><span style="width:16px;height:3px;background:#6B6B6B;border-radius:2px;"></span></div></div>
+            <div style="margin-top:20px;width:52%;font-family:Orbitron,sans-serif;font-size:10px;font-weight:700;color:#FFFFFF;line-height:1.2;">Seu negócio no próximo nível.</div>
+            <div style="margin-top:8px;width:40%;height:3px;background:#6B6B6B;border-radius:2px;"></div>
+            <div style="margin-top:4px;width:30%;height:3px;background:#6B6B6B;border-radius:2px;"></div>
+            <div style="margin-top:10px;width:46px;height:10px;border-radius:6px;background:#FFFFFF;"></div>
+            <div style="position:absolute;right:18px;top:38px;width:52px;height:52px;border:1px solid rgba(255,255,255,0.6);background:rgba(255,255,255,0.08);transform:rotate(12deg);display:flex;align-items:center;justify-content:center;"><img src="assets/c3-symbol.png" alt="" style="width:26px;"></div>
+          </div>
+          <div style="position:absolute;left:0;right:18%;bottom:6px;height:10px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#D1D1D1,#6B6B6B);"></div>
+          <div style="position:absolute;right:4%;bottom:0;width:72px;height:140px;border-radius:14px;border:5px solid #1A1A1A;background:#000000;padding:10px 7px;box-shadow:-8px 10px 24px rgba(0,0,0,0.2);">
+            <img src="assets/c3-symbol.png" alt="" style="height:6px;">
+            <div style="margin-top:14px;font-family:Orbitron,sans-serif;font-size:7px;font-weight:700;color:#FFFFFF;line-height:1.25;">Seu negócio no próximo nível.</div>
+            <div style="margin-top:8px;width:80%;height:2px;background:#6B6B6B;"></div>
+            <div style="margin-top:3px;width:60%;height:2px;background:#6B6B6B;"></div>
+            <div style="margin-top:10px;width:30px;height:7px;border-radius:4px;background:#FFFFFF;"></div>
+          </div>
+        </div>
+      </article>
+      <!-- Automação -->
+      <article id="sol-auto" style="flex:1 1 300px;min-width:0;scroll-margin-top:80px;border-radius:20px;border:1px solid #D1D1D1;background:linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 200%);box-shadow:0 18px 40px rgba(0,0,0,0.06);padding:24px;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <img src="https://unpkg.com/lucide-static@0.454.0/icons/message-square.svg" alt="" style="width:28px;flex:none;">
+          <h3 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:17px;line-height:1.3;">Atendimento e tarefas no automático</h3>
+        </div>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#6B6B6B;">Mensagens, agendamentos, cadastro de clientes e processos acontecendo sem depender de alguém repetir tudo à mão.</p>
+        <ol aria-label="Fluxo automatizado ilustrativo" aria-live="polite" style="list-style:none;margin:auto 0 0;padding:0;display:flex;flex-direction:column;gap:8px;">
+          <sc-for list="{{ autoSteps }}" as="a" hint-placeholder-count="0">
+            <li style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:{{ a.bg }};border:1px solid {{ a.bd }};color:{{ a.fg }};transition:all .35s ease;">
+              <img src="{{ a.icon }}" alt="" style="width:18px;filter:{{ a.filter }};">
+              <span style="flex:1;font-size:14px;font-weight:500;">{{ a.label }}</span>
+              <span style="font-size:12px;opacity:{{ a.checkOp }};transition:opacity .3s;">✓</span>
+            </li>
+          </sc-for>
+        </ol>
+        <button onClick="{{ simulateAuto }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #000000;color:#000000;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#000000;color:#FFFFFF;">
+          <img src="https://unpkg.com/lucide-static@0.454.0/icons/play.svg" alt="" style="width:14px;">{{ autoLabel }}
+        </button>
+      </article>
+    </div>
+    <!-- Gestão (destaque) -->
+    <article id="sol-gestao" style="margin-top:20px;scroll-margin-top:80px;border-radius:24px;background:radial-gradient(ellipse 60% 90% at 80% 30%,#1A1A1A 0%,#000000 70%);color:#FFFFFF;padding:clamp(24px,3.5vw,44px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px);align-items:center;box-shadow:0 30px 60px rgba(0,0,0,0.25);">
+      <div style="flex:1 1 280px;max-width:380px;">
+        <img src="https://unpkg.com/lucide-static@0.454.0/icons/layers.svg" alt="" style="width:34px;filter:invert(1);">
+        <h3 style="margin:16px 0 0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.18;text-wrap:balance;">Sua empresa organizada em um só sistema</h3>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Clientes, vendas, compras, estoque, financeiro e resultados no mesmo lugar. Você acompanha tudo sem planilhas espalhadas.</p>
+        <p style="margin:14px 0 0;font-size:13px;color:#D1D1D1;">Clique nos módulos ao lado para explorar.</p>
+        <button onClick="{{ diagGestao }}" style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">Quero organizar minha empresa <span aria-hidden="true">→</span></button>
+      </div>
+      <div style="flex:2 1 460px;min-width:0;">
+        <div style="border-radius:16px 16px 4px 4px;border:8px solid #1A1A1A;background:#000000;box-shadow:0 0 0 1px rgba(255,255,255,0.12);overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.1);">
+            <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/layout-dashboard.svg" alt="" style="width:16px;filter:invert(1);">Minha Empresa</span>
+            <span style="display:flex;align-items:center;gap:10px;"><span style="font-size:11px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:3px 8px;">Dados ilustrativos</span><img src="assets/c3-symbol.png" alt="" style="height:12px;"></span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;">
+            <div role="tablist" aria-label="Módulos da empresa" style="flex:1 1 220px;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;padding:14px;border-right:1px solid rgba(255,255,255,0.08);align-content:start;">
+              <sc-for list="{{ solTabs }}" as="t" hint-placeholder-count="0">
+                <button role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border-radius:12px;background:{{ t.bg }};border:1px solid {{ t.bd }};color:{{ t.fg }};font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;" style-hover="border-color:#FFFFFF;">
+                  <img src="{{ t.icon }}" alt="" style="width:22px;filter:{{ t.filter }};">{{ t.label }}
+                </button>
+              </sc-for>
+            </div>
+            <div role="tabpanel" aria-live="polite" style="flex:1.4 1 280px;min-width:0;padding:18px;">
+              <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:600;font-size:16px;">{{ mod.label }}</p>
+              <p style="margin:4px 0 14px;font-size:13px;color:#D1D1D1;">{{ mod.desc }}</p>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                <sc-for list="{{ mod.kpis }}" as="k" hint-placeholder-count="3">
+                  <div style="padding:10px;border-radius:10px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.08);">
+                    <div style="font-family:Orbitron,sans-serif;font-size:16px;font-weight:700;">{{ k.v }}</div>
+                    <div style="font-size:11px;color:#D1D1D1;margin-top:4px;line-height:1.3;">{{ k.l }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ mod.hasBars }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:14px;height:96px;display:flex;align-items:flex-end;gap:10px;padding:10px;border-radius:10px;background:#1A1A1A;">
+                  <sc-for list="{{ mod.bars }}" as="b" hint-placeholder-count="6">
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;">
+                      <div style="width:100%;height:{{ b.h }}%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#FFFFFF,#6B6B6B);"></div>
+                      <span style="font-size:10px;color:#D1D1D1;">{{ b.m }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ mod.hasRows }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:14px;display:flex;flex-direction:column;">
+                  <sc-for list="{{ mod.rows }}" as="r" hint-placeholder-count="3">
+                    <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.2fr) auto;gap:10px;padding:9px 2px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px;">
+                      <span style="font-weight:600;">{{ r.a }}</span><span style="color:#D1D1D1;">{{ r.b }}</span><span style="color:#D1D1D1;text-align:right;">{{ r.c }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+        <div style="height:12px;margin:0 -2%;border-radius:0 0 14px 14px;background:linear-gradient(180deg,#D1D1D1,#6B6B6B);"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 06 OPERAÇÃO CONECTADA -->
+<section id="operacao" data-screen-label="06 Operação conectada" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 50% 80% at 50% 50%,#1A1A1A 0%,#000000 75%);color:#FFFFFF;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);align-items:center;">
+    <div style="flex:1 1 280px;max-width:380px;">
+      <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Operação digital conectada</p>
+      <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Sua empresa funcionando como um só negócio.</h2>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Conectamos atendimento, vendas, gestão e informações para que você tenha menos trabalho e mais controle.</p>
+      <a href="#metodo" style="margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:600;">Entenda a integração <span aria-hidden="true">→</span></a>
+    </div>
+    <div style="flex:1.4 1 340px;min-width:0;">
+      <div style="position:relative;width:100%;max-width:540px;aspect-ratio:1.3;margin:0 auto;">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+          <ellipse cx="50" cy="52" rx="44" ry="20" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1" vector-effect="non-scaling-stroke"></ellipse>
+          <sc-for list="{{ flowNodes }}" as="f" hint-placeholder-count="0">
+            <line x1="50" y1="50" x2="{{ f.x }}" y2="{{ f.y }}" stroke="#FFFFFF" stroke-opacity="{{ f.lineOp }}" stroke-width="{{ f.lineW }}" vector-effect="non-scaling-stroke" style="transition:stroke-opacity .5s;"></line>
+          </sc-for>
+        </svg>
+        <dc-import name="GlassCube" size="{{ 128 }}" spin="{{ 10 }}" rx="{{ -20 }}" ry="{{ 30 }}" parallax="{{ 14 }}" logo="{{ true }}" glow="{{ true }}" style="position:absolute;left:calc(50% - 64px);top:calc(50% - 64px);" hint-size="128px,128px"></dc-import>
+        <div aria-hidden="true" style="position:absolute;left:{{ dotX }}%;top:{{ dotY }}%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 18px 6px rgba(255,255,255,0.55);transition:left 1.1s cubic-bezier(.4,0,.2,1), top 1.1s cubic-bezier(.4,0,.2,1);z-index:3;"></div>
+        <sc-for list="{{ flowNodes }}" as="f" hint-placeholder-count="0">
+          <button onClick="{{ f.onClick }}" aria-pressed="{{ f.active }}" style="position:absolute;left:{{ f.x }}%;top:{{ f.y }}%;transform:translate(-50%,-50%);width:clamp(76px,9vw,96px);padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;border-radius:14px;background:{{ f.bg }};border:1px solid {{ f.bd }};box-shadow:{{ f.glow }};color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all .4s ease;z-index:4;">
+            <img src="{{ f.icon }}" alt="" style="width:24px;filter:invert(1);">{{ f.label }}
+          </button>
+        </sc-for>
+      </div>
+      <div aria-live="polite" style="max-width:540px;margin:18px auto 0;display:flex;gap:14px;align-items:center;">
+        <span style="font-family:Orbitron,sans-serif;font-size:13px;font-weight:700;color:#FFFFFF;flex:none;">{{ flowNum }}</span>
+        <span style="height:1px;width:28px;background:#6B6B6B;flex:none;"></span>
+        <span style="font-size:14px;line-height:1.5;color:#D1D1D1;">{{ flowCaption }}</span>
+      </div>
+    </div>
+    <ul style="flex:1 1 280px;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px;">
+      <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+        <li style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="width:30px;height:30px;flex:none;border-radius:50%;border:1px solid #FFFFFF;display:flex;align-items:center;justify-content:center;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/check.svg" alt="" style="width:16px;filter:invert(1);"></span>
+          <span><span style="display:block;font-size:16px;font-weight:600;">{{ b.t }}</span><span style="display:block;font-size:14px;color:#D1D1D1;margin-top:3px;">{{ b.d }}</span></span>
+        </li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 MERCADO -->
+<section id="mercado" data-screen-label="07 Dados do mercado" style="background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 50%,#D1D1D1 260%);color:#000000;padding:clamp(48px,6vw,80px) 0;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);align-items:center;">
+    <div style="flex:1 1 320px;max-width:440px;">
+      <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">O cenário digital brasileiro</p>
+      <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(22px,2.3vw,30px);line-height:1.2;letter-spacing:-0.01em;text-wrap:balance;">A tecnologia já faz parte dos negócios. A integração ainda é uma grande oportunidade.</h2>
+    </div>
+    <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="0">
+        <figure style="margin:0;padding:22px;border-radius:16px;background:linear-gradient(160deg,#1A1A1A,#000000);color:#FFFFFF;box-shadow:0 18px 36px rgba(0,0,0,0.18);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:clamp(34px,3.4vw,46px);line-height:1;">{{ st.n }}</span>
+            <img src="{{ st.icon }}" alt="" style="width:24px;filter:invert(1);opacity:0.9;">
+          </div>
+          <figcaption style="margin-top:14px;font-size:14px;line-height:1.45;color:#D1D1D1;">{{ st.t }}<sup style="font-size:10px;">1</sup></figcaption>
+        </figure>
+      </sc-for>
+    </div>
+    <p style="flex:0 1 200px;margin:0;font-size:13px;line-height:1.5;color:#6B6B6B;border-left:1px solid #6B6B6B;padding-left:14px;"><sup>1</sup> Fonte: TIC Empresas 2025, Cetic.br. Empresas brasileiras com 10 ou mais pessoas ocupadas.</p>
+  </div>
+</section>
+
+<!-- 08 SEGMENTOS -->
+<section id="segmentos" data-screen-label="08 Segmentos" style="background:#FFFFFF;color:#000000;padding:clamp(56px,7vw,96px) 0;border-top:1px solid #D1D1D1;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);align-items:stretch;">
+      <div style="flex:1 1 280px;max-width:360px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Segmentos</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Soluções sob medida para o seu negócio.</h2>
+        <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Aplicamos tecnologia de forma prática, com foco nas necessidades de cada setor.</p>
+      </div>
+      <div style="flex:3 1 600px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+        <sc-for list="{{ segments }}" as="sg" hint-placeholder-count="0">
+          <article style="display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:#000000;color:#FFFFFF;border:2px solid {{ sg.bd }};box-shadow:{{ sg.shadow }};transition:all .25s ease;">
+            <div style="position:relative;height:150px;">
+              <image-slot id="{{ sg.slot }}" shape="rect" placeholder="{{ sg.ph }}"></image-slot>
+            </div>
+            <button onClick="{{ sg.onClick }}" aria-pressed="{{ sg.pressed }}" style="flex:1;text-align:left;display:flex;flex-direction:column;gap:8px;padding:16px;background:transparent;border:0;color:#FFFFFF;cursor:pointer;">
+              <span style="display:flex;align-items:center;gap:10px;"><img src="{{ sg.icon }}" alt="" style="width:20px;filter:invert(1);"><span style="font-size:15px;font-weight:600;">{{ sg.title }}</span></span>
+              <span style="font-size:13px;line-height:1.45;color:#D1D1D1;">{{ sg.desc }}</span>
+              <span style="margin-top:auto;padding-top:6px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;">{{ sg.btn }}<span aria-hidden="true" style="width:30px;height:30px;border-radius:50%;background:{{ sg.arrowBg }};color:{{ sg.arrowFg }};border:1px solid #FFFFFF;display:flex;align-items:center;justify-content:center;">→</span></span>
+            </button>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+    <div aria-live="polite" style="margin-top:22px;border-radius:20px;border:1px solid #D1D1D1;background:linear-gradient(160deg,#FFFFFF 30%,#D1D1D1 220%);padding:clamp(22px,3vw,36px);display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);">
+      <div style="flex:1 1 240px;max-width:320px;">
+        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Segmento selecionado</p>
+        <h3 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:22px;line-height:1.25;">{{ seg.title }}</h3>
+        <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#6B6B6B;">{{ seg.intro }}</p>
+      </div>
+      <div style="flex:1.3 1 280px;min-width:0;">
+        <p style="margin:0 0 12px;font-size:14px;font-weight:600;">Aplicações possíveis</p>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ seg.apps }}" as="a" hint-placeholder-count="4">
+            <li style="display:flex;gap:10px;font-size:15px;line-height:1.45;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/check.svg" alt="" style="width:18px;flex:none;margin-top:2px;">{{ a }}</li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:14px;">
+        <p style="margin:0;font-size:14px;font-weight:600;">Benefícios</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ seg.benefits }}" as="b" hint-placeholder-count="3">
+            <span style="font-size:13px;padding:7px 12px;border-radius:999px;background:#000000;color:#FFFFFF;">{{ b }}</span>
+          </sc-for>
+        </div>
+        <button onClick="{{ seg.onCta }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border:0;border-radius:999px;padding:13px 20px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;" style-hover="background:#1A1A1A;">{{ seg.cta }} <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 MÉTODO PILOTO -->
+<section id="metodo" ref="{{ pilotoRef }}" data-screen-label="09 Método PILOTO" style="position:relative;height:{{ pilotoHeight }};background:#000000;color:#FFFFFF;scroll-margin-top:64px;">
+  <div style="position:sticky;top:64px;height:calc(100vh - 64px);min-height:440px;overflow:hidden;background:radial-gradient(ellipse 50% 70% at 70% 35%,#1A1A1A 0%,#000000 70%);">
+    <div style="max-width:1320px;height:100%;margin:0 auto;padding:clamp(28px,4vh,56px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:clamp(16px,3vh,32px);">
+      <div style="flex:1;min-height:0;display:flex;flex-wrap:wrap;align-items:center;gap:20px;">
+        <div style="flex:1 1 320px;min-width:0;">
+          <p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Nosso método</p>
+          <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:900;font-size:clamp(40px,5.4vw,76px);line-height:1;letter-spacing:0.04em;transform:skewX(-10deg);transform-origin:0 100%;">PILOTO</p>
+          <h2 style="margin:16px 0 0;font-family:Inter,sans-serif;font-weight:500;font-size:clamp(18px,1.8vw,24px);line-height:1.35;color:#FFFFFF;max-width:440px;text-wrap:balance;">Da ideia à operação, em um caminho claro e eficiente.</h2>
+          <button onClick="{{ pilotoBtn }}" style="margin-top:22px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ pilotoBtnLabel }} <span aria-hidden="true">→</span></button>
+        </div>
+        <div style="flex:1.2 1 300px;min-width:0;height:100%;min-height:{{ pilotoCubeBox }}px;position:relative;display:flex;align-items:center;justify-content:center;">
+          <div aria-hidden="true" style="position:absolute;width:{{ pilotoGlow }}px;height:{{ pilotoGlow }}px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,{{ pilotoGlowOp }}) 0%,rgba(255,255,255,0) 65%);transition:all .8s ease;"></div>
+          <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+            <dc-import name="GlassCube" size="{{ 34 }}" spin="{{ 20 }}" logo="{{ false }}" progress="{{ 6 }}" style="position:absolute;left:4%;top:30%;" hint-size="34px,34px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 26 }}" spin="{{ -16 }}" logo="{{ false }}" progress="{{ 6 }}" style="position:absolute;left:16%;top:14%;" hint-size="26px,26px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 40 }}" spin="{{ 12 }}" logo="{{ false }}" progress="{{ 6 }}" style="position:absolute;left:12%;top:58%;" hint-size="40px,40px"></dc-import>
+          </sc-if>
+          <dc-import name="GlassCube" size="{{ pilotoCube }}" progress="{{ pilotoProgress }}" spin="{{ 9 }}" rx="{{ -22 }}" ry="{{ 30 }}" parallax="{{ 16 }}" logo="{{ true }}" glow="{{ true }}" hint-size="220px,220px"></dc-import>
+          <div aria-live="polite" style="position:absolute;right:0;bottom:4%;text-align:right;">
+            <div style="font-family:Orbitron,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;color:#D1D1D1;">ETAPA {{ pilotoNum }} / 06</div>
+            <div style="font-size:14px;color:#FFFFFF;margin-top:4px;">{{ pilotoCur.cube }}</div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative;">
+          <div aria-hidden="true" style="position:absolute;left:8%;right:8%;top:6px;height:1px;background:#6B6B6B;"></div>
+          <div aria-hidden="true" style="position:absolute;left:8%;top:6px;height:1px;width:{{ pilotoLine }}%;background:#FFFFFF;box-shadow:0 0 10px rgba(255,255,255,0.8);transition:width .6s ease;"></div>
+          <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;">
+            <sc-for list="{{ pilotoSteps }}" as="p" hint-placeholder-count="0">
+              <li style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                <span aria-hidden="true" style="width:13px;height:13px;border-radius:50%;background:{{ p.dotBg }};border:1px solid #FFFFFF;box-shadow:{{ p.dotGlow }};transition:all .4s;"></span>
+                <button onClick="{{ p.onClick }}" aria-current="{{ p.current }}" style="width:100%;text-align:left;padding:16px;border-radius:14px;background:{{ p.bg }};border:1px solid {{ p.bd }};color:#FFFFFF;cursor:pointer;transition:all .4s ease;min-height:clamp(64px,13vh,118px);">
+                  <span style="display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;"><img src="{{ p.icon }}" alt="" style="width:20px;filter:invert(1);">{{ p.title }}</span>
+                  <span style="display:block;margin-top:clamp(4px,1.2vh,10px);font-size:13px;line-height:1.4;color:#D1D1D1;opacity:{{ p.descOp }};transition:opacity .4s;">{{ p.desc }}</span>
+                </button>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.06);">
+            <span style="display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;"><img src="{{ pilotoCur.icon }}" alt="" style="width:20px;filter:invert(1);">{{ pilotoCur.title }}</span>
+            <span style="display:block;margin-top:8px;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ pilotoCur.desc }}</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:14px;" role="group" aria-label="Etapas">
+            <sc-for list="{{ pilotoSteps }}" as="p" hint-placeholder-count="0">
+              <button onClick="{{ p.onClick }}" aria-label="{{ p.title }}" style="flex:1;height:44px;background:transparent;border:0;padding:0;cursor:pointer;display:flex;align-items:center;"><span style="display:block;width:100%;height:4px;border-radius:2px;background:{{ p.dotBg }};transition:background .3s;"></span></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- 10 AGENTES -->
+<section id="agentes" data-screen-label="10 Agentes" style="background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 55%,#D1D1D1 240%);color:#000000;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);align-items:stretch;">
+      <div style="flex:1 1 280px;max-width:340px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Nossas inteligências</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Três agentes. Três especialidades. Um só propósito.</h2>
+        <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Entender seu negócio, conectar oportunidades e construir soluções que impulsionam sua evolução. Selecione um agente.</p>
+      </div>
+      <div style="flex:3 1 600px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;" role="group" aria-label="Agentes">
+        <sc-for list="{{ agents }}" as="a" hint-placeholder-count="0">
+          <button onClick="{{ a.onClick }}" aria-pressed="{{ a.pressed }}" style="text-align:left;display:flex;gap:14px;align-items:stretch;padding:10px;border-radius:18px;background:#FFFFFF;border:2px solid {{ a.bd }};box-shadow:{{ a.shadow }};cursor:pointer;color:#000000;transition:all .25s ease;" style-hover="transform:translateY(-2px);">
+            <span style="width:42%;flex:none;border-radius:12px;overflow:hidden;background:#000000;aspect-ratio:0.82;"><img src="{{ a.img }}" alt="{{ a.alt }}" style="width:100%;height:100%;object-fit:cover;object-position:50% 10%;display:block;"></span>
+            <span style="flex:1;min-width:0;padding:8px 4px 8px 0;display:flex;flex-direction:column;gap:8px;">
+              <span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:22px;">{{ a.name }}</span>
+              <span style="font-size:13px;color:#6B6B6B;margin-top:-4px;">{{ a.role }}</span>
+              <span style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ a.verbs }}" as="v" hint-placeholder-count="3"><span style="font-size:11px;font-weight:600;padding:4px 8px;border-radius:999px;border:1px solid #D1D1D1;">{{ v }}</span></sc-for></span>
+              <span style="font-size:13px;line-height:1.45;color:#1A1A1A;">{{ a.desc }}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div aria-live="polite" style="margin-top:22px;border-radius:24px;background:radial-gradient(ellipse 50% 90% at 20% 50%,#1A1A1A,#000000 70%);color:#FFFFFF;display:flex;flex-wrap:wrap;overflow:hidden;">
+      <div style="flex:1 1 280px;max-width:380px;min-height:320px;position:relative;background:#000000;">
+        <img src="{{ agent.img }}" alt="{{ agent.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;">
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:20px 22px;background:linear-gradient(180deg,rgba(0,0,0,0),#000000 70%);">
+          <div style="font-family:Orbitron,sans-serif;font-weight:800;font-size:30px;">{{ agent.name }}</div>
+          <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;margin-top:4px;">{{ agent.role }}</div>
+        </div>
+      </div>
+      <div style="flex:2 1 320px;min-width:0;padding:clamp(22px,3vw,40px);display:flex;flex-wrap:wrap;gap:28px;">
+        <div style="flex:1 1 240px;min-width:0;">
+          <p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Missão</p>
+          <p style="margin:0 0 20px;font-family:Orbitron,sans-serif;font-size:17px;font-weight:600;line-height:1.4;">{{ agent.mission }}</p>
+          <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Responsabilidades</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ agent.resp }}" as="r" hint-placeholder-count="3">
+              <li style="display:flex;gap:10px;font-size:15px;line-height:1.45;color:#D1D1D1;"><span style="width:6px;height:6px;margin-top:8px;flex:none;background:#FFFFFF;transform:rotate(45deg);"></span>{{ r }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="flex:1 1 260px;min-width:0;">
+          <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Aplicações e status</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;">
+            <sc-for list="{{ agent.apps }}" as="p" hint-placeholder-count="3">
+              <li style="display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;">
+                <span>{{ p.label }}</span>
+                <span style="flex:none;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:{{ p.tagBg }};color:{{ p.tagFg }};border:1px solid {{ p.tagBd }};">{{ p.status }}</span>
+              </li>
+            </sc-for>
+          </ul>
+          <p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#D1D1D1;">“Funcional nesta prévia” indica um recurso simulado neste site, sem integração real com IA, CRM ou WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DIAGNÓSTICO -->
+<section id="diagnostico" data-screen-label="11 Diagnóstico" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 100% at 70% 30%,#1A1A1A,#000000 70%);color:#FFFFFF;padding:clamp(48px,6vw,80px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);align-items:center;">
+      <div style="flex:0 0 auto;width:clamp(150px,16vw,220px);aspect-ratio:0.82;border-radius:18px;overflow:hidden;background:#000000;-webkit-mask-image:linear-gradient(180deg,#000000 70%,rgba(0,0,0,0));mask-image:linear-gradient(180deg,#000000 70%,rgba(0,0,0,0));">
+        <img src="assets/clara.png" alt="CLARA, agente de Inteligência Comercial da CORE 3" style="width:100%;height:100%;object-fit:cover;object-position:50% 10%;display:block;">
+      </div>
+      <div style="flex:1 1 320px;min-width:0;max-width:460px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Diagnóstico inteligente</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Conte um pouco sobre seu negócio.</h2>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Responda algumas perguntas e receba um direcionamento inicial com soluções da CORE 3 para a sua realidade.</p>
+      </div>
+      <div style="flex:1.4 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px;">
+        <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;">
+          <sc-for list="{{ diagIntro }}" as="d" hint-placeholder-count="0">
+            <li style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 10px;border-radius:14px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.04);text-align:center;font-size:13px;line-height:1.3;">
+              <img src="{{ d.icon }}" alt="" style="width:26px;filter:invert(1);">{{ d.label }}
+            </li>
+          </sc-for>
+        </ol>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+          <button onClick="{{ openDiagTop }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ diagCta }} <span aria-hidden="true">→</span></button>
+          <span style="display:flex;align-items:center;gap:8px;font-size:13px;color:#D1D1D1;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/zap.svg" alt="" style="width:16px;filter:invert(1);">Leva menos de 2 minutos.</span>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ diagOpen }}" hint-placeholder-val="{{ false }}">
+      <div id="diagnostico-form" style="margin-top:clamp(28px,4vw,48px);border-radius:24px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.12);overflow:hidden;scroll-margin-top:80px;">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding:16px clamp(18px,3vw,32px);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <span style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;"><img src="assets/clara.png" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:50% 12%;background:#000000;">Diagnóstico com a CLARA</span>
+          <span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:5px 10px;">Prévia: regras simuladas, nenhum dado é enviado</span>
+        </div>
+        <div style="height:3px;background:#000000;"><div style="height:100%;width:{{ dPct }}%;background:#FFFFFF;transition:width .5s ease;"></div></div>
+
+        <sc-if value="{{ dNotDone }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:clamp(20px,3vw,36px);">
+            <ol aria-label="Etapas do diagnóstico" style="list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
+              <sc-for list="{{ dStepsNav }}" as="s" hint-placeholder-count="5">
+                <li style="font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:{{ s.bg }};color:{{ s.fg }};border:1px solid {{ s.bd }};" aria-current="{{ s.current }}">{{ s.label }}</li>
+              </sc-for>
+            </ol>
+            <p style="margin:0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Etapa {{ dNum }} de 5</p>
+            <h3 style="margin:8px 0 22px;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(19px,2vw,24px);line-height:1.3;">{{ dTitle }}</h3>
+
+            <sc-if value="{{ dS0 }}" hint-placeholder-val="{{ true }}">
+              <div role="radiogroup" aria-label="Desafio principal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+                <sc-for list="{{ dChallengeOpts }}" as="o" hint-placeholder-count="5">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="text-align:left;padding:16px;border-radius:14px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS1 }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Segmento</p>
+              <div role="radiogroup" aria-label="Segmento" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dSegOpts }}" as="o" hint-placeholder-count="5">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="padding:12px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <p style="margin:22px 0 10px;font-size:14px;font-weight:600;">Quantas pessoas trabalham na empresa?</p>
+              <div role="radiogroup" aria-label="Porte" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dSizeOpts }}" as="o" hint-placeholder-count="4">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="padding:12px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS2 }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 10px;font-size:14px;font-weight:600;">{{ dQ1Label }} <span style="font-weight:400;color:#D1D1D1;">(marque quantas quiser)</span></p>
+              <div role="group" aria-label="{{ dQ1Label }}" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dQ1Opts }}" as="o" hint-placeholder-count="4">
+                  <button role="checkbox" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="padding:12px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <p style="margin:22px 0 10px;font-size:14px;font-weight:600;">{{ dQ2Label }}</p>
+              <div role="radiogroup" aria-label="{{ dQ2Label }}" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dQ2Opts }}" as="o" hint-placeholder-count="3">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="padding:12px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS3 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:16px;">
+                <div style="flex:2 1 320px;min-width:0;display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ dRec.items }}" as="r" hint-placeholder-count="2">
+                    <div style="padding:18px;border-radius:14px;background:{{ r.bg }};color:{{ r.fg }};border:1px solid rgba(255,255,255,0.3);">
+                      <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;opacity:0.75;">{{ r.tag }}</div>
+                      <div style="margin-top:6px;font-family:Orbitron,sans-serif;font-size:16px;font-weight:700;line-height:1.35;">{{ r.title }}</div>
+                      <div style="margin-top:6px;font-size:14px;line-height:1.5;">{{ r.why }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="flex:1 1 240px;min-width:0;padding:18px;border-radius:14px;border:1px dashed rgba(255,255,255,0.35);">
+                  <p style="margin:0 0 6px;font-size:14px;font-weight:600;">Primeira aplicação sugerida</p>
+                  <p style="margin:0 0 16px;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ dRec.segApp }}</p>
+                  <p style="margin:0 0 6px;font-size:14px;font-weight:600;">Próximo passo</p>
+                  <p style="margin:0;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ dRec.next }}</p>
+                </div>
+              </div>
+              <p style="margin:14px 0 0;font-size:12px;color:#D1D1D1;">Direcionamento gerado por regras simples nesta prévia. Não é uma análise de inteligência artificial.</p>
+            </sc-if>
+
+            <sc-if value="{{ dS4 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">Seu nome *
+                  <input value="{{ d.name }}" onChange="{{ fName }}" autocomplete="name" placeholder="Como podemos te chamar?" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">Empresa
+                  <input value="{{ d.company }}" onChange="{{ fCompany }}" autocomplete="organization" placeholder="Nome da empresa (opcional)" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">WhatsApp ou telefone
+                  <input value="{{ d.phone }}" onChange="{{ fPhone }}" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">E-mail
+                  <input value="{{ d.email }}" onChange="{{ fEmail }}" type="email" autocomplete="email" placeholder="voce@empresa.com.br" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+              </div>
+              <p style="margin:18px 0 10px;font-size:13px;font-weight:600;">Como prefere ser contatado?</p>
+              <div role="radiogroup" aria-label="Preferência de contato" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dPrefOpts }}" as="o" hint-placeholder-count="3">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="padding:10px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <label style="margin-top:18px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:#D1D1D1;cursor:pointer;">
+                <input type="checkbox" checked="{{ d.consent }}" onChange="{{ fConsent }}" style="width:20px;height:20px;margin:1px 0 0;accent-color:#FFFFFF;flex:none;">Autorizo a CORE 3 a entrar em contato sobre este diagnóstico.
+              </label>
+            </sc-if>
+
+            <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}">
+              <p role="alert" style="margin:18px 0 0;padding:10px 14px;border-radius:10px;background:#000000;border:1px solid #FFFFFF;font-size:14px;">{{ dErr }}</p>
+            </sc-if>
+
+            <div style="margin-top:28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <button onClick="{{ dBack }}" disabled="{{ dBackDisabled }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;opacity:{{ dBackOp }};">← Voltar</button>
+              <button onClick="{{ dNext }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ dNextLabel }} <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ dDone }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:28px;">
+            <div style="flex:1 1 260px;max-width:360px;">
+              <span style="width:44px;height:44px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/check.svg" alt="" style="width:22px;"></span>
+              <h3 style="margin:16px 0 0;font-family:Orbitron,sans-serif;font-weight:700;font-size:22px;line-height:1.3;">Obrigado, {{ dFirstName }}.</h3>
+              <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#D1D1D1;">Este é o resumo do seu diagnóstico. Nesta prévia, a solicitação não é enviada: quando a CLARA estiver integrada, nossa equipe recebe estas respostas e entra em contato pelo canal escolhido.</p>
+              <button onClick="{{ dRestart }}" style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/refresh-cw.svg" alt="" style="width:14px;filter:invert(1);">Refazer diagnóstico</button>
+            </div>
+            <dl style="flex:2 1 320px;min-width:0;margin:0;display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);border-top:1px solid rgba(255,255,255,0.1);">
+              <sc-for list="{{ dSummary }}" as="s" hint-placeholder-count="6">
+                <dt style="padding:12px 12px 12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px;color:#D1D1D1;">{{ s.k }}</dt>
+                <dd style="margin:0;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;line-height:1.5;">{{ s.v }}</dd>
+              </sc-for>
+            </dl>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- 12 FAQ -->
+<section id="faq" data-screen-label="12 FAQ" style="background:#FFFFFF;color:#000000;padding:clamp(56px,7vw,96px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px);align-items:flex-start;">
+    <div style="flex:1 1 260px;max-width:340px;">
+      <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Dúvidas frequentes</p>
+      <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Tire suas dúvidas e fale com a gente.</h2>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;">Respostas para as perguntas mais comuns sobre a CORE 3, nossos serviços e como podemos ajudar o seu negócio.</p>
+    </div>
+    <div style="flex:2 1 400px;min-width:0;display:flex;flex-direction:column;gap:10px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="border-radius:14px;border:1px solid {{ f.bd }};background:linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 300%);transition:border-color .2s;">
+          <h3 style="margin:0;">
+            <button onClick="{{ f.onClick }}" aria-expanded="{{ f.open }}" aria-controls="{{ f.id }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px;background:transparent;border:0;text-align:left;font-size:16px;font-weight:600;color:#000000;cursor:pointer;">
+              {{ f.q }}<span aria-hidden="true" style="width:28px;height:28px;flex:none;border-radius:50%;border:1px solid #000000;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;background:{{ f.signBg }};color:{{ f.signFg }};">{{ f.sign }}</span>
+            </button>
+          </h3>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <div id="{{ f.id }}" style="padding:0 20px 20px;font-size:15px;line-height:1.6;color:#1A1A1A;">
+              {{ f.a }}
+              <sc-if value="{{ f.provisional }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;margin-left:6px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid #6B6B6B;color:#6B6B6B;">Resposta provisória</span></sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <aside style="flex:1 1 260px;min-width:0;border-radius:20px;background:#000000;color:#FFFFFF;padding:26px;">
+      <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:20px;">Ainda com dúvidas?</p>
+      <p style="margin:8px 0 20px;font-size:15px;color:#D1D1D1;">Fale diretamente com a nossa equipe.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button onClick="{{ whatsClick }}" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 18px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/message-circle.svg" alt="" style="width:18px;">Conversar no WhatsApp</button>
+        <button onClick="{{ emailClick }}" style="display:flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.5);border-radius:999px;padding:13px 18px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:rgba(255,255,255,0.1);"><img src="https://unpkg.com/lucide-static@0.454.0/icons/mail.svg" alt="" style="width:18px;filter:invert(1);">Enviar um e-mail</button>
+      </div>
+    </aside>
+  </div>
+</section>
+</main>
+
+<!-- 13 FOOTER -->
+<footer id="contato" data-screen-label="13 Footer" style="background:#000000;color:#FFFFFF;border-top:1px solid rgba(255,255,255,0.1);padding:clamp(40px,5vw,64px) 0 28px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:36px;justify-content:space-between;">
+      <div style="flex:1 1 220px;max-width:280px;">
+        <div style="display:flex;align-items:center;gap:10px;"><img src="assets/c3-symbol.png" alt="" style="height:26px;"><span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:22px;letter-spacing:0.04em;">CORE 3</span></div>
+        <p style="margin:12px 0 0;font-size:15px;color:#D1D1D1;">Tecnologia com propósito.</p>
+      </div>
+      <div style="flex:3 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:24px;">
+        <sc-for list="{{ footCols }}" as="c" hint-placeholder-count="5">
+          <div>
+            <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#FFFFFF;">{{ c.title }}</p>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="3"><li><a href="{{ l.href }}" style="font-size:13px;color:#D1D1D1;" style-hover="color:#FFFFFF;opacity:1;">{{ l.label }}</a></li></sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;">
+      <div style="display:flex;gap:8px;" aria-label="Redes sociais">
+        <sc-for list="{{ socials }}" as="so" hint-placeholder-count="0">
+          <button onClick="{{ so.onClick }}" aria-label="{{ so.label }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.25);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:rgba(255,255,255,0.1);"><img src="{{ so.icon }}" alt="" style="width:17px;height:17px;filter:{{ so.filter }};"></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:#D1D1D1;align-items:center;">
+        <span>© {{ year }} CORE 3. Todos os direitos reservados.</span>
+        <button onClick="{{ legalClick }}" style="background:transparent;border:0;color:#D1D1D1;font-size:12px;cursor:pointer;padding:4px 0;text-decoration:underline;">Política de Privacidade</button>
+        <button onClick="{{ legalClick }}" style="background:transparent;border:0;color:#D1D1D1;font-size:12px;cursor:pointer;padding:4px 0;text-decoration:underline;">Termos de Uso</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;width:min(520px,calc(100% - 32px));display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:#1A1A1A;color:#FFFFFF;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+    <img src="https://unpkg.com/lucide-static@0.454.0/icons/info.svg" alt="" style="width:20px;filter:invert(1);flex:none;">
+    <span style="flex:1;font-size:14px;line-height:1.45;">{{ toast }}</span>
+    <button onClick="{{ toastAction }}" style="flex:none;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;">Diagnóstico</button>
+    <button onClick="{{ toastClose }}" aria-label="Fechar aviso" style="flex:none;width:32px;height:32px;background:transparent;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;"><img src="https://unpkg.com/lucide-static@0.454.0/icons/x.svg" alt="" style="width:16px;filter:invert(1);"></button>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  I = n => `https://unpkg.com/lucide-static@0.454.0/icons/${n}.svg`;
+  CONTACT = { whatsapp: '', email: '' };
+  state = {
+    isMobile: typeof window !== 'undefined' && window.innerWidth < 820,
+    vw: typeof window !== 'undefined' ? window.innerWidth : 1440,
+    menuOpen: false, navActive: '', problem: 0, solTab: 0, autoStep: -1, autoRunning: false,
+    flowStep: 0, segment: 0, piloto: 0, agent: 1, faq: 0, toast: null,
+    diagOpen: false, dStep: 0, dDone: false, dErr: '',
+    d: { challenge: null, segment: null, size: null, q1: [], q2: null, name: '', company: '', phone: '', email: '', pref: 'WhatsApp', consent: false }
+  };
+  pilotoRef = React.createRef();
+  heroParallax = React.createRef();
+
+  PROBLEMS = [
+    { icon: 'trending-up', title: 'Perco oportunidades de venda', sol: 'Presença digital e atendimento rápido para não deixar nenhum cliente sem resposta.', text: 'Um site que apresenta bem sua empresa e um atendimento automático que responde na hora, registra cada contato e avisa sua equipe.', chips: [['Sites', '#sol-sites'], ['Atendimento automático', '#sol-auto']] },
+    { icon: 'database', title: 'Não consigo visualizar bem meus gastos', sol: 'Financeiro organizado, com entradas, saídas e resultados em um só lugar.', text: 'Um sistema de gestão que reúne contas a pagar e receber, mostra o saldo do mês e gera relatórios fáceis de entender.', chips: [['Sistema de gestão', '#sol-gestao']] },
+    { icon: 'users', title: 'Minha equipe perde tempo com tarefas repetitivas', sol: 'Automação das tarefas que se repetem todos os dias.', text: 'Mensagens, agendamentos, cadastros e lembretes acontecem sozinhos. Sua equipe fica livre para o que realmente precisa de atenção.', chips: [['Automação', '#sol-auto']] },
+    { icon: 'monitor', title: 'Minha empresa precisa de mais organização e controle', sol: 'Sua operação inteira em um só sistema, conectada de ponta a ponta.', text: 'Clientes, vendas, compras, estoque e financeiro conversando entre si, com um painel que mostra o que acontece na empresa.', chips: [['Sistema de gestão', '#sol-gestao'], ['Operação conectada', '#operacao']] }
+  ];
+  MODULES = [
+    { label: 'Clientes', icon: 'users', desc: 'Cadastro e histórico de cada cliente.', kpis: [['128', 'clientes cadastrados'], ['14', 'novos no mês'], ['32', 'retornos agendados']], rows: [['Cliente A', 'Orçamento enviado', 'Hoje'], ['Cliente B', 'Atendimento concluído', 'Ontem'], ['Cliente C', 'Aguardando retorno', '2 dias']] },
+    { label: 'Vendas', icon: 'shopping-cart', desc: 'Pedidos, propostas e acompanhamento.', kpis: [['46', 'pedidos no mês'], ['R$ 280', 'ticket médio'], ['12', 'propostas abertas']], rows: [['Pedido 1042', 'Pago', 'R$ 420'], ['Pedido 1041', 'Em separação', 'R$ 190'], ['Proposta 88', 'Em negociação', 'R$ 1.200']] },
+    { label: 'Compras', icon: 'shopping-bag', desc: 'Pedidos a fornecedores e recebimentos.', kpis: [['8', 'pedidos a fornecedores'], ['3', 'em trânsito'], ['5', 'recebidos']], rows: [['Fornecedor A', 'Em trânsito', 'Sex.'], ['Fornecedor B', 'Recebido', 'Ontem'], ['Fornecedor C', 'Aguardando cotação', '—']] },
+    { label: 'Estoque', icon: 'package', desc: 'Entradas, saídas e alertas de reposição.', kpis: [['312', 'itens ativos'], ['6', 'abaixo do mínimo'], ['54', 'movimentações']], rows: [['Produto A', '4 unidades', 'Repor'], ['Produto B', '38 unidades', 'Ok'], ['Produto C', '2 unidades', 'Repor']] },
+    { label: 'Financeiro', icon: 'wallet', desc: 'Contas a pagar, a receber e saldo.', kpis: [['R$ 18,4 mil', 'entradas'], ['R$ 11,2 mil', 'saídas'], ['R$ 7,2 mil', 'saldo do mês']], rows: [['Aluguel', 'Vence em 3 dias', 'R$ 2.400'], ['Pedido 1042', 'Recebido', 'R$ 420'], ['Fornecedor A', 'Agendado', 'R$ 1.150']] },
+    { label: 'Resultados', icon: 'trending-up', desc: 'Visão geral do desempenho da empresa.', kpis: [['+12%', 'vendas vs. mês anterior'], ['3,1x', 'giro de estoque'], ['92%', 'contas em dia']], bars: [[38, 'Jan'], [52, 'Fev'], [47, 'Mar'], [64, 'Abr'], [72, 'Mai'], [88, 'Jun']] }
+  ];
+  AUTO = [['message-circle', 'Mensagem recebida'], ['zap', 'Resposta automática enviada'], ['calendar', 'Horário agendado'], ['user-round', 'Cliente registrado no sistema']];
+  FLOW = [
+    { label: 'Site', icon: 'globe', x: 20, y: 15, cap: 'O cliente encontra sua empresa no site e pede um orçamento.' },
+    { label: 'Atendimento', icon: 'message-square', x: 16, y: 84, cap: 'A mensagem é respondida na hora e o contato fica registrado.' },
+    { label: 'Vendas', icon: 'shopping-cart', x: 80, y: 15, cap: 'A proposta vira venda, com o histórico do cliente à mão.' },
+    { label: 'Gestão', icon: 'trending-up', x: 84, y: 84, cap: 'Financeiro, estoque e resultados atualizados automaticamente.' }
+  ];
+  SEGMENTS = [
+    { slot: 'seg-clinicas', icon: 'heart-pulse', title: 'Clínicas e Saúde', desc: 'Mais organização, atendimento e controle de pacientes.', intro: 'Agenda, atendimento e informações dos pacientes organizados, com menos tempo gasto ao telefone.', apps: ['Agendamento online com lembretes automáticos', 'Confirmação de consultas por mensagem', 'Cadastro e histórico de pacientes', 'Controle financeiro da clínica'], benefits: ['Agenda organizada', 'Atendimento mais rápido', 'Financeiro claro'] },
+    { slot: 'seg-imobiliarias', icon: 'building-2', title: 'Imobiliárias', desc: 'Gestão de imóveis, contatos e oportunidades.', intro: 'Imóveis, interessados e visitas em um só lugar, com resposta rápida para cada contato.', apps: ['Site com vitrine de imóveis e filtros', 'Captação e distribuição de contatos', 'Agenda de visitas', 'Acompanhamento de propostas'], benefits: ['Nenhum contato perdido', 'Visitas organizadas', 'Propostas sob controle'] },
+    { slot: 'seg-comercios', icon: 'store', title: 'Comércios', desc: 'Controle de vendas, estoque e resultados.', intro: 'Vendas, estoque e caixa conectados para você saber o que vende, o que falta e quanto sobra.', apps: ['Loja ou catálogo online', 'Estoque atualizado a cada venda', 'Atendimento automático para pedidos', 'Relatórios de vendas'], benefits: ['Estoque sem surpresas', 'Pedidos mais rápidos', 'Resultados visíveis'] },
+    { slot: 'seg-servicos', icon: 'wrench', title: 'Prestadores de Serviços', desc: 'Orçamentos, agenda e clientes.', intro: 'Orçamentos, agenda e cobranças padronizados para atender mais clientes com menos retrabalho.', apps: ['Orçamentos padronizados', 'Agenda de serviços', 'Cobranças e lembretes', 'Histórico por cliente'], benefits: ['Menos retrabalho', 'Agenda cheia e organizada', 'Recebimentos em dia'] }
+  ];
+  PILOTO = [
+    { title: 'Projeto', icon: 'target', desc: 'Entendemos seu negócio e seus desafios.', cube: 'Projeto cria o núcleo.' },
+    { title: 'Interface', icon: 'monitor', desc: 'Desenhamos a melhor experiência para sua operação.', cube: 'Interface acrescenta as faces.' },
+    { title: 'Lógica', icon: 'code', desc: 'Definimos como tudo deve funcionar.', cube: 'Lógica conecta os elementos.' },
+    { title: 'Organização', icon: 'layers', desc: 'Conectamos informações e processos.', cube: 'Organização encaixa os módulos.' },
+    { title: 'Tirar do papel', icon: 'rocket', desc: 'Construímos e colocamos a solução em prática.', cube: 'Tirar do papel completa o cubo.' },
+    { title: 'Operar', icon: 'activity', desc: 'Acompanhamos, otimizamos e evoluímos.', cube: 'Operar ilumina a marca C3.' }
+  ];
+  AGENTS = [
+    { img: 'assets/max.png', name: 'MAX', role: 'Inteligência Estratégica', verbs: ['Analisar', 'Planejar', 'Orientar'], desc: 'Identifica necessidades e estrutura soluções.', mission: 'Analisar, planejar e orientar.', resp: ['Entender o contexto e os objetivos da empresa', 'Identificar necessidades e prioridades', 'Estruturar soluções e próximos passos'], apps: [['Análise do diagnóstico', 'Planejado'], ['Plano de soluções por prioridade', 'Planejado'], ['Orientação estratégica contínua', 'Planejado']] },
+    { img: 'assets/clara.png', name: 'CLARA', role: 'Inteligência Comercial', verbs: ['Atender', 'Qualificar', 'Converter'], desc: 'Responsável por leads, clientes, relacionamento e oportunidades.', mission: 'Atender, qualificar e converter.', resp: ['Atender e qualificar novos contatos', 'Cuidar do relacionamento com clientes', 'Transformar conversas em oportunidades'], apps: [['Diagnóstico guiado neste site', 'Funcional nesta prévia'], ['Atendimento por WhatsApp', 'Planejado'], ['Registro de leads e oportunidades', 'Planejado']] },
+    { img: 'assets/core.png', name: 'CORE', role: 'Inteligência de Desenvolvimento', verbs: ['Criar', 'Conectar', 'Evoluir'], desc: 'Agente que apoia sistemas, integrações e automações.', mission: 'Criar, conectar e evoluir.', resp: ['Apoiar a criação de sistemas e sites', 'Conectar ferramentas e integrações', 'Manter e evoluir automações'], apps: [['Apoio a integrações entre sistemas', 'Planejado'], ['Monitoramento de automações', 'Planejado'], ['Sugestões de melhoria contínua', 'Planejado']] }
+  ];
+  CHALLENGES = ['Perco oportunidades de venda', 'Não consigo visualizar bem meus gastos', 'Minha equipe perde tempo com tarefas repetitivas', 'Minha empresa precisa de mais organização e controle', 'Ainda não sei, quero orientação'];
+  SEGS = ['Clínicas e Saúde', 'Imobiliárias', 'Comércios', 'Prestadores de Serviços', 'Outro segmento'];
+  SIZES = ['Só eu', '2 a 9 pessoas', '10 a 49 pessoas', '50 ou mais'];
+  COND = [
+    { q1: 'Por onde chegam seus clientes hoje?', o1: ['WhatsApp', 'Instagram', 'Indicação', 'Site', 'Telefone'], q2: 'Sua empresa tem site?', o2: ['Não tenho', 'Tenho, mas está desatualizado', 'Sim, atualizado'] },
+    { q1: 'Onde você controla o financeiro hoje?', o1: ['Planilha', 'Caderno', 'Algum sistema', 'Não controlo'], q2: 'Você trabalha com estoque?', o2: ['Sim', 'Não'] },
+    { q1: 'Quais tarefas tomam mais tempo?', o1: ['Responder mensagens', 'Agendamentos', 'Orçamentos', 'Cadastro de clientes', 'Cobranças'], q2: 'Quantas mensagens recebem por dia?', o2: ['Até 20', '20 a 100', 'Mais de 100'] },
+    { q1: 'Quais informações faltam para decidir?', o1: ['Vendas', 'Despesas', 'Clientes', 'Estoque', 'Desempenho da equipe'], q2: 'Onde ficam os dados hoje?', o2: ['Planilhas', 'Vários sistemas', 'Papel', 'Na cabeça do dono'] },
+    { q1: 'O que mais incomoda hoje?', o1: ['Atendimento lento', 'Poucos clientes novos', 'Desorganização', 'Retrabalho'], q2: 'Já usa algum sistema?', o2: ['Sim', 'Não', 'Não sei'] }
+  ];
+  SOL = {
+    site: ['Sites que trabalham pelo seu negócio', 'Presença profissional para atrair e captar clientes.'],
+    auto: ['Atendimento e tarefas no automático', 'Respostas, agendamentos e cadastros sem trabalho manual.'],
+    gest: ['Sua empresa organizada em um só sistema', 'Clientes, vendas, estoque e financeiro no mesmo lugar.'],
+    talk: ['Conversa de diagnóstico com especialista', 'Um primeiro encontro para mapear sua operação e prioridades.']
+  };
+
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onResize = () => this.setState({ isMobile: window.innerWidth < 820, vw: window.innerWidth, vh: window.innerHeight });
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    this.onScroll = () => { if (this.tick) return; this.tick = requestAnimationFrame(() => { this.tick = null; this.handleScroll(); }); };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.handleScroll();
+    if (!this.reduce) this.flowTimer = setInterval(() => { if (Date.now() > (this.flowPause || 0)) this.setState(s => ({ flowStep: (s.flowStep + 1) % 4 })); }, 2200);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll);
+    clearInterval(this.flowTimer); clearTimeout(this.toastT); (this.autoT || []).forEach(clearTimeout);
+  }
+  handleScroll() {
+    const y = window.scrollY;
+    if (this.heroParallax.current && !this.reduce) this.heroParallax.current.style.transform = `translateY(${Math.min(y, 900) * 0.18}px)`;
+    const el = this.pilotoRef.current;
+    if (el) {
+      const r = el.getBoundingClientRect(), range = r.height - window.innerHeight;
+      const p = Math.max(0, Math.min(0.999, (64 - r.top) / Math.max(1, range)));
+      const step = Math.floor(p * 6);
+      if (step !== this.state.piloto) this.setState({ piloto: step });
+    }
+    const ids = ['solucoes', 'segmentos', 'metodo', 'agentes', 'operacao'];
+    let active = '';
+    ids.forEach(id => { const s = document.getElementById(id); if (s) { const r = s.getBoundingClientRect(); if (r.top < 140 && r.bottom > 140) active = id; } });
+    if (active !== this.state.navActive) this.setState({ navActive: active });
+  }
+  scrollToId(id, offset = 64) {
+    const el = document.getElementById(id); if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  goPiloto(i) {
+    const el = this.pilotoRef.current; if (!el) return;
+    const range = el.offsetHeight - window.innerHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - 64 + range * ((i + 0.5) / 6);
+    window.scrollTo({ top, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  openDiag(pre = {}, step = 0) {
+    this.setState(s => ({ diagOpen: true, dDone: false, dErr: '', dStep: step, menuOpen: false, d: { ...s.d, ...pre } }));
+    setTimeout(() => this.scrollToId('diagnostico-form', 72), 60);
+  }
+  showToast(msg) {
+    clearTimeout(this.toastT);
+    this.setState({ toast: msg });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 6000);
+  }
+  setD(patch) { this.setState(s => ({ d: { ...s.d, ...patch }, dErr: '' })); }
+  simulateAuto() {
+    if (this.state.autoRunning) return;
+    (this.autoT || []).forEach(clearTimeout);
+    this.setState({ autoStep: 0, autoRunning: true });
+    this.autoT = [1, 2, 3].map(i => setTimeout(() => this.setState({ autoStep: i }), i * (this.reduce ? 150 : 800)));
+    this.autoT.push(setTimeout(() => this.setState({ autoRunning: false }), 3 * (this.reduce ? 150 : 800) + 200));
+  }
+  rec(d) {
+    const items = [];
+    const add = (k, tag) => items.push({ title: this.SOL[k][0], why: this.SOL[k][1], tag });
+    const c = d.challenge, big = d.size >= 2;
+    if (c === 0) { if (d.q2 === 'Sim, atualizado') { add('auto', 'Prioridade'); add('site', 'Complemento'); } else { add('site', 'Prioridade'); add('auto', 'Complemento'); } }
+    else if (c === 1) { add('gest', 'Prioridade'); if (d.q2 === 'Sim') items[0].why = 'Financeiro e estoque conectados, com relatórios simples.'; }
+    else if (c === 2) { add('auto', 'Prioridade'); if (big) add('gest', 'Complemento'); }
+    else if (c === 3) { add('gest', 'Prioridade'); add('auto', 'Complemento'); }
+    else { add('talk', 'Prioridade'); }
+    if (big && c !== 2 && c !== 3 && c !== 4) items.push({ title: 'Integração entre setores', why: 'Com uma equipe maior, conectar as áreas evita retrabalho.', tag: 'A considerar' });
+    const seg = this.SEGMENTS[d.segment];
+    return {
+      items: items.map((it, i) => ({ ...it, bg: i === 0 ? '#FFFFFF' : 'transparent', fg: i === 0 ? '#000000' : '#FFFFFF' })),
+      segApp: seg ? `${seg.apps[0]} (${seg.title}).` : 'Definida na conversa inicial, conforme o seu segmento.',
+      next: 'Etapa Projeto do Método PILOTO: uma conversa para entender sua operação e definir escopo e prazo.'
+    };
+  }
+  validate(step, d) {
+    if (step === 0 && d.challenge === null) return 'Escolha o principal desafio para continuar.';
+    if (step === 1 && (d.segment === null || d.size === null)) return 'Informe o segmento e o tamanho da equipe.';
+    if (step === 2 && (!d.q1.length || d.q2 === null)) return 'Responda as duas perguntas para continuar.';
+    if (step === 4) {
+      if (d.name.trim().length < 2) return 'Informe seu nome.';
+      const digits = d.phone.replace(/\D/g, ''), hasPhone = digits.length > 0, hasEmail = d.email.trim().length > 0;
+      if (!hasPhone && !hasEmail) return 'Informe um telefone ou e-mail para contato.';
+      if (hasPhone && (digits.length < 10 || digits.length > 13)) return 'Confira o telefone: use DDD + número.';
+      if (hasEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) return 'Confira o e-mail informado.';
+      if (d.pref === 'WhatsApp' && !hasPhone) return 'Para contato por WhatsApp, informe um telefone.';
+      if (d.pref === 'E-mail' && !hasEmail) return 'Para contato por e-mail, informe o e-mail.';
+      if (!d.consent) return 'Confirme a autorização de contato.';
+    }
+    return '';
+  }
+
+  renderVals() {
+    const S = this.state, I = this.I, d = S.d, isMobile = S.isMobile;
+    const opt = sel => ({ bg: sel ? '#FFFFFF' : 'transparent', fg: sel ? '#000000' : '#FFFFFF', bd: sel ? '#FFFFFF' : 'rgba(255,255,255,0.3)', sel });
+    const nav = [['Soluções', 'solucoes'], ['Segmentos', 'segmentos'], ['Método PILOTO', 'metodo'], ['Agentes', 'agentes'], ['Sobre', 'operacao']];
+    const navLinks = nav.map(([label, id]) => ({ label, href: '#' + id, color: S.navActive === id ? '#FFFFFF' : '#D1D1D1', line: S.navActive === id ? '#FFFFFF' : 'transparent', onClick: () => this.setState({ menuOpen: false }) }));
+    const pending = msg => () => this.showToast(msg);
+
+    const problems = this.PROBLEMS.map((p, i) => {
+      const on = S.problem === i;
+      return { icon: I(p.icon), title: p.title, pressed: on, bg: on ? '#000000' : 'linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 220%)', fg: on ? '#FFFFFF' : '#000000', bd: on ? '#000000' : '#D1D1D1', filter: on ? 'invert(1)' : 'none', shadow: on ? '0 18px 36px rgba(0,0,0,0.22)' : '0 10px 24px rgba(0,0,0,0.05)', onClick: () => this.setState({ problem: i }) };
+    });
+    const P = this.PROBLEMS[S.problem];
+    const m = this.MODULES[S.solTab];
+    const mod = { label: m.label, desc: m.desc, kpis: m.kpis.map(([v, l]) => ({ v, l })), rows: (m.rows || []).map(([a, b, c]) => ({ a, b, c })), hasRows: !!m.rows, hasBars: !!m.bars, bars: (m.bars || []).map(([h, mm]) => ({ h, m: mm })) };
+    const solTabs = this.MODULES.map((t, i) => { const on = S.solTab === i; return { label: t.label, icon: I(t.icon), selected: on, bg: on ? '#FFFFFF' : 'rgba(255,255,255,0.04)', fg: on ? '#000000' : '#FFFFFF', bd: on ? '#FFFFFF' : 'rgba(255,255,255,0.14)', filter: on ? 'none' : 'invert(1)', onClick: () => this.setState({ solTab: i }) }; });
+    const autoSteps = this.AUTO.map(([icon, label], i) => { const on = i <= S.autoStep; return { icon: I(icon), label, bg: on ? '#000000' : '#FFFFFF', fg: on ? '#FFFFFF' : '#6B6B6B', bd: on ? '#000000' : '#D1D1D1', filter: on ? 'invert(1)' : 'invert(0.42)', checkOp: on ? 1 : 0 }; });
+
+    const F = this.FLOW[S.flowStep];
+    const flowNodes = this.FLOW.map((f, i) => { const on = S.flowStep === i; return { label: f.label, icon: I(f.icon), x: f.x, y: f.y, active: on, bg: on ? 'rgba(255,255,255,0.16)' : 'rgba(26,26,26,0.7)', bd: on ? '#FFFFFF' : 'rgba(255,255,255,0.3)', glow: on ? '0 0 28px rgba(255,255,255,0.35)' : 'none', lineOp: on ? 0.9 : 0.25, lineW: on ? 2 : 1, onClick: () => { this.flowPause = Date.now() + 6000; this.setState({ flowStep: i }); } }; });
+
+    const segments = this.SEGMENTS.map((s, i) => { const on = S.segment === i; return { slot: s.slot, ph: `Fotografia — ${s.title}`, icon: I(s.icon), title: s.title, desc: s.desc, btn: on ? 'Selecionado' : 'Ver aplicações', pressed: on, bd: on ? '#000000' : 'transparent', shadow: on ? '0 0 0 3px #D1D1D1, 0 18px 36px rgba(0,0,0,0.2)' : '0 10px 24px rgba(0,0,0,0.12)', arrowBg: on ? '#FFFFFF' : 'transparent', arrowFg: on ? '#000000' : '#FFFFFF', onClick: () => this.setState({ segment: i }) }; });
+    const SG = this.SEGMENTS[S.segment];
+    const seg = { ...SG, cta: `Diagnóstico para ${SG.title}`, onCta: () => this.openDiag({ segment: S.segment }, d.challenge === null ? 0 : 1) };
+
+    const pc = this.PILOTO[S.piloto];
+    const pilotoSteps = this.PILOTO.map((p, i) => { const on = i === S.piloto, done = i < S.piloto; return { title: p.title, desc: p.desc, icon: I(p.icon), current: on ? 'step' : 'false', bg: on ? 'rgba(255,255,255,0.12)' : 'rgba(26,26,26,0.6)', bd: on ? '#FFFFFF' : done ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.14)', descOp: on || done ? 1 : 0.6, dotBg: on || done ? '#FFFFFF' : '#000000', dotGlow: on ? '0 0 14px 3px rgba(255,255,255,0.7)' : 'none', onClick: () => this.goPiloto(i) }; });
+
+    const agents = this.AGENTS.map((a, i) => { const on = S.agent === i; return { ...a, alt: `${a.name}, ${a.role}`, pressed: on, bd: on ? '#000000' : '#D1D1D1', shadow: on ? '0 18px 36px rgba(0,0,0,0.16)' : 'none', onClick: () => this.setState({ agent: i }) }; });
+    const A = this.AGENTS[S.agent];
+    const agent = { ...A, alt: `${A.name}, ${A.role}`, apps: A.apps.map(([label, status]) => { const f = status !== 'Planejado'; return { label, status, tagBg: f ? '#FFFFFF' : 'transparent', tagFg: f ? '#000000' : '#D1D1D1', tagBd: f ? '#FFFFFF' : '#6B6B6B' }; }) };
+
+    const cond = this.COND[d.challenge ?? 0];
+    const stepNames = ['Desafio', 'Empresa', 'Perguntas', 'Direcionamento', 'Contato'];
+    const titles = ['Qual é o principal desafio do seu negócio hoje?', 'Conte sobre a sua empresa.', 'Algumas perguntas rápidas.', 'Seu direcionamento inicial', 'Para onde enviamos o retorno?'];
+    const R = this.rec(d);
+    const segName = d.segment !== null ? this.SEGS[d.segment] : '—';
+    const dSummary = [
+      { k: 'Desafio', v: d.challenge !== null ? this.CHALLENGES[d.challenge] : '—' },
+      { k: 'Segmento', v: segName },
+      { k: 'Equipe', v: d.size !== null ? this.SIZES[d.size] : '—' },
+      { k: cond.q1, v: d.q1.join(', ') || '—' },
+      { k: cond.q2, v: d.q2 || '—' },
+      { k: 'Direcionamento', v: R.items.map(i => i.title).join(' + ') },
+      { k: 'Contato', v: [d.name, d.company, d.phone, d.email].filter(Boolean).join(' · ') + ` (prefere ${d.pref})` }
+    ];
+    const dNext = () => {
+      const err = this.validate(S.dStep, d);
+      if (err) return this.setState({ dErr: err });
+      if (S.dStep === 4) return this.setState({ dDone: true, dErr: '' });
+      this.setState({ dStep: S.dStep + 1, dErr: '' });
+    };
+    const field = k => e => this.setD({ [k]: e.target.value });
+    const toastShow = !!S.toast;
+
+    return {
+      isMobile, notMobile: !isMobile, menuOpen: S.menuOpen, menuVisible: isMobile && S.menuOpen, menuClosed: !S.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      navLinks, openDiagTop: () => this.openDiag({}, S.diagOpen ? S.dStep : 0),
+      whatsClick: pending('O número oficial de WhatsApp ainda não foi informado nesta prévia. Enquanto isso, faça o diagnóstico com a Clara.'),
+      emailClick: pending('O e-mail oficial ainda não foi informado nesta prévia. Enquanto isso, faça o diagnóstico com a Clara.'),
+      legalClick: pending('Documento legal pendente: será publicado com o site oficial.'),
+      heroH: isMobile ? Math.round(Math.min(S.vw - 40, 560) * 500 / 560) : 500,
+      heroScale: isMobile ? Math.min(S.vw - 40, 560) / 560 : 1,
+      heroParallax: this.heroParallax,
+      services: [
+        { icon: I('monitor'), title: 'Presença Digital', desc: 'Mais visibilidade e clientes.', href: '#sol-sites' },
+        { icon: I('layers'), title: 'Gestão da Empresa', desc: 'Organização e controle total.', href: '#sol-gestao' },
+        { icon: I('zap'), title: 'Automação Inteligente', desc: 'Menos tarefas, mais resultados.', href: '#sol-auto' },
+        { icon: I('headphones'), title: 'Suporte Contínuo', desc: 'Acompanhamento próximo.', href: '#metodo' }
+      ],
+      problems, problemSol: { title: P.sol, text: P.text, chips: P.chips.map(([label, href]) => ({ label, href })) },
+      continueProblem: () => this.openDiag({ challenge: S.problem, q1: d.challenge === S.problem ? d.q1 : [], q2: d.challenge === S.problem ? d.q2 : null }, 1),
+      solTabs, mod, autoSteps, simulateAuto: () => this.simulateAuto(), autoLabel: S.autoStep >= 3 && !S.autoRunning ? 'Simular de novo' : 'Simular atendimento',
+      diagGestao: () => this.openDiag({ challenge: 3, q1: [], q2: null }, 1),
+      flowNodes, dotX: F.x, dotY: F.y, flowCaption: F.cap, flowNum: `0${S.flowStep + 1}`,
+      benefits: [
+        { t: 'Tudo conectado. Nada perdido.', d: 'As informações acompanham o cliente.' },
+        { t: 'Menos tarefas. Mais tempo para crescer.', d: 'Automatize atividades repetitivas.' },
+        { t: 'Saiba o que acontece na sua empresa.', d: 'Acompanhe vendas, despesas e resultados.' },
+        { t: 'Cresça sem começar tudo de novo.', d: 'Amplie suas soluções conforme sua evolução.' }
+      ],
+      stats: [
+        { n: '79%', t: 'das empresas utilizam WhatsApp ou Telegram', icon: I('message-circle') },
+        { n: '31%', t: 'utilizam CRM, um sistema de gestão de clientes', icon: I('layers') },
+        { n: '17%', t: 'utilizam aplicações de inteligência artificial', icon: I('sparkles') }
+      ],
+      segments, seg,
+      pilotoRef: this.pilotoRef, pilotoHeight: isMobile ? '380vh' : '440vh', pilotoProgress: S.piloto + 1, pilotoNum: `0${S.piloto + 1}`,
+      pilotoCube: isMobile ? 150 : (S.vh < 700 ? 170 : 230), pilotoCubeBox: isMobile ? 200 : (S.vh < 700 ? 200 : 300), pilotoGlow: isMobile ? 260 : 420, pilotoGlowOp: S.piloto === 5 ? 0.3 : 0.12,
+      pilotoCur: { ...pc, icon: I(pc.icon) }, pilotoSteps, pilotoLine: (S.piloto / 5) * 84,
+      pilotoBtnLabel: S.piloto === 5 ? 'Solicitar diagnóstico' : S.piloto === 0 ? 'Conhecer o método' : 'Próxima etapa',
+      pilotoBtn: () => S.piloto === 5 ? this.openDiag({}, 0) : this.goPiloto(S.piloto + 1),
+      agents, agent,
+      diagIntro: [{ icon: I('target'), label: '1. Seu desafio' }, { icon: I('list-checks'), label: '2. Algumas perguntas' }, { icon: I('box'), label: '3. Análise inicial' }, { icon: I('trending-up'), label: '4. Soluções ideais' }],
+      diagCta: S.diagOpen ? 'Continuar diagnóstico' : 'Iniciar diagnóstico com a Clara',
+      diagOpen: S.diagOpen, dDone: S.dDone, dNotDone: !S.dDone, d,
+      dPct: S.dDone ? 100 : (S.dStep / 5) * 100 + 4, dNum: S.dStep + 1, dTitle: titles[S.dStep],
+      dStepsNav: stepNames.map((label, i) => ({ label: `${i + 1}. ${label}`, current: i === S.dStep ? 'step' : 'false', bg: i === S.dStep ? '#FFFFFF' : 'transparent', fg: i === S.dStep ? '#000000' : i < S.dStep ? '#FFFFFF' : '#D1D1D1', bd: i <= S.dStep ? '#FFFFFF' : 'rgba(255,255,255,0.2)' })),
+      dS0: S.dStep === 0, dS1: S.dStep === 1, dS2: S.dStep === 2, dS3: S.dStep === 3, dS4: S.dStep === 4,
+      dChallengeOpts: this.CHALLENGES.map((label, i) => ({ label, ...opt(d.challenge === i), onClick: () => this.setD(d.challenge === i ? {} : { challenge: i, q1: [], q2: null }) })),
+      dSegOpts: this.SEGS.map((label, i) => ({ label, ...opt(d.segment === i), onClick: () => this.setD({ segment: i }) })),
+      dSizeOpts: this.SIZES.map((label, i) => ({ label, ...opt(d.size === i), onClick: () => this.setD({ size: i }) })),
+      dQ1Label: cond.q1, dQ2Label: cond.q2,
+      dQ1Opts: cond.o1.map(label => ({ label, ...opt(d.q1.includes(label)), onClick: () => this.setD({ q1: d.q1.includes(label) ? d.q1.filter(x => x !== label) : [...d.q1, label] }) })),
+      dQ2Opts: cond.o2.map(label => ({ label, ...opt(d.q2 === label), onClick: () => this.setD({ q2: label }) })),
+      dPrefOpts: ['WhatsApp', 'Ligação', 'E-mail'].map(label => ({ label, ...opt(d.pref === label), onClick: () => this.setD({ pref: label }) })),
+      dRec: R, fName: field('name'), fCompany: field('company'), fPhone: field('phone'), fEmail: field('email'),
+      fConsent: e => this.setD({ consent: e.target.checked }),
+      hasErr: !!S.dErr, dErr: S.dErr,
+      dBack: () => S.dStep > 0 && this.setState({ dStep: S.dStep - 1, dErr: '' }), dBackDisabled: S.dStep === 0, dBackOp: S.dStep === 0 ? 0.35 : 1,
+      dNext, dNextLabel: S.dStep === 3 ? 'Quero receber o contato' : S.dStep === 4 ? 'Enviar solicitação' : 'Continuar',
+      dSummary, dFirstName: d.name.trim().split(' ')[0] || '',
+      dRestart: () => this.setState({ dDone: false, dStep: 0, dErr: '', d: { challenge: null, segment: null, size: null, q1: [], q2: null, name: '', company: '', phone: '', email: '', pref: 'WhatsApp', consent: false } }),
+      faqs: [
+        ['Quais serviços a CORE 3 oferece?', 'Criamos sites, automações de atendimento e tarefas, sistemas de gestão, integrações entre ferramentas e soluções com inteligência artificial. Tudo pensado para melhorar vendas, atendimento e organização da sua empresa.'],
+        ['Como funciona o diagnóstico?', 'Você responde algumas perguntas sobre o seu negócio e os seus desafios. Com isso, indicamos um primeiro caminho e combinamos uma conversa. Nesta versão do site, o diagnóstico usa regras simples e não envia dados.'],
+        ['Vocês atendem todo o Brasil?', 'A abrangência de atendimento será confirmada pela equipe CORE 3.', true],
+        ['Como funciona o atendimento depois da entrega?', 'Na etapa Operar do Método PILOTO, acompanhamos a solução em uso, fazemos ajustes e planejamos as próximas evoluções.'],
+        ['Quanto tempo leva para um projeto?', 'Depende do tamanho do projeto. O prazo é definido depois do diagnóstico, na etapa Projeto, junto com o escopo.'],
+        ['Como entro em contato?', 'Pelo diagnóstico com a Clara aqui no site, pelo WhatsApp ou por e-mail. Os canais oficiais serão publicados no lançamento.', true]
+      ].map(([q, a, provisional], i) => { const open = S.faq === i; return { q, a, provisional: !!provisional, open, id: `faq-${i}`, sign: open ? '−' : '+', signBg: open ? '#000000' : 'transparent', signFg: open ? '#FFFFFF' : '#000000', bd: open ? '#000000' : '#D1D1D1', onClick: () => this.setState({ faq: open ? -1 : i }) }; }),
+      footCols: [
+        { title: 'Soluções', links: [['Presença Digital', '#sol-sites'], ['Gestão da Empresa', '#sol-gestao'], ['Automação Inteligente', '#sol-auto'], ['Suporte Contínuo', '#metodo']] },
+        { title: 'Segmentos', links: this.SEGMENTS.map(s => [s.title, '#segmentos']) },
+        { title: 'Método', links: [['PILOTO', '#metodo']] },
+        { title: 'Agentes', links: [['MAX — Estratégia', '#agentes'], ['CLARA — Comercial', '#agentes'], ['CORE — Desenvolvimento', '#agentes']] },
+        { title: 'CORE 3', links: [['Sobre', '#operacao'], ['Dúvidas', '#faq'], ['Contato', '#diagnostico']] }
+      ].map(c => ({ title: c.title, links: c.links.map(([label, href]) => ({ label, href })) })),
+      socials: [['instagram', 'Instagram'], ['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['linkedin', 'LinkedIn'], ['whatsapp', 'WhatsApp']].map(([k, label]) => ({ label, icon: k === 'linkedin' ? I('linkedin') : `https://cdn.simpleicons.org/${k}/ffffff`, filter: k === 'linkedin' ? 'invert(1)' : 'none', onClick: pending(`Perfil oficial de ${label} ainda não informado nesta prévia.`) })),
+      year: new Date().getFullYear(),
+      toast: S.toast, toastShow, toastClose: () => this.setState({ toast: null }), toastAction: () => { this.setState({ toast: null }); this.openDiag({}, 0); }
+    };
+  }
+}
+</script>
+</body>
+</html>

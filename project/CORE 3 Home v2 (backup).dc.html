@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>CORE 3 — Tecnologia que impulsiona seu negócio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Orbitron:wght@500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#000000;color:#FFFFFF;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit;opacity:.8}
+button{font-family:inherit}
+:focus-visible{outline:2px solid #6B6B6B;outline-offset:3px}
+input::placeholder{color:#6B6B6B}
+@keyframes c3in{0%{opacity:0;transform:translateY(8px)}14%,82%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-4px)}}
+@keyframes c3cyc{0%,2%{opacity:0}6%,30%{opacity:1}34%,100%{opacity:0}}
+@keyframes c3blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes c3pop{0%{opacity:0;transform:scale(.9)}16%,84%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.94)}}
+@keyframes c3dash{from{background-position-x:0}to{background-position-x:8px}}
+@keyframes c3bar{0%{transform:scaleY(.18)}48%,100%{transform:scaleY(1)}}
+@keyframes c3rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes c3inOnce{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes c3popOnce{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes c3barOnce{from{transform:scaleY(.18)}to{transform:scaleY(1)}}
+@keyframes c3wob{0%,100%{transform:scaleY(1)}28%{transform:scaleY(.66)}64%{transform:scaleY(1.14)}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:0.01ms !important}*{animation:none !important}}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08);">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="#inicio" aria-label="CORE 3 — início" style="display:flex;align-items:center;gap:10px;">
+      <img src="assets/c3-symbol.png" alt="" style="height:22px;width:auto;display:block;">
+      <span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:18px;letter-spacing:0.04em;color:#FFFFFF;">CORE 3</span>
+    </a>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Principal" style="display:flex;align-items:center;gap:clamp(18px,2.6vw,40px);">
+        <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" onClick="{{ n.onClick }}" style="font-size:14px;font-weight:500;color:{{ n.color }};padding:8px 0;border-bottom:1px solid {{ n.line }};transition:color .2s, border-color .2s;">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <button onClick="{{ openDiagTop }}" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#FFFFFF;border:1px solid #FFFFFF;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s,color .2s;" style-hover="background:#FFFFFF;color:#000000;">Fale com a Clara <span aria-hidden="true">→</span></button>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-label="{{ menuLabel }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);border-radius:12px;cursor:pointer;">
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}"><img src="assets/icons/x.svg" alt="" style="width:20px;filter:invert(1);"></sc-if>
+        <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}"><img src="assets/icons/menu.svg" alt="" style="width:20px;filter:invert(1);"></sc-if>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Menu móvel" style="border-top:1px solid rgba(255,255,255,0.1);padding:12px 20px 24px;display:flex;flex-direction:column;gap:4px;background:#000000;">
+      <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ n.onClick }}" style="font-size:17px;font-weight:500;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,0.08);color:#FFFFFF;">{{ n.label }}</a>
+      </sc-for>
+      <button onClick="{{ openDiagTop }}" style="margin-top:14px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 18px;font-size:15px;font-weight:600;cursor:pointer;">Fale com a Clara →</button>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+<!-- 02 HERO -->
+<section id="inicio" data-screen-label="02 Hero" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 46% 60% at 74% 40%,rgba(255,255,255,0.09) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 80% 38% at 70% 104%,rgba(255,255,255,0.11) 0%,rgba(255,255,255,0) 70%),linear-gradient(180deg,#000000 0%,#080808 55%,#111111 100%);scroll-margin-top:64px;">
+  <svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+    <defs>
+      <linearGradient id="c3fade" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="0.42" stop-color="#FFFFFF" stop-opacity="0.16"></stop><stop offset="0.72" stop-color="#FFFFFF" stop-opacity="0.9"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.25"></stop></linearGradient>
+      <path id="c3f1" d="M-40,690 C260,600 520,740 820,630 S1240,420 1480,470" fill="none" stroke="url(#c3fade)"></path>
+      <path id="c3f2" d="M380,830 C620,740 860,790 1100,680 S1380,570 1480,590" fill="none" stroke="url(#c3fade)"></path>
+      <path id="c3f3" d="M820,-20 C940,110 1120,170 1480,140" fill="none" stroke="url(#c3fade)"></path>
+      <path id="c3st" d="M0,-10 C0.8,-1.6 1.6,-0.8 10,0 C1.6,0.8 0.8,1.6 0,10 C-0.8,1.6 -1.6,0.8 -10,0 C-1.6,-0.8 -0.8,-1.6 0,-10Z" fill="#FFFFFF"></path>
+    </defs>
+    <g><use href="#c3f1" transform="translate(0,0)" opacity="0.9" stroke-width="1.3"></use><use href="#c3f1" transform="translate(-3.5999999999999996,6)" opacity="0.6" stroke-width="0.8"></use><use href="#c3f1" transform="translate(-7.199999999999999,12)" opacity="0.45" stroke-width="0.7"></use><use href="#c3f1" transform="translate(-11.4,19)" opacity="0.32" stroke-width="0.6"></use><use href="#c3f1" transform="translate(-16.2,27)" opacity="0.22" stroke-width="0.5"></use><use href="#c3f1" transform="translate(-22.2,37)" opacity="0.12" stroke-width="0.5"></use></g>
+    <g><use href="#c3f2" transform="translate(0,0)" opacity="0.5" stroke-width="0.8"></use><use href="#c3f2" transform="translate(-4.8,8)" opacity="0.34" stroke-width="0.6"></use><use href="#c3f2" transform="translate(-10.2,17)" opacity="0.22" stroke-width="0.5"></use><use href="#c3f2" transform="translate(-16.2,27)" opacity="0.12" stroke-width="0.5"></use></g>
+    <g><use href="#c3f3" transform="translate(0,0)" opacity="0.32" stroke-width="0.6"></use><use href="#c3f3" transform="translate(-6,10)" opacity="0.2" stroke-width="0.5"></use><use href="#c3f3" transform="translate(-13.2,22)" opacity="0.1" stroke-width="0.5"></use></g>
+    <g><use href="#c3st" transform="translate(1040,96) scale(1.1)" opacity="0.9"></use><circle cx="1040" cy="96" r="2.4" fill="#FFFFFF" opacity="0.9"></circle><use href="#c3st" transform="translate(1330,250) scale(0.7)" opacity="0.7"></use><circle cx="1330" cy="250" r="1.5" fill="#FFFFFF" opacity="0.7"></circle><use href="#c3st" transform="translate(900,520) scale(0.55)" opacity="0.55"></use><circle cx="900" cy="520" r="1.2" fill="#FFFFFF" opacity="0.55"></circle><use href="#c3st" transform="translate(1250,610) scale(0.9)" opacity="0.8"></use><circle cx="1250" cy="610" r="2.0" fill="#FFFFFF" opacity="0.8"></circle><use href="#c3st" transform="translate(700,140) scale(0.45)" opacity="0.45"></use><circle cx="700" cy="140" r="1.0" fill="#FFFFFF" opacity="0.45"></circle></g>
+  </svg>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(36px,5.5vw,68px) clamp(20px,4vw,48px) 28px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(4px,2vw,24px);">
+      <div style="flex:1 1 440px;min-width:0;max-width:640px;position:relative;z-index:2;">
+        <p style="margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#D1D1D1;">Tecnologia que impulsiona seu negócio</p>
+        <h1 style="margin:0;font-family:Orbitron,sans-serif;font-weight:800;font-size:clamp(34px,5.2vw,74px);line-height:1.06;letter-spacing:-0.02em;color:#FFFFFF;text-wrap:balance;max-width:12ch;">Seu negócio no próximo nível.</h1>
+        <p style="margin:22px 0 0;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:#D1D1D1;max-width:520px;text-wrap:pretty;">Sites, automações, inteligência artificial e um sistema completo para organizar, atender, vender e crescer.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;">
+          <button onClick="{{ openDiagTop }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 0 30px rgba(255,255,255,0.18);transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-1px);box-shadow:0 0 40px rgba(255,255,255,0.32);">Solicitar diagnóstico <span aria-hidden="true">→</span></button>
+          <a href="#solucoes" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);color:#FFFFFF;border:1px solid rgba(255,255,255,0.55);border-radius:999px;padding:13px 24px;font-size:15px;font-weight:600;transition:background .2s;" style-hover="background:rgba(255,255,255,0.12);opacity:1;">Conhecer soluções</a>
+        </div>
+        <button onClick="{{ whatsClick }}" style="margin-top:24px;display:flex;align-items:flex-start;gap:10px;background:transparent;border:0;color:#D1D1D1;font-size:14px;line-height:1.45;text-align:left;cursor:pointer;padding:6px 0;" style-hover="color:#FFFFFF;">
+          <img src="assets/icons/message-circle.svg" alt="" style="width:18px;flex:none;margin-top:1px;filter:invert(1);"><span>Converse com a nossa especialista no WhatsApp</span>
+        </button>
+      </div>
+      <div style="flex:1 1 420px;min-width:0;position:relative;height:{{ heroH }}px;">
+        <div ref="{{ heroParallax }}" style="position:absolute;inset:0;will-change:transform;">
+          <div style="position:absolute;left:50%;top:{{ heroTop }}px;width:560px;height:500px;margin-left:-280px;transform:scale({{ heroScale }});transform-origin:50% 0;">
+            <div aria-hidden="true" style="position:absolute;left:90px;top:326px;width:380px;height:96px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.20) 0%,rgba(255,255,255,0.05) 45%,rgba(255,255,255,0) 72%);"></div>
+            <div aria-hidden="true" style="position:absolute;left:0;top:262px;width:560px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.4),rgba(255,255,255,0));transform:rotate(-12deg);"></div>
+            <div aria-hidden="true" style="position:absolute;left:60px;top:170px;width:460px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.22),rgba(255,255,255,0));transform:rotate(20deg);"></div>
+            <dc-import name="GlassCube" size="{{ 104 }}" ry="{{ -24 }}" assemble="{{ true }}" delay="{{ 450 }}" logo="{{ false }}" light="{{ 0.5 }}" style="position:absolute;left:408px;top:40px;" hint-size="104px,104px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 86 }}" ry="{{ 34 }}" assemble="{{ true }}" delay="{{ 350 }}" logo="{{ false }}" light="{{ 0.5 }}" glyph="&lt;/&gt;" style="position:absolute;left:40px;top:126px;" hint-size="86px,86px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 236 }}" assemble="{{ true }}" delay="{{ 120 }}" logo="{{ true }}" glow="{{ true }}" style="position:absolute;left:162px;top:118px;" hint-size="236px,236px"></dc-import>
+            <dc-import name="GlassCube" size="{{ 68 }}" ry="{{ 18 }}" assemble="{{ true }}" delay="{{ 600 }}" logo="{{ false }}" light="{{ 0.5 }}" glyph="IA" style="position:absolute;left:432px;top:316px;" hint-size="68px,68px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <div aria-hidden="true" style="position:absolute;right:clamp(20px,4vw,48px);top:72px;text-align:left;font-size:12px;letter-spacing:0.22em;line-height:1.9;color:#D1D1D1;text-transform:uppercase;">Ideias<br>Estratégia<br>Tecnologia<br>Resultados.<div style="width:28px;height:1px;background:#D1D1D1;margin-top:14px;"></div></div>
+    </sc-if>
+    <!-- 03 SERVICE BAR -->
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Serviços" data-screen-label="03 Barra de serviços" style="position:relative;z-index:3;margin-top:clamp(16px,2.5vw,32px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:rgba(26,26,26,0.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.14);border-radius:16px;overflow:hidden;">
+        <sc-for list="{{ services }}" as="sv" hint-placeholder-count="0">
+          <a href="{{ sv.href }}" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-right:1px solid rgba(255,255,255,0.08);transition:background .2s;" style-hover="background:rgba(255,255,255,0.06);opacity:1;">
+            <img src="{{ sv.icon }}" alt="" style="width:26px;height:26px;filter:invert(1);flex:none;opacity:0.9;">
+            <span style="flex:1;min-width:0;">
+              <span style="display:block;font-size:15px;font-weight:600;color:#FFFFFF;">{{ sv.title }}</span>
+              <span style="display:block;font-size:13px;color:#D1D1D1;margin-top:3px;">{{ sv.desc }}</span>
+            </span>
+            <span aria-hidden="true" style="width:28px;height:28px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFFFFF;">→</span>
+          </a>
+        </sc-for>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <nav aria-label="Serviços" data-screen-label="03 Barra de serviços" style="position:relative;z-index:3;margin-top:8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.14);border-radius:16px;overflow:hidden;">
+        <sc-for list="{{ services }}" as="sv" hint-placeholder-count="0">
+          <a href="{{ sv.href }}" style="display:flex;flex-direction:column;gap:8px;padding:14px;background:#111111;">
+            <img src="{{ sv.icon }}" alt="" style="width:22px;height:22px;filter:invert(1);">
+            <span style="font-size:14px;font-weight:600;color:#FFFFFF;line-height:1.25;">{{ sv.title }}</span>
+            <span style="font-size:12px;line-height:1.35;color:#D1D1D1;">{{ sv.desc }}</span>
+          </a>
+        </sc-for>
+      </nav>
+    </sc-if>
+  </div>
+</section>
+
+<!-- 04 PROBLEMAS -->
+<section id="problemas" data-screen-label="04 Problemas" style="background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 60%,#D1D1D1 220%);color:#000000;padding:clamp(52px,6vw,84px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:18px clamp(24px,4vw,56px);align-items:flex-start;justify-content:space-between;">
+      <div style="flex:1 1 380px;max-width:620px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Problemas que resolvemos</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Seu negócio merece mais do que improviso.</h2>
+      </div>
+      <div style="flex:1 1 320px;max-width:460px;border-left:1px solid #D1D1D1;padding-left:clamp(16px,2vw,26px);">
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Seu negócio pode ser excelente no que faz. Mas, se os clientes não encontram sua empresa, o atendimento é desorganizado e tudo depende de processos manuais, crescer fica mais difícil. Veja se alguma dessas situações faz parte da sua rotina.</p>
+      </div>
+    </div>
+    <div style="margin-top:clamp(24px,2.8vw,34px);display:grid;grid-template-columns:{{ probCols }};grid-auto-rows:{{ probRows }};gap:14px;" role="group" aria-label="Problemas">
+      <button onClick="{{ pA.onClick }}" onMouseEnter="{{ pA.onEnter }}" onMouseLeave="{{ pA.onLeave }}" onFocus="{{ pA.onEnter }}" onBlur="{{ pA.onLeave }}" aria-pressed="{{ pA.pressed }}" style="text-align:left;display:flex;flex-direction:column;gap:13px;padding:18px 16px;border-radius:18px;border:1px solid {{ pA.bd }};background:{{ pA.bg }};color:{{ pA.fg }};box-shadow:{{ pA.shadow }};cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-3px);">
+        <span style="display:flex;gap:11px;align-items:flex-start;">
+          <span style="flex:none;width:34px;height:34px;border-radius:11px;border:1px solid {{ pA.line }};background:{{ pA.chip }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/globe.svg" alt="" style="width:17px;filter:{{ pA.filter }};"></span>
+          <span style="font-size:15px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;text-wrap:pretty;">Seus clientes não encontram sua empresa.</span>
+        </span>
+        <span aria-hidden="true" style="flex:1;min-height:176px;border-radius:14px;border:1px solid {{ pA.line }};background:{{ pA.scene }};padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;box-shadow:{{ pA.inner }};">
+          <span style="display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:999px;background:{{ pA.chip }};border:1px solid {{ pA.chipBd }};">
+            <span style="flex:none;position:relative;width:13px;height:13px;"><span style="position:absolute;top:0;left:0;width:9px;height:9px;border-radius:50%;border:1.5px solid {{ pA.fg }};"></span><span style="position:absolute;right:1px;bottom:1px;width:5px;height:1.5px;border-radius:1px;background:{{ pA.fg }};transform:rotate(45deg);"></span></span>
+            <span style="flex:1;min-width:0;font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;">Sua empresa</span>
+            <span style="flex:none;width:1.5px;height:11px;background:{{ pA.fg }};animation:{{ pA.bl }};"></span>
+            <span style="flex:none;font-size:11px;color:{{ pA.dim }};">×</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:10px;background:{{ pA.chip }};border:1px solid {{ pA.chipBd }};animation:{{ pA.a1 }};">
+            <span style="flex:none;width:22px;height:22px;border-radius:7px;border:1px solid {{ pA.line }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/store.svg" alt="" style="width:11px;filter:{{ pA.filter }};"></span>
+            <span style="flex:1;min-width:0;">
+              <span style="display:block;font-size:10.5px;font-weight:600;line-height:1.2;">Sua Empresa LTDA</span>
+              <span style="display:block;font-size:9px;line-height:1.3;color:{{ pA.dim }};">Sem site · Poucas informações</span>
+            </span>
+            <span style="flex:none;align-self:flex-start;font-size:7.5px;padding:2px 5px;border-radius:999px;border:1px solid {{ pA.line }};color:{{ pA.dim }};white-space:nowrap;">Não encontrada</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:10px;background:{{ pA.chip }};border:1px solid {{ pA.chipBd }};animation:{{ pA.a2 }};">
+            <span style="flex:none;width:22px;height:22px;border-radius:7px;border:1px solid {{ pA.line }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/store.svg" alt="" style="width:11px;filter:{{ pA.filter }};"></span>
+            <span style="flex:1;min-width:0;">
+              <span style="display:block;font-size:10.5px;font-weight:600;line-height:1.2;">Concorrente da região</span>
+              <span style="display:block;font-size:9px;line-height:1.3;color:{{ pA.dim }};">Site profissional · Avaliações (4,8)</span>
+            </span>
+            <img src="assets/icons/arrow-up-right.svg" alt="" style="flex:none;width:12px;filter:{{ pA.filter }};">
+          </span>
+          <span style="margin-top:auto;padding-top:2px;font-size:9px;line-height:1.3;color:{{ pA.dim }};">Resultado ilustrativo de uma busca local.</span>
+        </span>
+        <span style="font-size:12.5px;line-height:1.45;color:{{ pA.dim }};text-wrap:pretty;">Sem uma presença digital profissional, você pode perder visibilidade, confiança e oportunidades.</span>
+      </button>
+      <button onClick="{{ pE.onClick }}" onMouseEnter="{{ pE.onEnter }}" onMouseLeave="{{ pE.onLeave }}" onFocus="{{ pE.onEnter }}" onBlur="{{ pE.onLeave }}" aria-pressed="{{ pE.pressed }}" style="text-align:left;display:flex;flex-direction:column;gap:13px;padding:18px 16px;border-radius:18px;border:1px solid {{ pE.bd }};background:{{ pE.bg }};color:{{ pE.fg }};box-shadow:{{ pE.shadow }};cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-3px);">
+        <span style="display:flex;gap:11px;align-items:flex-start;">
+          <span style="flex:none;width:34px;height:34px;border-radius:11px;border:1px solid {{ pE.line }};background:{{ pE.chip }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/user-plus.svg" alt="" style="width:17px;filter:{{ pE.filter }};"></span>
+          <span style="font-size:15px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;text-wrap:pretty;">Seu negócio é bom. Mas onde estão os clientes?</span>
+        </span>
+        <span aria-hidden="true" style="flex:1;min-height:176px;border-radius:14px;border:1px solid {{ pE.line }};background:{{ pE.scene }};padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;box-shadow:{{ pE.inner }};">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:{{ pE.dim }};">Movimento comercial</span>
+            <span style="font-size:9.5px;color:{{ pE.dim }};">30 dias</span>
+          </span>
+          <span style="display:flex;gap:6px;">
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:7px 8px;border-radius:10px;background:{{ pE.chip }};border:1px solid {{ pE.chipBd }};animation:{{ pE.a1 }};">
+              <span style="display:block;font-size:8.5px;line-height:1.2;color:{{ pE.dim }};">Novos contatos</span>
+              <span style="display:flex;align-items:baseline;gap:4px;"><span style="font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;line-height:1;">4</span><span style="font-size:8px;color:{{ pE.dim }};">no mês</span></span>
+            </span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:7px 8px;border-radius:10px;background:{{ pE.chip }};border:1px solid {{ pE.chipBd }};animation:{{ pE.a2 }};">
+              <span style="display:block;font-size:8.5px;line-height:1.2;color:{{ pE.dim }};">Pedidos de orçamento</span>
+              <span style="display:flex;align-items:baseline;gap:4px;"><span style="font-family:Orbitron,sans-serif;font-size:15px;font-weight:700;line-height:1;">2</span><span style="font-size:8px;color:{{ pE.dim }};">no mês</span></span>
+            </span>
+          </span>
+          <span style="flex:1;min-height:0;display:flex;flex-direction:column;gap:5px;padding:7px 8px;border-radius:10px;background:{{ pE.chip }};border:1px solid {{ pE.chipBd }};">
+            <span style="display:flex;align-items:center;justify-content:space-between;gap:6px;"><span style="font-size:9px;font-weight:600;">Procura pelo seu serviço</span><span style="font-size:8.5px;color:{{ pE.dim }};">irregular</span></span>
+            <span style="flex:1;display:flex;align-items:flex-end;gap:3px;min-height:36px;">
+              <span style="flex:1;height:15px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w1 }};"></span>
+              <span style="flex:1;height:7px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w2 }};"></span>
+              <span style="flex:1;height:24px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w3 }};"></span>
+              <span style="flex:1;height:9px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w4 }};"></span>
+              <span style="flex:1;height:5px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w1 }};"></span>
+              <span style="flex:1;height:18px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w2 }};"></span>
+              <span style="flex:1;height:8px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w3 }};"></span>
+              <span style="flex:1;height:13px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w4 }};"></span>
+              <span style="flex:1;height:6px;border-radius:2px 2px 0 0;background:{{ pE.barc }};transform-origin:bottom;animation:{{ pE.w1 }};"></span>
+            </span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:8.5px;color:{{ pE.dim }};"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:{{ pE.dim }};animation:{{ pE.bl }};"></span>Semanas sem novos pedidos</span>
+          </span>
+          <span style="margin-top:auto;padding-top:2px;font-size:9px;line-height:1.3;color:{{ pE.dim }};">Dados ilustrativos de movimento comercial.</span>
+        </span>
+        <span style="font-size:12.5px;line-height:1.45;color:{{ pE.dim }};text-wrap:pretty;">Você trabalha, investe no negócio, mas os contatos e pedidos não chegam com a frequência que precisa.</span>
+      </button>
+      <button onClick="{{ pB.onClick }}" onMouseEnter="{{ pB.onEnter }}" onMouseLeave="{{ pB.onLeave }}" onFocus="{{ pB.onEnter }}" onBlur="{{ pB.onLeave }}" aria-pressed="{{ pB.pressed }}" style="text-align:left;display:flex;flex-direction:column;gap:13px;padding:18px 16px;border-radius:18px;border:1px solid {{ pB.bd }};background:{{ pB.bg }};color:{{ pB.fg }};box-shadow:{{ pB.shadow }};cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-3px);">
+        <span style="display:flex;gap:11px;align-items:flex-start;">
+          <span style="flex:none;width:34px;height:34px;border-radius:11px;border:1px solid {{ pB.line }};background:{{ pB.chip }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/message-square.svg" alt="" style="width:17px;filter:{{ pB.filter }};"></span>
+          <span style="font-size:15px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;text-wrap:pretty;">Seu atendimento se perde entre conversas, agenda e papel.</span>
+        </span>
+        <span aria-hidden="true" style="flex:1;min-height:176px;border-radius:14px;border:1px solid {{ pB.line }};background:{{ pB.scene }};padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;box-shadow:{{ pB.inner }};">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:{{ pB.dim }};">Rotina de hoje</span>
+            <span style="font-size:9.5px;color:{{ pB.dim }};">no improviso</span>
+          </span>
+          <span style="flex:1;display:flex;gap:8px;align-items:stretch;min-height:0;">
+            <span style="flex:none;width:84px;border-radius:12px 12px 10px 10px;border:1px solid {{ pB.line }};background:{{ pB.chip }};padding:7px 6px;display:flex;flex-direction:column;gap:5px;">
+              <span style="align-self:center;width:22px;height:2.5px;border-radius:2px;background:{{ pB.line }};"></span>
+              <span style="align-self:flex-start;max-width:92%;padding:4px 6px;border-radius:8px 8px 8px 2px;border:1px solid {{ pB.chipBd }};font-size:9px;line-height:1.25;animation:{{ pB.a1 }};">Tem orçamento?</span>
+              <span style="align-self:flex-start;max-width:92%;padding:4px 6px;border-radius:8px 8px 8px 2px;border:1px solid {{ pB.chipBd }};font-size:9px;line-height:1.25;animation:{{ pB.a2 }};">Consegue me passar o valor?</span>
+              <span style="margin-top:auto;display:flex;align-items:center;gap:5px;font-size:8.5px;color:{{ pB.dim }};"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:{{ pB.fg }};animation:{{ pB.bl }};"></span>2 sem resposta</span>
+            </span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;">
+              <span style="transform:rotate(1.4deg);padding:7px 8px;border-radius:9px;background:{{ pB.chip }};border:1px solid {{ pB.chipBd }};display:flex;flex-direction:column;gap:4px;">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;color:{{ pB.dim }};"><span>Agenda e anotações</span><span style="white-space:nowrap;">14h ?</span></span>
+                <span style="display:flex;align-items:center;gap:6px;font-size:9.5px;animation:{{ pB.a1 }};"><span style="flex:none;width:8px;height:8px;border-radius:2px;border:1px solid {{ pB.line }};"></span>Responder cliente</span>
+                <span style="display:flex;align-items:center;gap:6px;font-size:9.5px;animation:{{ pB.a2 }};"><span style="flex:none;width:8px;height:8px;border-radius:2px;border:1px solid {{ pB.line }};"></span>Montar orçamento</span>
+                <span style="display:flex;align-items:center;gap:6px;font-size:9.5px;animation:{{ pB.a3 }};"><span style="flex:none;width:8px;height:8px;border-radius:2px;border:1px solid {{ pB.line }};"></span>Cadastrar de novo</span>
+              </span>
+              <span style="margin-top:auto;display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:8px;border:1px dashed {{ pB.chipBd }};font-size:9px;color:{{ pB.dim }};"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:{{ pB.dim }};animation:{{ pB.bl }};"></span>Orçamento pendente há 2 dias</span>
+            </span>
+          </span>
+          <span style="font-size:9px;line-height:1.3;color:{{ pB.dim }};">Exemplo ilustrativo de rotina manual.</span>
+        </span>
+        <span style="font-size:12.5px;line-height:1.45;color:{{ pB.dim }};text-wrap:pretty;">Mensagens, anotações, agenda, cadastros e orçamentos ficam espalhados. A equipe perde tempo, esquece retornos e o cliente fica sem acompanhamento.</span>
+      </button>
+      <button onClick="{{ pD.onClick }}" onMouseEnter="{{ pD.onEnter }}" onMouseLeave="{{ pD.onLeave }}" onFocus="{{ pD.onEnter }}" onBlur="{{ pD.onLeave }}" aria-pressed="{{ pD.pressed }}" style="text-align:left;display:flex;flex-direction:column;gap:13px;padding:18px 16px;border-radius:18px;border:1px solid {{ pD.bd }};background:{{ pD.bg }};color:{{ pD.fg }};box-shadow:{{ pD.shadow }};cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,box-shadow .25s ease;" style-hover="transform:translateY(-3px);">
+        <span style="display:flex;gap:11px;align-items:flex-start;">
+          <span style="flex:none;width:34px;height:34px;border-radius:11px;border:1px solid {{ pD.line }};background:{{ pD.chip }};display:flex;align-items:center;justify-content:center;"><img src="assets/icons/trending-up.svg" alt="" style="width:17px;filter:{{ pD.filter }};"></span>
+          <span style="font-size:15px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;text-wrap:pretty;">Você sabe onde estão suas oportunidades e resultados?</span>
+        </span>
+        <span aria-hidden="true" style="flex:1;min-height:176px;border-radius:14px;border:1px solid {{ pD.line }};background:{{ pD.scene }};padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;box-shadow:{{ pD.inner }};">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:{{ pD.dim }};">Relatório do mês</span>
+            <span style="font-size:9.5px;color:{{ pD.dim }};">incompleto</span>
+          </span>
+          <span style="flex:1;display:flex;gap:8px;align-items:stretch;min-height:0;">
+            <span style="flex:1.5;min-width:0;display:flex;flex-direction:column;gap:5px;padding:7px;border-radius:10px;background:{{ pD.chip }};border:1px solid {{ pD.chipBd }};">
+              <span style="display:flex;justify-content:space-between;gap:6px;font-size:7px;letter-spacing:0.04em;text-transform:uppercase;color:{{ pD.dim }};white-space:nowrap;"><span>Clientes</span><span>Status · valor</span></span>
+              <span style="display:grid;grid-template-columns:minmax(0,1fr) 18px 20px;gap:6px;align-items:center;font-size:9px;animation:{{ pD.a1 }};">
+                <span style="white-space:nowrap;">Cliente A</span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+              </span>
+              <span style="display:grid;grid-template-columns:minmax(0,1fr) 18px 20px;gap:6px;align-items:center;font-size:9px;animation:{{ pD.a2 }};">
+                <span style="white-space:nowrap;">Cliente B</span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+              </span>
+              <span style="display:grid;grid-template-columns:minmax(0,1fr) 18px 20px;gap:6px;align-items:center;font-size:9px;animation:{{ pD.a3 }};">
+                <span style="white-space:nowrap;">Cliente C</span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+                <span style="height:2.5px;border-radius:2px;background:{{ pD.chipBd }};"></span>
+              </span>
+            </span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:10px;background:{{ pD.chip }};border:1px solid {{ pD.chipBd }};">
+              <span style="font-size:9px;font-weight:600;">Vendas no mês</span>
+              <span style="flex:1;display:flex;align-items:flex-end;gap:3px;min-height:0;">
+                <span style="flex:1;height:14px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g1 }};"></span>
+                <span style="flex:1;height:22px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g2 }};"></span>
+                <span style="flex:1;height:18px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g3 }};"></span>
+                <span style="flex:1;height:30px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g4 }};"></span>
+                <span style="flex:1;height:26px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g1 }};"></span>
+                <span style="flex:1;height:38px;border-radius:2px 2px 0 0;background:{{ pD.barc }};transform-origin:bottom;animation:{{ pD.g2 }};"></span>
+              </span>
+              <span style="font-size:8.5px;color:{{ pD.dim }};">sem dados completos</span>
+            </span>
+          </span>
+        </span>
+        <span style="font-size:12.5px;line-height:1.45;color:{{ pD.dim }};text-wrap:pretty;">Clientes, vendas, compras e informações espalhadas dificultam acompanhar o negócio e tomar decisões.</span>
+      </button>
+    </div>
+    <div aria-live="polite" style="margin-top:16px;border-radius:24px;background:radial-gradient(ellipse 70% 90% at 78% 8%,#1C1C1C 0%,#050505 68%);color:#FFFFFF;border:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.22);">
+      <div style="flex:50 1 420px;min-width:0;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:14px;">
+        <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Como a CORE 3 resolve</p>
+        <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(20px,1.9vw,27px);line-height:1.2;letter-spacing:-0.01em;max-width:560px;text-wrap:balance;">{{ problemSol.title }}</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#D1D1D1;max-width:560px;text-wrap:pretty;">{{ problemSol.text }}</p>
+        <ul style="list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;">
+          <sc-for list="{{ problemSol.benefits }}" as="bn" hint-placeholder-count="3">
+            <li style="display:flex;gap:10px;align-items:center;font-size:14px;line-height:1.45;"><span style="width:21px;height:21px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:12px;filter:invert(1);"></span>{{ bn }}</li>
+          </sc-for>
+        </ul>
+        <div style="margin-top:auto;padding-top:16px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <sc-for list="{{ problemSol.chips }}" as="c" hint-placeholder-count="2">
+              <a href="{{ c.href }}" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);color:#FFFFFF;"><img src="{{ c.icon }}" alt="" style="width:14px;filter:invert(1);">{{ c.label }}</a>
+            </sc-for>
+          </div>
+          <button onClick="{{ continueProblem }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 22px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ problemSol.cta }} <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div style="flex:50 1 360px;min-width:0;border-left:1px solid rgba(255,255,255,0.08);padding:clamp(20px,2.6vw,32px);display:flex;align-items:center;">
+        <div style="width:100%;display:flex;flex-direction:column;">
+          <sc-if value="{{ probV0 }}" hint-placeholder-val="{{ true }}">
+            <div aria-hidden="true" style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;">
+              <div style="flex:1 1 280px;min-width:0;position:relative;padding-bottom:16px;">
+                <div style="border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:#0A0A0A;padding:7px 7px 9px;box-shadow:0 24px 40px rgba(0,0,0,0.45);">
+                  <div style="border-radius:7px;overflow:hidden;background:linear-gradient(160deg,#141414 0%,#000000 70%);border:1px solid rgba(255,255,255,0.08);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.08);">
+                      <span style="display:flex;align-items:center;gap:6px;font-family:Orbitron,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.06em;"><img src="assets/c3-symbol.png" alt="" style="height:9px;">CORE 3</span>
+                      <span style="display:flex;align-items:center;gap:9px;font-size:7.5px;color:#D1D1D1;">Início Sobre Serviços Contato<span style="padding:3px 7px;border-radius:999px;background:#FFFFFF;color:#000000;font-weight:600;">Pedir orçamento</span></span>
+                    </div>
+                    <div style="padding:14px 14px 16px;display:flex;flex-direction:column;gap:7px;">
+                      <span style="font-size:7.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;">Soluções em serviços</span>
+                      <span style="font-size:15px;font-weight:700;line-height:1.18;letter-spacing:-0.01em;max-width:72%;">Soluções completas para o seu negócio.</span>
+                      <span style="font-size:8px;line-height:1.4;color:#D1D1D1;max-width:62%;">Qualidade, agilidade e atendimento de confiança.</span>
+                      <span style="display:flex;gap:7px;margin-top:4px;">
+                        <span style="padding:5px 10px;border-radius:999px;background:#FFFFFF;color:#000000;font-size:8px;font-weight:600;">Pedir orçamento →</span>
+                        <span style="padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);font-size:8px;">Conhecer serviços</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="height:8px;margin:0 -5%;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#3A3A3A,#0E0E0E);border:1px solid rgba(255,255,255,0.12);border-top:0;"></div>
+                <div style="position:absolute;right:-4px;bottom:-6px;width:74px;border-radius:12px;border:1px solid rgba(255,255,255,0.22);background:#0A0A0A;padding:4px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+                  <div style="border-radius:9px;overflow:hidden;background:linear-gradient(160deg,#161616,#000000);padding:7px 7px 9px;display:flex;flex-direction:column;gap:5px;">
+                    <span style="align-self:center;width:18px;height:2px;border-radius:2px;background:rgba(255,255,255,0.3);"></span>
+                    <span style="display:flex;align-items:center;justify-content:space-between;font-family:Orbitron,sans-serif;font-size:6px;font-weight:700;"><span style="display:flex;align-items:center;gap:3px;"><img src="assets/c3-symbol.png" alt="" style="height:6px;">CORE 3</span><span style="color:#9A9A9A;">≡</span></span>
+                    <span style="font-size:9px;font-weight:700;line-height:1.15;">Soluções completas para o seu negócio.</span>
+                    <span style="margin-top:2px;align-self:flex-start;padding:4px 8px;border-radius:999px;background:#FFFFFF;color:#000000;font-size:6.5px;font-weight:600;">Pedir orçamento →</span>
+                  </div>
+                </div>
+              </div>
+              <div style="flex:1 1 230px;min-width:0;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;background:#111111;border:1px solid rgba(255,255,255,0.12);animation:c3rise .55s 0.05s ease both;">
+                <span style="flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/send.svg" alt="" style="width:14px;filter:invert(1);"></span>
+                <span style="flex:1;min-width:0;"><span style="display:block;font-size:12.5px;font-weight:600;">Pedido de orçamento</span><span style="display:block;font-size:11.5px;color:#D1D1D1;">Novo contato pelo site</span></span>
+                <span style="flex:none;font-size:11px;color:#9A9A9A;white-space:nowrap;">há 2 min</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;background:#111111;border:1px solid rgba(255,255,255,0.12);animation:c3rise .55s 0.18s ease both;">
+                <span style="flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/user-round.svg" alt="" style="width:14px;filter:invert(1);"></span>
+                <span style="flex:1;min-width:0;"><span style="display:block;font-size:12.5px;font-weight:600;">Contato registrado</span><span style="display:block;font-size:11.5px;color:#D1D1D1;">Cliente: Empresa ABC</span></span>
+                <span style="flex:none;font-size:11px;color:#9A9A9A;white-space:nowrap;">há 2 min</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;background:#111111;border:1px solid rgba(255,255,255,0.12);animation:c3rise .55s 0.31s ease both;">
+                <span style="flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check-check.svg" alt="" style="width:14px;filter:invert(1);"></span>
+                <span style="flex:1;min-width:0;"><span style="display:block;font-size:12.5px;font-weight:600;">Proposta em andamento</span><span style="display:block;font-size:11.5px;color:#D1D1D1;">Equipe comercial</span></span>
+                <span style="flex:none;font-size:11px;color:#9A9A9A;white-space:nowrap;">há 5 min</span>
+              </div>
+                <span style="font-size:11px;color:#9A9A9A;">Exemplos ilustrativos de site e contatos.</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ probV1 }}" hint-placeholder-val="{{ false }}">
+            <div style="border-radius:16px;border:1px solid rgba(255,255,255,0.14);background:rgba(0,0,0,0.6);padding:18px;display:flex;flex-direction:column;gap:12px;animation:c3rise .5s ease both;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D1D1D1;">Prévia de campanha</span><span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:3px 9px;">Ilustrativo</span></div>
+              <div aria-hidden="true" style="display:flex;flex-direction:column;gap:7px;padding:12px 14px;border-radius:12px;background:#111111;border:1px solid rgba(255,255,255,0.08);">
+                <span style="display:flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid rgba(255,255,255,0.35);">Anúncio</span><span style="font-size:11px;color:#9A9A9A;">exemplo de criativo</span></span>
+                <span style="font-size:14px;font-weight:600;line-height:1.3;">Serviços perto de você, com atendimento rápido.</span>
+                <span style="font-size:12px;line-height:1.45;color:#D1D1D1;">Peça seu orçamento e fale com a equipe hoje mesmo.</span>
+              </div>
+              <div role="group" aria-label="Destino do anúncio" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                <sc-for list="{{ adsDests }}" as="ad" hint-placeholder-count="3">
+                  <button onClick="{{ ad.onClick }}" aria-pressed="{{ ad.pressed }}" style="display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 6px;border-radius:10px;background:{{ ad.bg }};color:{{ ad.fg }};border:1px solid {{ ad.bd }};font-size:12.5px;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s;" style-hover="border-color:#FFFFFF;"><img src="{{ ad.icon }}" alt="" style="width:15px;filter:{{ ad.filter }};">{{ ad.label }}</button>
+                </sc-for>
+              </div>
+              <div aria-live="polite" style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;background:#111111;border:1px solid rgba(255,255,255,0.12);">
+                <span aria-hidden="true" style="flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="{{ adsDest.icon }}" alt="" style="width:15px;filter:invert(1);"></span>
+                <span style="flex:1;min-width:0;"><span style="display:block;font-size:13px;font-weight:600;">{{ adsDest.t }}</span><span style="display:block;font-size:12px;line-height:1.4;color:#D1D1D1;">{{ adsDest.s }}</span></span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#D1D1D1;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08);"><img src="assets/icons/check.svg" alt="" style="width:14px;filter:invert(1);">Você acompanha {{ adsDest.m }} ao longo da campanha.</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ probV2 }}" hint-placeholder-val="{{ false }}">
+            <div aria-hidden="true" style="border-radius:16px;border:1px solid rgba(255,255,255,0.14);background:rgba(0,0,0,0.6);padding:18px;display:flex;flex-direction:column;gap:10px;animation:c3rise .5s ease both;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D1D1D1;">Central de atendimento</span><span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:3px 9px;">Ilustrativo</span></div>
+              <sc-for list="{{ leadRows }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;background:#111111;border:1px solid rgba(255,255,255,0.08);">
+                  <span style="width:30px;height:30px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="{{ r.icon }}" alt="" style="width:15px;filter:invert(1);"></span>
+                  <span style="flex:1;min-width:0;"><span style="display:block;font-size:13px;font-weight:600;">{{ r.t }}</span><span style="display:block;font-size:12px;color:#D1D1D1;">{{ r.s }}</span></span>
+                  <span style="flex:none;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:{{ r.bg }};color:{{ r.fg }};border:1px solid #FFFFFF;">{{ r.tag }}</span>
+                </div>
+              </sc-for>
+              <ol style="list-style:none;margin:0;padding:10px 0 0;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;">
+                <sc-for list="{{ autoSeq }}" as="q" hint-placeholder-count="4">
+                  <li style="display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;"><span style="width:26px;height:26px;border-radius:50%;border:1px solid #FFFFFF;background:{{ q.bg }};display:flex;align-items:center;justify-content:center;"><img src="{{ q.icon }}" alt="" style="width:13px;filter:{{ q.filter }};"></span><span style="font-size:11.5px;font-weight:600;line-height:1.25;">{{ q.t }}</span></li>
+                </sc-for>
+              </ol>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#D1D1D1;"><img src="assets/icons/check.svg" alt="" style="width:14px;filter:invert(1);">Cada solicitação e etapa fica registrada, sem papel.</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ probV3 }}" hint-placeholder-val="{{ false }}">
+            <div aria-hidden="true" style="border-radius:16px;border:1px solid rgba(255,255,255,0.14);background:rgba(0,0,0,0.6);padding:18px;display:flex;flex-direction:column;gap:10px;animation:c3rise .5s ease both;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D1D1D1;">Painel da empresa</span><span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:3px 9px;">Ilustrativo</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;background:#111111;font-size:13px;font-weight:600;"><span style="display:flex;align-items:center;gap:8px;"><img src="assets/icons/layout-dashboard.svg" alt="" style="width:15px;filter:invert(1);">Minha Empresa</span><img src="assets/c3-symbol.png" alt="" style="height:11px;"></div>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+                <sc-for list="{{ hubMods }}" as="h" hint-placeholder-count="6">
+                  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.03);font-size:12px;font-weight:600;"><span style="position:absolute;right:7px;top:7px;width:5px;height:5px;border-radius:50%;background:#FFFFFF;"></span><img src="{{ h.icon }}" alt="" style="width:18px;filter:invert(1);">{{ h.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#D1D1D1;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08);"><img src="assets/icons/check.svg" alt="" style="width:14px;filter:invert(1);">Informações centralizadas em um só lugar.</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SOLUÇÕES -->
+<section id="solucoes" data-screen-label="05 Soluções" style="position:relative;background:radial-gradient(ellipse 55% 38% at 88% 0%,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0) 70%),radial-gradient(ellipse 45% 35% at 0% 100%,rgba(0,0,0,0.035) 0%,rgba(0,0,0,0) 70%),repeating-linear-gradient(0deg,rgba(0,0,0,0.022) 0 1px,transparent 1px 56px),repeating-linear-gradient(90deg,rgba(0,0,0,0.022) 0 1px,transparent 1px 56px),#F6F6F5;color:#000000;padding:clamp(36px,4.2vw,56px) 0;border-top:1px solid #D1D1D1;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:16px 48px;align-items:flex-end;justify-content:space-between;">
+      <div style="flex:1 1 420px;max-width:640px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Nossas soluções</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Tudo o que seu negócio precisa para evoluir.</h2>
+      </div>
+      <div style="flex:1 1 320px;max-width:480px;border-left:1px solid #D1D1D1;padding-left:clamp(16px,2vw,26px);">
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Do seu primeiro site à digitalização da sua operação. Criamos soluções para apresentar seu negócio, atrair clientes, organizar o atendimento e simplificar sua rotina.</p>
+      </div>
+    </div>
+
+    <article id="sol-sites" style="margin-top:clamp(18px,2vw,24px);scroll-margin-top:80px;position:relative;overflow:hidden;border-radius:28px;background:radial-gradient(ellipse 50% 70% at 76% 38%,#262626 0%,#0B0B0B 55%,#000000 100%);color:#FFFFFF;border:1px solid #1A1A1A;box-shadow:0 40px 80px rgba(0,0,0,0.24);display:flex;flex-wrap:wrap;">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.025) 0 1px,transparent 1px 56px);pointer-events:none;"></div>
+      <div style="position:relative;flex:1 1 320px;min-width:0;padding:clamp(20px,2.4vw,32px);display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#D1D1D1;"><img src="assets/icons/monitor.svg" alt="" style="width:16px;filter:invert(1);">01 · Sites profissionais</span><span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#FFFFFF;color:#000000;">Oferta principal</span></div>
+        <h3 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(24px,2.5vw,34px);line-height:1.15;letter-spacing:-0.01em;text-wrap:balance;">Sua empresa merece um site à altura do seu negócio.</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.6;color:#D1D1D1;max-width:500px;text-wrap:pretty;">Criamos sites profissionais que apresentam sua marca, destacam seus produtos ou serviços e facilitam o contato de quem procura seu negócio.</p>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;">
+          <li style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;filter:invert(1);"></span>Design profissional e responsivo.</li>
+          
+          <li style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;filter:invert(1);"></span>Acesso fácil ao WhatsApp e formulários de contato.</li>
+          
+          <li style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;filter:invert(1);"></span>Experiência pensada para facilitar pedidos de orçamento.</li>
+        </ul>
+        <div style="margin-top:auto;padding-top:6px;">
+          <button onClick="{{ diagSite }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:15px 24px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">Quero criar meu site <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div style="position:relative;flex:1.5 1 480px;min-width:0;padding:clamp(16px,2vw,28px) clamp(16px,2vw,28px) clamp(14px,1.6vw,20px);display:flex;flex-direction:column;gap:clamp(10px,1.2vw,14px);justify-content:center;">
+        <div role="group" aria-label="Tipo de site" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;padding:5px;border-radius:16px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);">
+          <sc-for list="{{ siteCats }}" as="sc" hint-placeholder-count="3">
+            <button onClick="{{ sc.onClick }}" aria-pressed="{{ sc.pressed }}" style="display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 12px;border-radius:12px;border:1px solid {{ sc.bd }};background:{{ sc.bg }};color:{{ sc.fg }};font-size:13.5px;font-weight:600;cursor:pointer;transition:background .25s,color .25s,border-color .25s;" style-hover="border-color:#FFFFFF;"><img src="{{ sc.icon }}" alt="" style="width:16px;filter:{{ sc.filter }};">{{ sc.label }}</button>
+          </sc-for>
+        </div>
+        <div aria-hidden="true" style="position:relative;padding:0 8% 6% 0;width:100%;max-width:640px;align-self:center;">
+          <div style="position:absolute;left:6%;right:16%;top:4%;bottom:12%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.16) 0%,rgba(255,255,255,0) 70%);"></div>
+          <div style="position:relative;">
+            <div style="border-radius:14px 14px 0 0;background:linear-gradient(180deg,#2A2A2A,#151515);padding:1.8% 1.8% 0;border:1px solid rgba(255,255,255,0.16);border-bottom:0;box-shadow:0 34px 60px rgba(0,0,0,0.55);">
+              <div style="container-type:inline-size;aspect-ratio:16/10;border-radius:6px 6px 0 0;overflow:hidden;background:#FFFFFF;color:#000000;position:relative;">
+                <sc-if value="{{ siteC0 }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF;animation:c3rise .45s ease both;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:2.2cqw 4cqw;border-bottom:1px solid #EDEDED;">
+                      <span style="font-weight:700;font-size:1.7cqw;letter-spacing:0.2em;">AURORA<span style="font-weight:400;color:#6B6B6B;"> ARQUITETURA</span></span>
+                      <span style="display:flex;gap:2.6cqw;font-size:1.35cqw;color:#4A4A4A;align-items:center;"><span>Início</span><span>Projetos</span><span>Escritório</span><span style="padding:0.8cqw 1.8cqw;border-radius:99px;background:#000000;color:#FFFFFF;">Fale conosco</span></span>
+                    </div>
+                    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3.4cqw;padding:3.6cqw 4cqw 2.6cqw;">
+                      <div style="display:flex;flex-direction:column;justify-content:center;gap:1.7cqw;">
+                        <span style="font-size:1.2cqw;letter-spacing:0.22em;text-transform:uppercase;color:#6B6B6B;">Arquitetura e interiores</span>
+                        <span style="font-size:4.4cqw;font-weight:700;line-height:1.05;letter-spacing:-0.03em;">Projetos que traduzem quem você é.</span>
+                        <span style="font-size:1.5cqw;line-height:1.5;color:#6B6B6B;">Residências e espaços comerciais pensados do conceito à obra.</span>
+                        <span style="display:flex;gap:1.2cqw;font-size:1.35cqw;font-weight:600;"><span style="padding:1cqw 2.2cqw;border-radius:99px;background:#000000;color:#FFFFFF;">Ver projetos</span><span style="padding:1cqw 2.2cqw;border-radius:99px;border:1px solid #000000;">Agendar conversa</span></span>
+                      </div>
+                      <div style="position:relative;overflow:hidden;border-radius:1.4cqw;background:linear-gradient(150deg,#ECECEC 0%,#BDBDBD 55%,#8A8A8A 100%);"><span style="position:absolute;left:10%;bottom:0;width:40%;height:72%;background:rgba(255,255,255,0.5);"></span><span style="position:absolute;left:50%;bottom:0;width:36%;height:50%;background:rgba(255,255,255,0.28);border-left:1px solid rgba(255,255,255,0.7);"></span><span style="position:absolute;left:0;right:0;bottom:22%;height:1px;background:rgba(255,255,255,0.6);"></span><span style="position:absolute;left:18%;top:36%;width:12%;height:14%;background:rgba(0,0,0,0.12);"></span><span style="position:absolute;left:1.6cqw;bottom:1.6cqw;padding:0.7cqw 1.4cqw;border-radius:99px;background:rgba(255,255,255,0.9);font-size:1.15cqw;">Projeto residencial</span></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;padding:0 4cqw 3cqw;">
+                      <span style="display:flex;flex-direction:column;gap:0.8cqw;padding-top:1.4cqw;border-top:1px solid #000000;"><span style="font-size:1.1cqw;color:#6B6B6B;">01</span><span style="font-size:1.6cqw;font-weight:600;">Residencial</span></span>
+                      <span style="display:flex;flex-direction:column;gap:0.8cqw;padding-top:1.4cqw;border-top:1px solid #D1D1D1;"><span style="font-size:1.1cqw;color:#6B6B6B;">02</span><span style="font-size:1.6cqw;font-weight:600;">Comercial</span></span>
+                      <span style="display:flex;flex-direction:column;gap:0.8cqw;padding-top:1.4cqw;border-top:1px solid #D1D1D1;"><span style="font-size:1.1cqw;color:#6B6B6B;">03</span><span style="font-size:1.6cqw;font-weight:600;">Interiores</span></span>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ siteC1 }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:2.4cqw;background:#F3F3F3;padding-bottom:3cqw;animation:c3rise .45s ease both;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:2.2cqw 4cqw;background:#FFFFFF;">
+                      <span style="display:flex;align-items:center;gap:1cqw;"><span style="width:2.6cqw;height:2.6cqw;border-radius:0.7cqw;background:#000000;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/wrench.svg" alt="" style="width:1.6cqw;filter:invert(1);"></span><span style="font-weight:700;font-size:1.6cqw;letter-spacing:0.06em;">LAR EM ORDEM</span></span>
+                      <span style="display:flex;gap:2.6cqw;font-size:1.35cqw;color:#4A4A4A;align-items:center;"><span>Serviços</span><span>Como funciona</span><span>Avaliações</span><span style="display:flex;align-items:center;gap:0.7cqw;padding:0.8cqw 1.8cqw;border-radius:99px;background:#000000;color:#FFFFFF;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:1.4cqw;filter:invert(1);">WhatsApp</span></span>
+                    </div>
+                    <div style="margin:0 4cqw;border-radius:2cqw;background:radial-gradient(ellipse 60% 90% at 85% 20%,#2A2A2A 0%,#000000 70%);color:#FFFFFF;padding:3.4cqw 3.6cqw;display:flex;flex-direction:column;gap:1.6cqw;">
+                      <span style="font-size:1.2cqw;letter-spacing:0.2em;text-transform:uppercase;color:#D1D1D1;">Reparos e manutenção residencial</span>
+                      <span style="font-size:3.8cqw;font-weight:700;line-height:1.08;letter-spacing:-0.02em;max-width:70%;">Manutenção para sua casa, sem complicação.</span>
+                      <span style="display:grid;grid-template-columns:1.2fr 1fr auto;gap:1cqw;margin-top:0.6cqw;font-size:1.35cqw;"><span style="padding:1.2cqw 1.6cqw;border-radius:1cqw;background:#FFFFFF;color:#6B6B6B;">Qual serviço você precisa?</span><span style="padding:1.2cqw 1.6cqw;border-radius:1cqw;background:#FFFFFF;color:#6B6B6B;">Seu bairro</span><span style="padding:1.2cqw 2cqw;border-radius:1cqw;background:#D1D1D1;color:#000000;font-weight:600;">Pedir orçamento</span></span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;padding:0 4cqw;">
+                      <sc-for list="{{ svcItems }}" as="sv" hint-placeholder-count="4">
+                        <span style="display:flex;flex-direction:column;gap:1cqw;padding:1.8cqw;border-radius:1.4cqw;background:#FFFFFF;border:1px solid #E4E4E4;"><span style="width:3.4cqw;height:3.4cqw;border-radius:1cqw;border:1px solid #D1D1D1;display:flex;align-items:center;justify-content:center;"><img src="{{ sv.icon }}" alt="" style="width:1.8cqw;"></span><span style="font-size:1.6cqw;font-weight:600;">{{ sv.t }}</span><span style="font-size:1.2cqw;color:#6B6B6B;">Solicitar →</span></span>
+                      </sc-for>
+                    </div>
+                    <span style="position:absolute;right:2.6cqw;bottom:2.6cqw;width:5cqw;height:5cqw;border-radius:50%;background:#000000;box-shadow:0 1cqw 2cqw rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:2.6cqw;filter:invert(1);"></span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ siteC2 }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF;animation:c3rise .45s ease both;">
+                    <div style="display:flex;align-items:center;gap:3cqw;padding:2cqw 4cqw;border-bottom:1px solid #EDEDED;">
+                      <span style="font-weight:700;font-size:1.8cqw;letter-spacing:0.24em;">LUME<span style="font-weight:400;"> CASA</span></span>
+                      <span style="flex:1;display:flex;align-items:center;gap:1cqw;padding:1cqw 1.6cqw;border-radius:99px;background:#F3F3F3;font-size:1.3cqw;color:#6B6B6B;"><span style="width:1.3cqw;height:1.3cqw;border-radius:50%;border:1px solid #6B6B6B;"></span>Buscar produtos</span>
+                      <span style="position:relative;display:flex;"><img src="assets/icons/shopping-bag.svg" alt="" style="width:2.4cqw;"><span style="position:absolute;right:-0.9cqw;top:-0.7cqw;width:1.8cqw;height:1.8cqw;border-radius:50%;background:#000000;color:#FFFFFF;font-size:1.1cqw;display:flex;align-items:center;justify-content:center;">2</span></span>
+                    </div>
+                    <div style="flex:1;display:grid;grid-template-columns:17% 1fr;gap:3cqw;padding:2.6cqw 4cqw 2.6cqw;min-height:0;">
+                      <span style="display:flex;flex-direction:column;gap:1.3cqw;font-size:1.4cqw;color:#6B6B6B;"><span style="font-size:1.1cqw;letter-spacing:0.18em;text-transform:uppercase;">Categorias</span><span style="color:#000000;font-weight:600;">Todos</span><span>Luminárias</span><span>Vasos</span><span>Têxteis</span><span>Mesa posta</span><span style="margin-top:auto;display:flex;align-items:center;gap:0.8cqw;padding:1cqw 1.2cqw;border-radius:1cqw;background:#000000;color:#FFFFFF;font-size:1.15cqw;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:1.4cqw;filter:invert(1);">Pedir no WhatsApp</span></span>
+                      <span style="display:flex;flex-direction:column;gap:1.6cqw;min-width:0;">
+                        <span style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:2.4cqw;font-weight:700;letter-spacing:-0.02em;">Novidades</span><span style="display:flex;gap:0.8cqw;font-size:1.2cqw;"><span style="padding:0.6cqw 1.4cqw;border-radius:99px;background:#000000;color:#FFFFFF;">Mais vendidos</span><span style="padding:0.6cqw 1.4cqw;border-radius:99px;border:1px solid #D1D1D1;">Menor preço</span></span></span>
+                        <span style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;">
+                          <sc-for list="{{ catItems }}" as="ct" hint-placeholder-count="8">
+                            <span style="display:flex;flex-direction:column;gap:0.6cqw;"><span style="aspect-ratio:1;border-radius:1cqw;background:{{ ct.tone }};position:relative;overflow:hidden;"><span style="position:absolute;left:30%;right:30%;top:24%;bottom:20%;border-radius:{{ ct.shape }};background:rgba(255,255,255,0.55);"></span></span><span style="font-size:1.25cqw;font-weight:500;">{{ ct.n }}</span><span style="font-size:1.25cqw;color:#6B6B6B;">{{ ct.p }}</span></span>
+                          </sc-for>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+            <div style="position:relative;height:clamp(9px,1.4vw,15px);margin:0 -3.5%;border-radius:0 0 14px 14px;background:linear-gradient(180deg,#D9D9D9 0%,#9A9A9A 55%,#4A4A4A 100%);box-shadow:0 18px 30px rgba(0,0,0,0.5);"><span style="position:absolute;left:42%;right:42%;top:0;height:35%;border-radius:0 0 6px 6px;background:#7A7A7A;"></span></div>
+          </div>
+          <div style="position:absolute;right:0;bottom:0;width:23%;border-radius:clamp(14px,2vw,24px);background:#0A0A0A;padding:clamp(3px,0.4vw,5px);border:1px solid rgba(255,255,255,0.24);box-shadow:-18px 26px 44px rgba(0,0,0,0.6);">
+            <div style="container-type:inline-size;aspect-ratio:9/19;border-radius:clamp(11px,1.6vw,19px);overflow:hidden;background:#FFFFFF;color:#000000;position:relative;">
+              <sc-if value="{{ siteC0 }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF;animation:c3rise .45s ease .08s both;">
+                  <div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:4.5cqw 8cqw 2cqw;font-size:5.4cqw;font-weight:600;color:#000000;"><span>9:41</span><span style="position:absolute;left:37%;top:2.6cqw;width:26%;height:6cqw;border-radius:99px;background:#000000;"></span><span style="width:7cqw;height:3.4cqw;border-radius:1cqw;border:1px solid #000000;"></span></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:3cqw 8cqw 5cqw;"><span style="font-size:6cqw;font-weight:700;letter-spacing:0.18em;">AURORA</span><span style="display:flex;flex-direction:column;gap:1.6cqw;"><span style="width:8cqw;height:1px;background:#000000;"></span><span style="width:8cqw;height:1px;background:#000000;"></span><span style="width:8cqw;height:1px;background:#000000;"></span></span></div>
+                  <div style="margin:0 6cqw;height:36%;border-radius:5cqw;background:linear-gradient(150deg,#ECECEC 0%,#BDBDBD 55%,#8A8A8A 100%);position:relative;overflow:hidden;"><span style="position:absolute;left:10%;bottom:0;width:40%;height:72%;background:rgba(255,255,255,0.5);"></span><span style="position:absolute;left:50%;bottom:0;width:36%;height:50%;background:rgba(255,255,255,0.28);border-left:1px solid rgba(255,255,255,0.7);"></span><span style="position:absolute;left:0;right:0;bottom:22%;height:1px;background:rgba(255,255,255,0.6);"></span><span style="position:absolute;left:18%;top:36%;width:12%;height:14%;background:rgba(0,0,0,0.12);"></span></div>
+                  <div style="padding:6cqw 8cqw 0;display:flex;flex-direction:column;gap:3cqw;"><span style="font-size:4.4cqw;letter-spacing:0.18em;text-transform:uppercase;color:#6B6B6B;">Arquitetura</span><span style="font-size:9.6cqw;font-weight:700;line-height:1.05;letter-spacing:-0.03em;">Projetos que traduzem quem você é.</span><span style="font-size:5cqw;line-height:1.45;color:#6B6B6B;">Do conceito à obra.</span></div>
+                  <div style="margin:auto 6cqw 8cqw;padding:4.4cqw;border-radius:99px;background:#000000;color:#FFFFFF;font-size:5.4cqw;font-weight:600;text-align:center;">Agendar conversa</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ siteC1 }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:3.6cqw;background:#F3F3F3;animation:c3rise .45s ease .08s both;">
+                  <div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:4.5cqw 8cqw 2cqw;font-size:5.4cqw;font-weight:600;color:#000000;"><span>9:41</span><span style="position:absolute;left:37%;top:2.6cqw;width:26%;height:6cqw;border-radius:99px;background:#000000;"></span><span style="width:7cqw;height:3.4cqw;border-radius:1cqw;border:1px solid #000000;"></span></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 7cqw;"><span style="font-size:5.6cqw;font-weight:700;letter-spacing:0.06em;">LAR EM ORDEM</span><span style="width:9cqw;height:9cqw;border-radius:50%;background:#000000;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:5cqw;filter:invert(1);"></span></div>
+                  <div style="margin:0 6cqw;padding:6cqw;border-radius:6cqw;background:radial-gradient(ellipse 80% 90% at 85% 10%,#2A2A2A 0%,#000000 70%);color:#FFFFFF;display:flex;flex-direction:column;gap:3.4cqw;"><span style="font-size:8.6cqw;font-weight:700;line-height:1.08;letter-spacing:-0.02em;">Manutenção sem complicação.</span><span style="align-self:flex-start;padding:2.6cqw 4.4cqw;border-radius:99px;background:#FFFFFF;color:#000000;font-size:4.8cqw;font-weight:600;">Pedir orçamento</span></div>
+                  <span style="padding:0 7cqw;font-size:4.4cqw;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Serviços</span>
+                  <div style="display:flex;flex-direction:column;gap:2.4cqw;padding:0 6cqw;">
+                    <sc-for list="{{ svcPhone }}" as="sv" hint-placeholder-count="3">
+                      <span style="display:flex;align-items:center;gap:3cqw;padding:3.2cqw 4cqw;border-radius:4cqw;background:#FFFFFF;border:1px solid #E4E4E4;"><img src="{{ sv.icon }}" alt="" style="width:5.4cqw;"><span style="flex:1;font-size:5.2cqw;font-weight:600;">{{ sv.t }}</span><span style="font-size:5cqw;color:#6B6B6B;">→</span></span>
+                    </sc-for>
+                  </div>
+                  <div style="margin:auto 6cqw 7cqw;display:flex;align-items:center;justify-content:center;gap:2.4cqw;padding:4cqw;border-radius:99px;background:#000000;color:#FFFFFF;font-size:5cqw;font-weight:600;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:5cqw;filter:invert(1);">Falar no WhatsApp</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ siteC2 }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:3.6cqw;background:#FFFFFF;animation:c3rise .45s ease .08s both;">
+                  <div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:4.5cqw 8cqw 2cqw;font-size:5.4cqw;font-weight:600;color:#000000;"><span>9:41</span><span style="position:absolute;left:37%;top:2.6cqw;width:26%;height:6cqw;border-radius:99px;background:#000000;"></span><span style="width:7cqw;height:3.4cqw;border-radius:1cqw;border:1px solid #000000;"></span></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 7cqw;"><span style="font-size:6cqw;font-weight:700;letter-spacing:0.22em;">LUME</span><span style="position:relative;display:flex;"><img src="assets/icons/shopping-bag.svg" alt="" style="width:7cqw;"><span style="position:absolute;right:-2.4cqw;top:-2cqw;width:5.4cqw;height:5.4cqw;border-radius:50%;background:#000000;color:#FFFFFF;font-size:3.4cqw;display:flex;align-items:center;justify-content:center;">2</span></span></div>
+                  <div style="margin:0 6cqw;padding:3cqw 4cqw;border-radius:99px;background:#F3F3F3;font-size:4.6cqw;color:#6B6B6B;">Buscar produtos</div>
+                  <div style="display:flex;gap:2cqw;padding:0 6cqw;font-size:4.2cqw;white-space:nowrap;overflow:hidden;"><span style="padding:1.6cqw 3.4cqw;border-radius:99px;background:#000000;color:#FFFFFF;">Todos</span><span style="padding:1.6cqw 3.4cqw;border-radius:99px;border:1px solid #D1D1D1;">Luminárias</span><span style="padding:1.6cqw 3.4cqw;border-radius:99px;border:1px solid #D1D1D1;">Vasos</span></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3cqw;padding:0 6cqw;">
+                    <sc-for list="{{ catPhone }}" as="ct" hint-placeholder-count="4">
+                      <span style="display:flex;flex-direction:column;gap:1.4cqw;"><span style="aspect-ratio:1;border-radius:3.4cqw;background:{{ ct.tone }};position:relative;overflow:hidden;"><span style="position:absolute;left:30%;right:30%;top:24%;bottom:20%;border-radius:{{ ct.shape }};background:rgba(255,255,255,0.55);"></span></span><span style="font-size:4.4cqw;font-weight:500;">{{ ct.n }}</span><span style="font-size:4.4cqw;color:#6B6B6B;">{{ ct.p }}</span></span>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+        <p aria-live="polite" style="margin:0;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;font-size:13px;line-height:1.5;color:#D1D1D1;"><span style="font-weight:600;color:#FFFFFF;">{{ siteNote }}</span><span>Prévia ilustrativa com empresa fictícia.</span></p>
+      </div>
+    </article>
+
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;">
+      <article id="sol-ads" style="flex:1.15 1 380px;min-width:0;scroll-margin-top:80px;border-radius:22px;border:1px solid #D1D1D1;background:linear-gradient(165deg,#FFFFFF 45%,#EDEDED 150%);box-shadow:0 18px 40px rgba(0,0,0,0.06);padding:clamp(14px,1.6vw,20px);display:flex;flex-direction:column;gap:8px;">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;"><img src="assets/icons/target.svg" alt="" style="width:16px;opacity:0.7;">02 · Anúncios e tráfego pago</span>
+        <h3 style="margin:0;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.3;letter-spacing:-0.01em;text-wrap:balance;">Não basta estar na internet. As pessoas precisam encontrar seu negócio.</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:#6B6B6B;text-wrap:pretty;">Planejamos e gerenciamos campanhas no Google, Instagram e Facebook para alcançar pessoas interessadas no que você oferece e direcioná-las ao seu site, WhatsApp ou loja física.</p>
+        <div style="border-radius:16px;border:1px solid #E4E4E4;background:#FFFFFF;padding:8px;display:flex;flex-direction:column;gap:6px;">
+                    <div aria-hidden="true" style="display:flex;gap:10px;align-items:center;padding:7px 8px;border-radius:10px;background:#F5F5F5;border:1px solid #E4E4E4;">
+            <span style="flex:none;width:36px;height:36px;border-radius:9px;background:radial-gradient(circle at 70% 30%,#3A3A3A,#000000 70%);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/wrench.svg" alt="" style="width:18px;filter:invert(1);"></span>
+            <span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:6px;font-size:11px;color:#6B6B6B;"><span style="font-weight:600;color:#000000;">Lar em Ordem</span>· Patrocinado · Ilustrativo</span><span style="display:block;margin-top:2px;font-size:13px;font-weight:600;line-height:1.35;">Precisa de um reparo em casa? Peça seu orçamento.</span></span>
+          </div>
+          <div role="group" aria-label="Destino do anúncio" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+            <sc-for list="{{ solAdsDests }}" as="ad" hint-placeholder-count="3">
+              <button onClick="{{ ad.onClick }}" aria-pressed="{{ ad.pressed }}" style="display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 6px;border-radius:10px;background:{{ ad.bg }};color:{{ ad.fg }};border:1px solid {{ ad.bd }};font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s;" style-hover="border-color:#000000;"><img src="{{ ad.icon }}" alt="" style="width:15px;filter:{{ ad.filter }};">{{ ad.label }}</button>
+            </sc-for>
+          </div>
+          <ol aria-label="Caminho do interessado" aria-live="polite" style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+            <sc-for list="{{ adsNodes }}" as="n" hint-placeholder-count="4">
+              <li style="position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;">
+                <span aria-hidden="true" style="position:absolute;top:13px;left:50%;width:100%;height:1px;background:{{ n.line }};"></span>
+                <span style="position:relative;width:28px;height:28px;border-radius:50%;border:1px solid #000000;background:{{ n.bg }};display:flex;align-items:center;justify-content:center;transition:background .3s;"><img src="{{ n.icon }}" alt="" style="width:14px;filter:{{ n.filter }};"></span>
+                <span style="font-size:12.5px;font-weight:600;line-height:1.25;">{{ n.t }}</span><span style="font-size:11.5px;line-height:1.3;color:#6B6B6B;">{{ n.s }}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;">
+          <li style="display:flex;gap:10px;align-items:center;font-size:14px;line-height:1.4;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid #000000;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;"></span>Alcance de potenciais clientes.</li>
+          <li style="display:flex;gap:10px;align-items:center;font-size:14px;line-height:1.45;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid #000000;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;"></span>Campanhas direcionadas ao público desejado.</li>
+          <li style="display:flex;gap:10px;align-items:center;font-size:14px;line-height:1.45;"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:1px solid #000000;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:11px;"></span>Acompanhamento de desempenho.</li>
+        </ul>
+        <div style="margin-top:auto;padding-top:2px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;">
+          <button onClick="{{ diagAds }}" style="display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border:0;border-radius:999px;padding:13px 20px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#1A1A1A;">Quero atrair mais clientes <span aria-hidden="true">→</span></button>
+          <span style="font-size:12px;line-height:1.45;color:#6B6B6B;">Os resultados variam conforme mercado, oferta e investimento.</span>
+        </div>
+      </article>
+
+      <article id="sol-auto" style="flex:1 1 400px;min-width:0;scroll-margin-top:80px;border-radius:22px;border:1px solid #D1D1D1;background:linear-gradient(165deg,#FFFFFF 45%,#EDEDED 150%);box-shadow:0 18px 40px rgba(0,0,0,0.06);padding:clamp(14px,1.6vw,20px);display:flex;flex-direction:column;gap:8px;">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;"><img src="assets/icons/message-square.svg" alt="" style="width:16px;opacity:0.7;">03 · Atendimento e digitalização</span>
+        <h3 style="margin:0;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.3;letter-spacing:-0.01em;text-wrap:balance;">Organize seu atendimento e deixe as tarefas repetitivas com a tecnologia.</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:#6B6B6B;text-wrap:pretty;">Centralize contatos, organize agendamentos e digitalize processos que hoje dependem de mensagens espalhadas, agendas, papel e trabalho manual.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div aria-hidden="true" style="min-width:0;border-radius:14px;background:radial-gradient(ellipse 80% 60% at 80% 0%,#232323 0%,#000000 70%);color:#FFFFFF;padding:10px 12px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:9px;padding-bottom:7px;border-bottom:1px solid rgba(255,255,255,0.1);"><span style="flex:none;width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;"><img src="assets/icons/social-whatsapp.svg" alt="" style="width:14px;filter:invert(1);"></span><span style="flex:1;min-width:0;"><span style="display:block;font-size:13px;font-weight:600;">Cliente A</span><span style="display:block;font-size:11.5px;color:#D1D1D1;">WhatsApp</span></span><span style="font-size:11.5px;color:#D1D1D1;">09:12</span></div>
+            <span style="align-self:flex-start;max-width:88%;padding:6px 10px;border-radius:12px 12px 12px 3px;background:rgba(255,255,255,0.1);font-size:12.5px;line-height:1.35;opacity:{{ chatOp1 }};transition:opacity .4s;">Olá! Quero agendar uma avaliação para quinta à tarde.</span>
+            <span style="align-self:flex-end;max-width:88%;padding:6px 10px;border-radius:12px 12px 3px 12px;background:#FFFFFF;color:#000000;font-size:12.5px;line-height:1.35;opacity:{{ chatOp2 }};transition:opacity .4s;">Recebemos sua solicitação. Quinta às 14h está disponível.</span>
+            <span style="align-self:center;display:flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);font-size:12px;opacity:{{ chatOp3 }};transition:opacity .4s;"><img src="assets/icons/calendar.svg" alt="" style="width:13px;filter:invert(1);">Qui, 14h · agenda atualizada</span>
+            <span style="font-size:11px;color:#9A9A9A;">Simulação ilustrativa</span>
+          </div>
+          <div style="min-width:0;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;">Fluxo do atendimento</span><span style="font-family:Orbitron,sans-serif;font-size:12px;font-weight:700;">{{ autoProgress }}</span></div>
+            <ol aria-label="Fluxo de atendimento ilustrativo" aria-live="polite" style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:6px;">
+              <sc-for list="{{ autoSteps }}" as="a" hint-placeholder-count="4">
+                <li style="display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:{{ a.bg }};border:1px solid {{ a.bd }};color:{{ a.fg }};transition:all .35s ease;">
+                  <img src="{{ a.icon }}" alt="" style="width:18px;flex:none;filter:{{ a.filter }};">
+                  <span style="flex:1;min-width:0;"><span style="display:block;font-size:13.5px;font-weight:600;line-height:1.3;">{{ a.label }}</span><span style="display:block;font-size:12px;line-height:1.35;color:{{ a.sub2 }};">{{ a.sub }}</span></span>
+                  <img src="assets/icons/check.svg" alt="" style="width:14px;flex:none;opacity:{{ a.checkOp }};filter:{{ a.filter }};transition:opacity .3s;">
+                </li>
+              </sc-for>
+            </ol>
+          </div>
+        </div>
+        <div style="margin-top:auto;padding-top:2px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <button onClick="{{ diagAuto }}" style="display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border:0;border-radius:999px;padding:13px 20px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#1A1A1A;">Quero organizar meu atendimento <span aria-hidden="true">→</span></button>
+          <button onClick="{{ simulateAuto }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #000000;color:#000000;border-radius:999px;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#000000;color:#FFFFFF;"><img src="assets/icons/play.svg" alt="" style="width:14px;">{{ autoLabel }}</button>
+        </div>
+      </article>
+    </div>
+
+    <article id="sol-gestao" style="margin-top:12px;scroll-margin-top:80px;border-radius:22px;border:1px solid #D1D1D1;background:linear-gradient(165deg,#FFFFFF 45%,#EDEDED 150%);box-shadow:0 18px 40px rgba(0,0,0,0.06);padding:clamp(12px,1.4vw,18px);display:flex;flex-wrap:wrap;gap:clamp(14px,2vw,24px);align-items:stretch;">
+      <div style="flex:1 1 280px;max-width:440px;display:flex;flex-direction:column;gap:12px;">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;"><img src="assets/icons/layers.svg" alt="" style="width:16px;opacity:0.7;">04 · Gestão empresarial</span>
+        <h3 style="margin:0;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.3;letter-spacing:-0.01em;text-wrap:balance;">Sua empresa organizada em um só sistema.</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:#6B6B6B;text-wrap:pretty;">Clientes, vendas, compras, estoque, financeiro e resultados reunidos para facilitar o controle da operação.</p>
+        <div style="margin-top:auto;"><button onClick="{{ diagGestao }}" style="display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border:0;border-radius:999px;padding:13px 20px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#1A1A1A;">Quero organizar minha empresa <span aria-hidden="true">→</span></button></div>
+      </div>
+      <div style="flex:2 1 480px;min-width:0;border-radius:16px;background:#000000;color:#FFFFFF;border:1px solid #1A1A1A;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 40px rgba(0,0,0,0.16);">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;"><img src="assets/icons/layout-dashboard.svg" alt="" style="width:16px;filter:invert(1);">Minha Empresa</span>
+          <span style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:3px 9px;">Dados ilustrativos</span><img src="assets/c3-symbol.png" alt="" style="height:12px;"></span>
+        </div>
+        <div role="tablist" aria-label="Módulos da empresa" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,96px),1fr));gap:6px;padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <sc-for list="{{ solTabs }}" as="t" hint-placeholder-count="6">
+            <button role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.onClick }}" style="display:flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:6px;border-radius:10px;background:{{ t.bg }};border:1px solid {{ t.bd }};color:{{ t.fg }};font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;" style-hover="border-color:#FFFFFF;"><img src="{{ t.icon }}" alt="" style="width:16px;filter:{{ t.filter }};">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div role="tabpanel" aria-live="polite" style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;"><p style="margin:0;font-weight:700;font-size:15px;">{{ mod.label }}</p><p style="margin:0;font-size:13px;color:#D1D1D1;">{{ mod.desc }}</p></div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+            <sc-for list="{{ mod.kpis }}" as="k" hint-placeholder-count="3">
+              <div style="padding:8px 12px;border-radius:10px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.08);">
+                <div style="font-family:Orbitron,sans-serif;font-size:clamp(14px,1.4vw,18px);font-weight:700;">{{ k.v }}</div>
+                <div style="font-size:12px;color:#D1D1D1;margin-top:4px;line-height:1.3;">{{ k.l }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <button onClick="{{ toggleGest }}" aria-expanded="{{ gestOpen }}" aria-controls="gest-detalhes" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border-radius:999px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.3);font-size:13px;font-weight:600;cursor:pointer;" style-hover="border-color:#FFFFFF;"><img src="{{ gestIcon }}" alt="" style="width:14px;filter:invert(1);">{{ gestToggleLabel }}</button>
+          <div id="gest-detalhes">
+            <sc-if value="{{ gestOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="animation:c3rise .4s ease both;">
+                <sc-if value="{{ mod.hasBars }}" hint-placeholder-val="{{ false }}">
+                  <div style="height:104px;display:flex;align-items:flex-end;gap:10px;padding:10px;border-radius:10px;background:#1A1A1A;">
+                    <sc-for list="{{ mod.bars }}" as="b" hint-placeholder-count="6">
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;">
+                        <div style="width:100%;height:{{ b.h }}%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#FFFFFF,#6B6B6B);"></div>
+                        <span style="font-size:12px;color:#D1D1D1;">{{ b.m }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ mod.hasRows }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;">
+                    <sc-for list="{{ mod.rows }}" as="r" hint-placeholder-count="3">
+                      <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.2fr) auto;gap:10px;padding:9px 2px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px;">
+                        <span style="font-weight:600;">{{ r.a }}</span><span style="color:#D1D1D1;">{{ r.b }}</span><span style="color:#D1D1D1;text-align:right;">{{ r.c }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 06 OPERAÇÃO CONECTADA -->
+<section id="operacao" data-screen-label="06 Operação conectada" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 50% 50% at 50% 28%,#1A1A1A 0%,#000000 75%);color:#FFFFFF;padding:clamp(52px,6vw,84px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);align-items:center;">
+      <div style="flex:1 1 280px;max-width:380px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Operação digital conectada</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Sua empresa funcionando como um só negócio.</h2>
+        <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Conectamos atendimento, vendas, gestão e informações para que você tenha menos trabalho e mais controle.</p>
+        <a href="#metodo" style="margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border-radius:999px;padding:13px 22px;font-size:15px;font-weight:600;">Entenda a integração <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="flex:1.4 1 340px;min-width:0;">
+        <div ref="{{ opRef }}" style="position:relative;width:100%;max-width:540px;aspect-ratio:1.3;margin:0 auto;">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+            <sc-for list="{{ flowSpokes }}" as="sp" hint-placeholder-count="0">
+              <line x1="50" y1="50" x2="{{ sp.x }}" y2="{{ sp.y }}" stroke="#FFFFFF" stroke-opacity="{{ sp.op }}" stroke-width="1" stroke-dasharray="3 5" vector-effect="non-scaling-stroke" style="transition:stroke-opacity .6s;"></line>
+            </sc-for>
+            <sc-for list="{{ flowSegs }}" as="sg" hint-placeholder-count="0">
+              <line x1="{{ sg.x1 }}" y1="{{ sg.y1 }}" x2="{{ sg.x2 }}" y2="{{ sg.y2 }}" stroke="#FFFFFF" stroke-opacity="{{ sg.op }}" stroke-width="{{ sg.w }}" vector-effect="non-scaling-stroke" style="transition:stroke-opacity .6s;"></line>
+            </sc-for>
+          </svg>
+          <div aria-hidden="true" style="position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,{{ flowHalo }}) 0%,rgba(255,255,255,0) 65%);transition:background .8s ease;"></div>
+          <dc-import name="GlassCube" size="{{ 124 }}" logo="{{ true }}" glow="{{ flowLit }}" light="{{ flowLight }}" style="position:absolute;left:calc(50% - 62px);top:calc(50% - 62px);" hint-size="124px,124px"></dc-import>
+          <div aria-hidden="true" style="position:absolute;left:{{ dotX }}%;top:{{ dotY }}%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 12px 4px rgba(255,255,255,0.5);transition:left 1s cubic-bezier(.4,0,.2,1), top 1s cubic-bezier(.4,0,.2,1);z-index:3;"></div>
+          <sc-for list="{{ flowNodes }}" as="f" hint-placeholder-count="0">
+            <button onClick="{{ f.onClick }}" aria-pressed="{{ f.active }}" style="position:absolute;left:{{ f.x }}%;top:{{ f.y }}%;transform:translate(-50%,-50%);width:clamp(84px,9vw,100px);padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;border-radius:14px;background:{{ f.bg }};border:1px solid {{ f.bd }};box-shadow:{{ f.glow }};color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer;transition:all .4s ease;z-index:4;">
+              <img src="{{ f.icon }}" alt="" style="width:22px;filter:invert(1);">{{ f.label }}
+            </button>
+          </sc-for>
+        </div>
+        <div aria-live="polite" style="max-width:540px;margin:18px auto 0;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;min-height:44px;">
+          <span style="font-family:Orbitron,sans-serif;font-size:13px;font-weight:700;color:#FFFFFF;flex:none;">{{ flowNum }}</span>
+          <span style="height:1px;width:28px;background:#6B6B6B;flex:none;"></span>
+          <span style="flex:1 1 220px;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ flowCaption }}</span>
+          <sc-if value="{{ flowPaused }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ flowResume }}" style="flex:none;display:inline-flex;align-items:center;gap:6px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;"><img src="assets/icons/play.svg" alt="" style="width:12px;filter:invert(1);">Retomar fluxo</button>
+          </sc-if>
+        </div>
+      </div>
+      <ul style="flex:1 1 280px;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px;">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <li style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="width:30px;height:30px;flex:none;border-radius:50%;border:1px solid #FFFFFF;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:16px;filter:invert(1);"></span>
+            <span><span style="display:block;font-size:16px;font-weight:600;">{{ b.t }}</span><span style="display:block;font-size:14px;color:#D1D1D1;margin-top:3px;">{{ b.d }}</span></span>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+
+    <!-- 07 MERCADO -->
+    <div id="mercado" ref="{{ statsRef }}" data-screen-label="07 Dados do mercado" style="margin-top:clamp(44px,5vw,68px);padding-top:clamp(32px,4vw,52px);border-top:1px solid rgba(255,255,255,0.14);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);">
+      <div style="flex:1 1 320px;max-width:460px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">O cenário digital brasileiro</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.22;letter-spacing:-0.01em;text-wrap:balance;">As ferramentas já chegaram. O próximo passo é <span style="white-space:nowrap;">fazê-las</span> trabalhar juntas.</h2>
+        <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Os canais digitais já fazem parte da rotina das empresas, mas gestão do relacionamento e inteligência artificial ainda estão em adoção. A oportunidade está em conectar atendimento, operação e dados com estratégia.</p>
+      </div>
+      <div style="flex:2 1 560px;min-width:0;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:clamp(20px,3vw,36px);">
+          <sc-for list="{{ stats }}" as="st" hint-placeholder-count="0">
+            <figure style="margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,0.55);">
+              <div style="display:flex;align-items:baseline;font-family:Orbitron,sans-serif;font-weight:800;font-size:clamp(44px,4.4vw,60px);line-height:1;"><span ref="{{ st.ref }}" style="display:inline-block;min-width:1.55em;text-align:right;font-variant-numeric:tabular-nums;">{{ st.init }}</span><span>%</span></div>
+              <figcaption style="margin-top:14px;font-size:16px;font-weight:600;line-height:1.4;color:#FFFFFF;text-wrap:pretty;">{{ st.t }}</figcaption>
+              <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:#D1D1D1;text-wrap:pretty;">{{ st.r }}</p>
+            </figure>
+          </sc-for>
+        </div>
+        <p style="margin:26px 0 0;font-size:12px;line-height:1.5;color:#D1D1D1;">Fonte: TIC Empresas 2025, Cetic.br/NIC.br. Empresas brasileiras com 10 ou mais pessoas ocupadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 SEGMENTOS -->
+<section id="segmentos" data-screen-label="08 Segmentos" style="background:#FFFFFF;color:#000000;padding:clamp(52px,6vw,84px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,48px);align-items:stretch;">
+      <div style="flex:1 1 300px;max-width:400px;display:flex;flex-direction:column;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Segmentos</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Soluções sob medida para o seu negócio.</h2>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Aplicamos tecnologia de forma prática, com foco nas necessidades de cada setor.</p>
+        <div style="margin-top:auto;padding-top:24px;">
+          <div style="padding:20px;border-radius:16px;background:#000000;color:#FFFFFF;">
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#D1D1D1;text-wrap:pretty;"><strong style="font-weight:600;color:#FFFFFF;">Não encontrou seu segmento?</strong> A CORE 3 adapta a solução à realidade da sua empresa. Faça um diagnóstico com a CLARA.</p>
+            <button onClick="{{ segOther }}" style="margin-top:16px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;" style-hover="background:#D1D1D1;">Ver uma solução para minha empresa <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1.7 1 520px;min-width:0;">
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Alguns exemplos</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:12px;">
+          <sc-for list="{{ segments }}" as="sg" hint-placeholder-count="0">
+            <article style="display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:#000000;color:#FFFFFF;border:2px solid {{ sg.bd }};box-shadow:{{ sg.shadow }};transition:all .25s ease;">
+              <button onClick="{{ sg.onClick }}" aria-pressed="{{ sg.pressed }}" style="flex:1;display:flex;flex-direction:column;text-align:left;background:transparent;border:0;padding:0;color:#FFFFFF;cursor:pointer;">
+                <span style="position:relative;display:block;width:100%;aspect-ratio:16/6;min-height:104px;background:radial-gradient(ellipse 70% 100% at 78% 10%,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 60%),linear-gradient(160deg,#1A1A1A 0%,#000000 100%);border-bottom:1px solid rgba(255,255,255,0.1);overflow:hidden;">
+                  <sc-if value="{{ sg.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ sg.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);"></sc-if>
+                  <sc-if value="{{ sg.noImg }}" hint-placeholder-val="{{ true }}">
+                    <span style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;text-align:center;">
+                      <span style="width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;"><img src="{{ sg.icon }}" alt="" style="width:20px;filter:invert(1);"></span>
+                      <span style="font-size:12px;line-height:1.3;color:#D1D1D1;">Imagem do segmento a definir</span>
+                    </span>
+                  </sc-if>
+                </span>
+                <span style="flex:1;display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;">
+                  <span style="display:flex;align-items:center;gap:10px;"><img src="{{ sg.icon }}" alt="" style="width:18px;flex:none;filter:invert(1);"><span style="font-size:15px;font-weight:600;line-height:1.3;">{{ sg.title }}</span></span>
+                  <span style="font-size:13px;line-height:1.45;color:#D1D1D1;">{{ sg.desc }}</span>
+                  <span style="margin-top:auto;padding-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:600;">{{ sg.btn }}<span aria-hidden="true" style="width:30px;height:30px;flex:none;border-radius:50%;background:{{ sg.arrowBg }};color:{{ sg.arrowFg }};border:1px solid #FFFFFF;display:flex;align-items:center;justify-content:center;">→</span></span>
+                </span>
+              </button>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div aria-live="polite" style="margin-top:16px;border-radius:20px;border:1px solid #D1D1D1;background:linear-gradient(160deg,#FFFFFF 30%,#D1D1D1 220%);padding:clamp(20px,3vw,32px);display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);">
+      <div style="flex:1 1 240px;max-width:320px;">
+        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Segmento selecionado</p>
+        <h3 style="margin:0;font-weight:700;font-size:22px;line-height:1.25;">{{ seg.title }}</h3>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6B6B6B;">{{ seg.intro }}</p>
+      </div>
+      <div style="flex:1.3 1 280px;min-width:0;">
+        <p style="margin:0 0 12px;font-size:14px;font-weight:600;">Aplicações possíveis</p>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ seg.apps }}" as="a" hint-placeholder-count="4">
+            <li style="display:flex;gap:10px;font-size:15px;line-height:1.45;"><img src="assets/icons/check.svg" alt="" style="width:18px;flex:none;margin-top:2px;">{{ a }}</li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:14px;">
+        <p style="margin:0;font-size:14px;font-weight:600;">Benefícios</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ seg.benefits }}" as="b" hint-placeholder-count="3">
+            <span style="font-size:13px;padding:7px 12px;border-radius:999px;background:#000000;color:#FFFFFF;">{{ b }}</span>
+          </sc-for>
+        </div>
+        <button onClick="{{ seg.onCta }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:#000000;color:#FFFFFF;border:0;border-radius:999px;padding:13px 20px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;" style-hover="background:#1A1A1A;">{{ seg.cta }} <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 MÉTODO PILOTO -->
+<section id="metodo" ref="{{ pilotoRef }}" data-screen-label="09 Método PILOTO" style="position:relative;height:{{ pilotoHeight }};background:#000000;color:#FFFFFF;scroll-margin-top:64px;">
+  <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+    <div style="position:sticky;top:64px;height:calc(100vh - 64px);min-height:540px;overflow:hidden;background:radial-gradient(ellipse 42% 62% at 72% 42%,#1A1A1A 0%,#000000 70%);">
+      <div style="max-width:1320px;height:100%;margin:0 auto;padding:clamp(24px,4vh,48px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:clamp(14px,2.5vh,28px);">
+        <div style="flex:1;min-height:0;display:flex;align-items:center;gap:clamp(24px,4vw,64px);">
+          <div style="flex:1.1 1 0;min-width:0;">
+            <p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Nosso método</p>
+            <p aria-label="PILOTO" style="margin:0;display:flex;font-family:Orbitron,sans-serif;font-weight:900;font-size:clamp(52px,6.6vw,100px);line-height:1;letter-spacing:0.03em;">
+              <sc-for list="{{ pilotoLetters }}" as="l" hint-placeholder-count="6"><span aria-hidden="true" style="color:{{ l.color }};text-shadow:{{ l.glow }};transition:color .5s ease, text-shadow .5s ease;">{{ l.ch }}</span></sc-for>
+            </p>
+            <h2 style="margin:14px 0 0;font-family:Inter,sans-serif;font-weight:500;font-size:clamp(17px,1.5vw,20px);line-height:1.4;color:#D1D1D1;max-width:440px;text-wrap:balance;">Da ideia à operação, em um caminho claro e eficiente.</h2>
+            <div aria-live="polite" style="margin-top:clamp(16px,3vh,30px);padding-top:clamp(14px,2.4vh,22px);border-top:1px solid rgba(255,255,255,0.16);max-width:520px;">
+              <span style="font-family:Orbitron,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.14em;color:#D1D1D1;">ETAPA {{ pilotoNum }} / 06</span>
+              <p style="margin:8px 0 0;font-weight:700;font-size:clamp(24px,2.4vw,34px);line-height:1.15;"><span style="font-family:Orbitron,sans-serif;">{{ pilotoCur.letter }}</span> — {{ pilotoCur.title }}</p>
+              <p style="margin:10px 0 0;font-size:16px;line-height:1.55;color:#D1D1D1;">{{ pilotoCur.desc }}</p>
+            </div>
+            <button onClick="{{ pilotoBtn }}" style="margin-top:clamp(16px,2.6vh,24px);display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ pilotoBtnLabel }} <span aria-hidden="true">→</span></button>
+          </div>
+          <div style="flex:1 1 0;min-width:0;height:100%;position:relative;display:flex;align-items:center;justify-content:center;">
+            <div aria-hidden="true" style="position:absolute;width:{{ pilotoGlow }}px;height:{{ pilotoGlow }}px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,{{ pilotoGlowOp }}) 0%,rgba(255,255,255,0) 62%);transition:background .8s ease;"></div>
+            <dc-import name="GlassCube" size="{{ pilotoCube }}" progress="{{ pilotoProgress }}" logo="{{ true }}" glow="{{ true }}" hint-size="220px,220px"></dc-import>
+            <div aria-live="polite" style="position:absolute;left:0;right:0;bottom:3%;text-align:center;font-size:14px;color:#D1D1D1;">{{ pilotoCur.cube }}</div>
+          </div>
+        </div>
+        <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;">
+          <sc-for list="{{ pilotoSteps }}" as="p" hint-placeholder-count="0">
+            <li>
+              <button onClick="{{ p.onClick }}" aria-current="{{ p.current }}" style="width:100%;text-align:left;padding:12px 14px 14px;border-radius:12px;background:{{ p.bg }};border:1px solid {{ p.bd }};color:#FFFFFF;cursor:pointer;display:flex;flex-direction:column;gap:10px;transition:all .4s ease;">
+                <span style="display:block;width:100%;height:2px;border-radius:1px;background:rgba(255,255,255,0.16);overflow:hidden;"><span style="display:block;height:100%;width:{{ p.fill }}%;background:#FFFFFF;transition:width .5s ease;"></span></span>
+                <span style="display:flex;align-items:baseline;gap:10px;min-width:0;"><span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:18px;color:{{ p.lc }};">{{ p.letter }}</span><span style="font-size:14px;font-weight:600;color:{{ p.tc }};">{{ p.title }}</span></span>
+              </button>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:52px 20px;background:radial-gradient(ellipse 80% 40% at 80% 10%,#1A1A1A 0%,#000000 70%);">
+      <p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Nosso método</p>
+      <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:900;font-size:clamp(44px,13vw,64px);line-height:1;letter-spacing:0.03em;">PILOTO</p>
+      <h2 style="margin:12px 0 0;font-weight:500;font-size:17px;line-height:1.4;color:#D1D1D1;">Da ideia à operação, em um caminho claro e eficiente.</h2>
+      <ol ref="{{ pilotoListRef }}" style="list-style:none;margin:28px 0 0;padding:0;">
+        <sc-for list="{{ pilotoMobile }}" as="p" hint-placeholder-count="0">
+          <li data-pidx="{{ p.i }}" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;opacity:{{ p.op }};transform:translateY({{ p.ty }}px);transition:opacity .6s ease, transform .6s ease;">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <dc-import name="GlassCube" size="{{ 48 }}" progress="{{ p.prog }}" logo="{{ true }}" glow="{{ p.last }}" hint-size="48px,48px"></dc-import>
+              <sc-if value="{{ p.notLast }}" hint-placeholder-val="{{ true }}"><span style="flex:1;width:1px;min-height:16px;margin-top:10px;background:rgba(255,255,255,0.24);"></span></sc-if>
+            </div>
+            <div style="padding:2px 0 24px;">
+              <span style="font-family:Orbitron,sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;color:#D1D1D1;">{{ p.num }}</span>
+              <p style="margin:4px 0 0;font-size:18px;font-weight:700;line-height:1.25;"><span style="font-family:Orbitron,sans-serif;">{{ p.letter }}</span> — {{ p.title }}</p>
+              <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ p.desc }}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+      <button onClick="{{ pilotoMobileCta }}" style="margin-top:8px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 22px;font-size:15px;font-weight:600;cursor:pointer;">Solicitar diagnóstico <span aria-hidden="true">→</span></button>
+    </div>
+  </sc-if>
+</section>
+
+<!-- 10 AGENTES -->
+<section id="agentes" data-screen-label="10 Agentes" style="background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 55%,#D1D1D1 240%);color:#000000;padding:clamp(52px,6vw,84px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);align-items:flex-start;">
+      <div style="flex:1 1 280px;max-width:340px;">
+        <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Nossas inteligências</p>
+        <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Três agentes. Três especialidades. Um só propósito.</h2>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;text-wrap:pretty;">Entender seu negócio, conectar oportunidades e construir soluções que impulsionam sua evolução. Selecione um agente.</p>
+      </div>
+      <div style="flex:3 1 600px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;" role="group" aria-label="Agentes">
+        <sc-for list="{{ agents }}" as="a" hint-placeholder-count="0">
+          <button onClick="{{ a.onClick }}" aria-pressed="{{ a.pressed }}" style="text-align:left;display:flex;gap:14px;align-items:flex-start;padding:10px;border-radius:18px;background:#FFFFFF;border:2px solid {{ a.bd }};box-shadow:{{ a.shadow }};cursor:pointer;color:#000000;transition:all .25s ease;" style-hover="transform:translateY(-2px);">
+            <span style="position:relative;display:block;width:40%;max-width:180px;flex:none;aspect-ratio:0.82;border-radius:12px;overflow:hidden;background:#060706;"><img src="{{ a.img }}" alt="{{ a.alt }}" style="position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:96%;width:auto;max-width:100%;object-fit:contain;object-position:50% 100%;display:block;"></span>
+            <span style="flex:1;min-width:0;padding:6px 4px 6px 0;display:flex;flex-direction:column;gap:8px;">
+              <span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:22px;">{{ a.name }}</span>
+              <span style="font-size:13px;color:#6B6B6B;margin-top:-4px;">{{ a.role }}</span>
+              <span style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ a.verbs }}" as="v" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid #D1D1D1;">{{ v }}</span></sc-for></span>
+              <span style="font-size:13px;line-height:1.45;color:#1A1A1A;">{{ a.desc }}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div aria-live="polite" style="margin-top:16px;border-radius:24px;background:radial-gradient(ellipse 50% 90% at 20% 50%,#1A1A1A,#000000 70%);color:#FFFFFF;display:flex;flex-wrap:wrap;overflow:hidden;">
+      <div style="flex:0 1 340px;min-width:min(100%,260px);min-height:340px;position:relative;background:#060706;">
+        <div style="position:absolute;left:22px;top:20px;right:22px;z-index:1;">
+          <div style="font-family:Orbitron,sans-serif;font-weight:800;font-size:28px;">{{ agent.name }}</div>
+          <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;margin-top:4px;">{{ agent.role }}</div>
+        </div>
+        <img src="{{ agent.img }}" alt="{{ agent.alt }}" style="position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:min(74%,250px);width:auto;max-width:88%;object-fit:contain;object-position:50% 100%;display:block;">
+      </div>
+      <div style="flex:2 1 320px;min-width:0;padding:clamp(22px,3vw,40px);display:flex;flex-wrap:wrap;gap:28px;">
+        <div style="flex:1 1 240px;min-width:0;">
+          <p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Missão</p>
+          <p style="margin:0 0 20px;font-family:Orbitron,sans-serif;font-size:17px;font-weight:600;line-height:1.4;">{{ agent.mission }}</p>
+          <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Responsabilidades</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ agent.resp }}" as="r" hint-placeholder-count="3">
+              <li style="display:flex;gap:10px;font-size:15px;line-height:1.45;color:#D1D1D1;"><span style="width:6px;height:6px;margin-top:8px;flex:none;background:#FFFFFF;transform:rotate(45deg);"></span>{{ r }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="flex:1 1 260px;min-width:0;">
+          <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Aplicações e status</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;">
+            <sc-for list="{{ agent.apps }}" as="p" hint-placeholder-count="3">
+              <li style="display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;">
+                <span>{{ p.label }}</span>
+                <span style="flex:none;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:{{ p.tagBg }};color:{{ p.tagFg }};border:1px solid {{ p.tagBd }};">{{ p.status }}</span>
+              </li>
+            </sc-for>
+          </ul>
+          <p style="margin:14px 0 0;display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;color:#D1D1D1;"><img src="assets/icons/info.svg" alt="" style="width:14px;flex:none;margin-top:2px;filter:invert(1);opacity:0.8;">“Funcional nesta prévia” indica um recurso simulado neste site, sem integração real com IA, CRM ou WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 DIAGNÓSTICO -->
+<section id="diagnostico" data-screen-label="11 Diagnóstico" style="position:relative;overflow:hidden;background:radial-gradient(ellipse 40% 60% at 14% 82%,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0) 70%),radial-gradient(ellipse 60% 100% at 78% 20%,#1A1A1A,#000000 70%);color:#FFFFFF;padding:clamp(52px,6vw,84px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:stretch;">
+    <div style="flex:1 1 320px;min-width:0;max-width:470px;display:flex;flex-direction:column;">
+      <sc-if value="{{ diagNarrow }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+          <span style="width:64px;height:64px;flex:none;border-radius:50%;overflow:hidden;background:#000000;border:1px solid rgba(255,255,255,0.25);"><img src="assets/clara.png" alt="CLARA, agente de Inteligência Comercial da CORE 3" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;"></span>
+          <span><span style="display:block;font-family:Orbitron,sans-serif;font-weight:800;font-size:16px;">CLARA</span><span style="display:block;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#D1D1D1;margin-top:2px;">Inteligência Comercial</span></span>
+        </div>
+      </sc-if>
+      <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Diagnóstico inteligente</p>
+      <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,3vw,42px);line-height:1.12;letter-spacing:-0.01em;text-wrap:balance;">Conte um pouco sobre seu negócio.</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#D1D1D1;text-wrap:pretty;">Responda algumas perguntas e receba um direcionamento inicial com soluções da CORE 3 para a sua realidade.</p>
+      <ul style="list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ diagFacts }}" as="df" hint-placeholder-count="3">
+          <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#D1D1D1;"><img src="{{ df.icon }}" alt="" style="width:16px;flex:none;filter:invert(1);">{{ df.t }}</li>
+        </sc-for>
+      </ul>
+      <sc-if value="{{ diagWide }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:auto;padding-top:28px;position:relative;min-height:280px;">
+          <div aria-hidden="true" style="position:absolute;left:-40px;bottom:-10px;width:320px;height:120px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,0.16) 0%,rgba(255,255,255,0) 70%);"></div>
+          <img src="assets/clara.png" alt="CLARA, agente de Inteligência Comercial da CORE 3" style="position:absolute;left:0;bottom:0;height:236px;width:auto;display:block;-webkit-mask-image:radial-gradient(ellipse 52% 54% at 50% 46%,#000000 66%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 52% 54% at 50% 46%,#000000 66%,rgba(0,0,0,0) 100%);">
+          <div style="position:absolute;left:210px;bottom:150px;right:0;max-width:240px;padding:14px 16px;border-radius:16px 16px 16px 4px;background:rgba(26,26,26,0.9);border:1px solid rgba(255,255,255,0.18);font-size:14px;line-height:1.5;color:#FFFFFF;">Oi! Eu sou a CLARA. Vou fazer algumas perguntas rápidas para entender a sua empresa.</div>
+        </div>
+      </sc-if>
+    </div>
+    <div id="diagnostico-form" ref="{{ formRef }}" style="flex:1.45 1 520px;min-width:0;display:flex;flex-direction:column;min-height:{{ formMinH }};border-radius:24px;background:#141414;border:1px solid rgba(255,255,255,0.16);box-shadow:0 30px 80px rgba(0,0,0,0.5);overflow:hidden;scroll-margin-top:80px;">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;padding:16px clamp(18px,3vw,32px);border-bottom:1px solid rgba(255,255,255,0.08);">
+        <span style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;"><img src="assets/clara.png" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:50% 12%;background:#000000;">Diagnóstico com a CLARA</span>
+        <span style="font-size:12px;color:#D1D1D1;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:4px 10px;">Prévia: regras simuladas, nenhum dado é enviado</span>
+      </div>
+      <ol aria-label="Etapas do diagnóstico" style="list-style:none;margin:0;padding:16px clamp(18px,3vw,32px) 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;">
+        <sc-for list="{{ dStepsNav }}" as="s" hint-placeholder-count="5">
+          <li aria-current="{{ s.current }}" style="display:flex;flex-direction:column;gap:8px;min-width:0;">
+            <span style="display:block;height:3px;border-radius:2px;background:{{ s.bar }};transition:background .4s ease;"></span>
+            <span style="font-size:12px;font-weight:600;color:{{ s.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ s.label }}</span>
+          </li>
+        </sc-for>
+      </ol>
+      <sc-if value="{{ dNotDone }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;display:flex;flex-direction:column;padding:clamp(18px,2.6vw,30px) clamp(18px,3vw,32px) clamp(20px,3vw,32px);">
+          <p style="margin:0;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D1D1D1;">Etapa {{ dNum }} de 5 · {{ dStepName }}</p>
+          <h3 style="margin:8px 0 20px;font-weight:700;font-size:clamp(20px,2vw,26px);line-height:1.3;text-wrap:balance;">{{ dTitle }}</h3>
+          <div data-first="true">
+            <sc-if value="{{ dS0 }}" hint-placeholder-val="{{ true }}">
+              <div role="radiogroup" aria-label="Desafio principal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;">
+                <sc-for list="{{ dChallengeOpts }}" as="o" hint-placeholder-count="5">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="text-align:left;padding:16px;border-radius:14px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS1 }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 10px;font-size:14px;font-weight:600;">Segmento</p>
+              <div role="radiogroup" aria-label="Segmento" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dSegOpts }}" as="o" hint-placeholder-count="5">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="min-height:44px;padding:11px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <p style="margin:22px 0 10px;font-size:14px;font-weight:600;">Quantas pessoas trabalham na empresa?</p>
+              <div role="radiogroup" aria-label="Porte" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dSizeOpts }}" as="o" hint-placeholder-count="4">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="min-height:44px;padding:11px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS2 }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 10px;font-size:14px;font-weight:600;">{{ dQ1Label }} <span style="font-weight:400;color:#D1D1D1;">(marque quantas quiser)</span></p>
+              <div role="group" aria-label="{{ dQ1Label }}" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dQ1Opts }}" as="o" hint-placeholder-count="4">
+                  <button role="checkbox" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="min-height:44px;padding:11px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <p style="margin:22px 0 10px;font-size:14px;font-weight:600;">{{ dQ2Label }}</p>
+              <div role="radiogroup" aria-label="{{ dQ2Label }}" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dQ2Opts }}" as="o" hint-placeholder-count="3">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="min-height:44px;padding:11px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ dS3 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:16px;">
+                <div style="flex:2 1 320px;min-width:0;display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ dRec.items }}" as="r" hint-placeholder-count="2">
+                    <div style="padding:16px;border-radius:14px;background:{{ r.bg }};color:{{ r.fg }};border:1px solid rgba(255,255,255,0.3);">
+                      <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;">{{ r.tag }}</div>
+                      <div style="margin-top:6px;font-size:16px;font-weight:700;line-height:1.35;">{{ r.title }}</div>
+                      <div style="margin-top:6px;font-size:14px;line-height:1.5;">{{ r.why }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="flex:1 1 240px;min-width:0;padding:18px;border-radius:14px;border:1px dashed rgba(255,255,255,0.35);">
+                  <p style="margin:0 0 6px;font-size:14px;font-weight:600;">Primeira aplicação sugerida</p>
+                  <p style="margin:0 0 16px;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ dRec.segApp }}</p>
+                  <p style="margin:0 0 6px;font-size:14px;font-weight:600;">Próximo passo</p>
+                  <p style="margin:0;font-size:14px;line-height:1.5;color:#D1D1D1;">{{ dRec.next }}</p>
+                </div>
+              </div>
+              <p style="margin:14px 0 0;font-size:12px;color:#D1D1D1;">Direcionamento gerado por regras simples nesta prévia. Não é uma análise de inteligência artificial.</p>
+            </sc-if>
+
+            <sc-if value="{{ dS4 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">Seu nome *
+                  <input value="{{ d.name }}" onChange="{{ fName }}" autocomplete="name" placeholder="Como podemos te chamar?" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">Empresa
+                  <input value="{{ d.company }}" onChange="{{ fCompany }}" autocomplete="organization" placeholder="Nome da empresa (opcional)" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">WhatsApp ou telefone
+                  <input value="{{ d.phone }}" onChange="{{ fPhone }}" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;">E-mail
+                  <input value="{{ d.email }}" onChange="{{ fEmail }}" type="email" autocomplete="email" placeholder="voce@empresa.com.br" style="height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.25);background:#000000;color:#FFFFFF;font-size:15px;font-family:Inter,sans-serif;">
+                </label>
+              </div>
+              <p style="margin:18px 0 10px;font-size:13px;font-weight:600;">Como prefere ser contatado?</p>
+              <div role="radiogroup" aria-label="Preferência de contato" style="display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ dPrefOpts }}" as="o" hint-placeholder-count="3">
+                  <button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="min-height:44px;padding:10px 16px;border-radius:999px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:14px;font-weight:500;cursor:pointer;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <label style="margin-top:18px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:#D1D1D1;cursor:pointer;">
+                <input type="checkbox" checked="{{ d.consent }}" onChange="{{ fConsent }}" style="width:20px;height:20px;margin:1px 0 0;accent-color:#FFFFFF;flex:none;">Autorizo a CORE 3 a entrar em contato sobre este diagnóstico.
+              </label>
+            </sc-if>
+
+            
+          </div>
+            <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}">
+              <p role="alert" style="margin:18px 0 0;padding:10px 14px;border-radius:10px;background:#000000;border:1px solid #FFFFFF;font-size:14px;">{{ dErr }}</p>
+            </sc-if>
+
+            <div style="margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <button onClick="{{ dBack }}" disabled="{{ dBackDisabled }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;opacity:{{ dBackOp }};">← Voltar</button>
+              <button onClick="{{ dNext }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;">{{ dNextLabel }} <span aria-hidden="true">→</span></button>
+            </div>
+          
+        </div>
+      </sc-if>
+      <sc-if value="{{ dDone }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:clamp(20px,3vw,36px);display:flex;flex-wrap:wrap;gap:28px;">
+            <div style="flex:1 1 260px;max-width:360px;">
+              <span style="width:44px;height:44px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/check.svg" alt="" style="width:22px;"></span>
+              <h3 style="margin:16px 0 0;font-weight:700;font-size:24px;line-height:1.3;">Obrigado, {{ dFirstName }}.</h3>
+              <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#D1D1D1;">Este é o resumo do seu diagnóstico. Nesta prévia, a solicitação não é enviada: quando a CLARA estiver integrada, nossa equipe recebe estas respostas e entra em contato pelo canal escolhido.</p>
+              <button onClick="{{ dRestart }}" style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;"><img src="assets/icons/refresh-cw.svg" alt="" style="width:14px;filter:invert(1);">Refazer diagnóstico</button>
+            </div>
+            <dl style="flex:2 1 320px;min-width:0;margin:0;display:grid;grid-template-columns:minmax(110px,auto) minmax(0,1fr);border-top:1px solid rgba(255,255,255,0.1);">
+              <sc-for list="{{ dSummary }}" as="s" hint-placeholder-count="6">
+                <dt style="padding:12px 12px 12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px;color:#D1D1D1;">{{ s.k }}</dt>
+                <dd style="margin:0;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;line-height:1.5;">{{ s.v }}</dd>
+              </sc-for>
+            </dl>
+          </div>
+        </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- 12 FAQ -->
+<section id="faq" data-screen-label="12 FAQ" style="background:#FFFFFF;color:#000000;padding:clamp(48px,5.5vw,76px) 0;scroll-margin-top:64px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px);align-items:flex-start;">
+    <div style="flex:1 1 260px;max-width:340px;">
+      <p style="margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">Dúvidas frequentes</p>
+      <h2 style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,38px);line-height:1.14;letter-spacing:-0.01em;text-wrap:balance;">Tire suas dúvidas e fale com a gente.</h2>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:#6B6B6B;">Respostas para as perguntas mais comuns sobre a CORE 3, nossos serviços e como podemos ajudar o seu negócio.</p>
+    </div>
+    <div style="flex:2 1 400px;min-width:0;display:flex;flex-direction:column;gap:8px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="border-radius:14px;border:1px solid {{ f.bd }};background:linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 300%);transition:border-color .2s;">
+          <h3 style="margin:0;">
+            <button onClick="{{ f.onClick }}" aria-expanded="{{ f.open }}" aria-controls="{{ f.id }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 18px;background:transparent;border:0;text-align:left;font-size:15px;font-weight:600;color:#000000;cursor:pointer;">
+              {{ f.q }}<span aria-hidden="true" style="width:26px;height:26px;flex:none;border-radius:50%;border:1px solid #000000;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;background:{{ f.signBg }};color:{{ f.signFg }};">{{ f.sign }}</span>
+            </button>
+          </h3>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <div id="{{ f.id }}" style="padding:0 18px 14px;font-size:15px;line-height:1.6;color:#1A1A1A;">
+              {{ f.a }}
+              <sc-if value="{{ f.provisional }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;margin-left:6px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid #6B6B6B;color:#6B6B6B;">Resposta provisória</span></sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <aside style="flex:1 1 260px;min-width:0;border-radius:20px;background:#000000;color:#FFFFFF;padding:24px;">
+      <p style="margin:0;font-family:Orbitron,sans-serif;font-weight:700;font-size:20px;">Ainda com dúvidas?</p>
+      <p style="margin:8px 0 20px;font-size:15px;color:#D1D1D1;">Fale diretamente com a nossa equipe.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button onClick="{{ whatsClick }}" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:14px 18px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:#D1D1D1;"><img src="assets/icons/message-circle.svg" alt="" style="width:18px;">Conversar no WhatsApp</button>
+        <button onClick="{{ emailClick }}" style="display:flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.5);border-radius:999px;padding:13px 18px;font-size:15px;font-weight:600;cursor:pointer;" style-hover="background:rgba(255,255,255,0.1);"><img src="assets/icons/mail.svg" alt="" style="width:18px;filter:invert(1);">Enviar um e-mail</button>
+      </div>
+    </aside>
+  </div>
+</section>
+</main>
+
+<!-- 13 FOOTER -->
+<footer id="contato" data-screen-label="13 Footer" style="background:#000000;color:#FFFFFF;border-top:1px solid rgba(255,255,255,0.1);padding:clamp(40px,5vw,64px) 0 28px;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);">
+    <div style="display:flex;flex-wrap:wrap;gap:36px;justify-content:space-between;">
+      <div style="flex:1 1 220px;max-width:280px;">
+        <div style="display:flex;align-items:center;gap:10px;"><img src="assets/c3-symbol.png" alt="" style="height:26px;"><span style="font-family:Orbitron,sans-serif;font-weight:800;font-size:22px;letter-spacing:0.04em;">CORE 3</span></div>
+        <p style="margin:12px 0 0;font-size:15px;color:#D1D1D1;">Tecnologia com propósito.</p>
+      </div>
+      <div style="flex:3 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:24px;">
+        <sc-for list="{{ footCols }}" as="c" hint-placeholder-count="5">
+          <div>
+            <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#FFFFFF;">{{ c.title }}</p>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="3"><li><a href="{{ l.href }}" style="font-size:13px;color:#D1D1D1;" style-hover="color:#FFFFFF;opacity:1;">{{ l.label }}</a></li></sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;">
+      <div style="display:flex;gap:8px;" aria-label="Redes sociais">
+        <sc-for list="{{ socials }}" as="so" hint-placeholder-count="0">
+          <button onClick="{{ so.onClick }}" aria-label="{{ so.label }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.25);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:rgba(255,255,255,0.1);"><img src="{{ so.icon }}" alt="" style="width:17px;height:17px;filter:{{ so.filter }};"></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:#D1D1D1;align-items:center;">
+        <span>© {{ year }} CORE 3. Todos os direitos reservados.</span>
+        <button onClick="{{ legalClick }}" style="background:transparent;border:0;color:#D1D1D1;font-size:12px;cursor:pointer;padding:4px 0;text-decoration:underline;">Política de Privacidade</button>
+        <button onClick="{{ legalClick }}" style="background:transparent;border:0;color:#D1D1D1;font-size:12px;cursor:pointer;padding:4px 0;text-decoration:underline;">Termos de Uso</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;width:min(520px,calc(100% - 32px));display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:#1A1A1A;color:#FFFFFF;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+    <img src="assets/icons/info.svg" alt="" style="width:20px;filter:invert(1);flex:none;">
+    <span style="flex:1;font-size:14px;line-height:1.45;">{{ toast }}</span>
+    <button onClick="{{ toastAction }}" style="flex:none;background:#FFFFFF;color:#000000;border:0;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;">Diagnóstico</button>
+    <button onClick="{{ toastClose }}" aria-label="Fechar aviso" style="flex:none;width:32px;height:32px;background:transparent;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;"><img src="assets/icons/x.svg" alt="" style="width:16px;filter:invert(1);"></button>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  I = n => `assets/icons/${n}.svg`;
+  CONTACT = { whatsapp: '', email: '' };
+  state = {
+    isMobile: typeof window !== 'undefined' && window.innerWidth < 820,
+    vw: typeof window !== 'undefined' ? window.innerWidth : 1440,
+    menuOpen: false, navActive: '', problem: 0, probHover: -1, adsDest: 0, solTab: 0, siteCat: 0, solAds: 0, gestOpen: false, autoStep: -1, autoRunning: false,
+    flowStep: 0, flowPaused: false, segment: 0, piloto: 0, pSeen: [], agent: 1, faq: 0, toast: null,
+    diagOpen: false, dStep: 0, dDone: false, dErr: '',
+    d: { challenge: null, segment: null, size: null, q1: [], q2: null, name: '', company: '', phone: '', email: '', pref: 'WhatsApp', consent: false }
+  };
+  pilotoRef = React.createRef();
+  heroParallax = React.createRef();
+  opRef = React.createRef();
+  statsRef = React.createRef();
+  formRef = React.createRef();
+  statRefs = [React.createRef(), React.createRef(), React.createRef()];
+  pilotoListRef = React.createRef();
+  STATS = [
+    { n: 79, t: 'já mantêm presença no WhatsApp ou Telegram', r: 'O canal já existe; organizar atendimento, histórico e resposta é o próximo passo.' },
+    { n: 31, t: 'usam sistemas para organizar o relacionamento com clientes', r: 'Acompanhar contatos e oportunidades ainda não é rotina na maioria das empresas.' },
+    { n: 17, t: 'utilizam tecnologias de inteligência artificial', r: 'Ainda há espaço para automatizar processos com estratégia e ganhar eficiência.' }
+  ];
+  PROB_BEN = [
+    ['Mais visibilidade para apresentar sua empresa.', 'Mais confiança na primeira impressão.', 'Mais facilidade para receber contatos e orçamentos.'],
+    ['Alcance pessoas com interesse nos seus produtos ou serviços.', 'Direcione contatos ao seu site, WhatsApp ou estabelecimento.', 'Acompanhe o desempenho dos anúncios.'],
+    ['Histórico de conversas e solicitações.', 'Cadastros e etapas organizados em fluxos digitais.', 'Menos retrabalho e contatos esquecidos.'],
+    ['Informações centralizadas.', 'Indicadores mais acessíveis.', 'Mais clareza para tomar decisões.']
+  ];
+
+  PROBLEMS = [
+    { chal: 0, cta: 'Quero colocar minha empresa no digital', sol: 'Seu site deixa de ser vitrine parada e passa a trabalhar pelo seu negócio.', text: 'Criamos sites profissionais que apresentam sua empresa com clareza, transmitem confiança e facilitam o contato de quem procura seus produtos ou serviços.', chips: [['Sites', 'monitor', '#sol-sites'], ['Presença digital', 'globe', '#solucoes']] },
+    { chal: 0, cta: 'Quero atrair mais clientes', sol: 'Coloque seu negócio na frente de quem pode se tornar seu cliente.', text: 'Criamos e gerenciamos campanhas no Google, Instagram e Facebook para alcançar pessoas interessadas no que você oferece e direcioná-las ao seu site, WhatsApp ou loja física.', chips: [['Tráfego pago', 'target', '#solucoes'], ['Google Ads', 'globe', '#solucoes'], ['Meta Ads', 'instagram', '#solucoes']] },
+    { chal: 0, cta: 'Quero organizar meu atendimento', sol: 'Organize o atendimento e tire a rotina do papel.', text: 'Reúna contatos, acompanhe solicitações e transforme atividades manuais em fluxos digitais, para sua equipe atender com mais organização e menos retrabalho.', chips: [['Atendimento', 'message-square', '#sol-auto'], ['Processos digitais', 'file-text', '#sol-auto'], ['Automação', 'zap', '#sol-auto']] },
+    { chal: 3, cta: 'Quero organizar minha empresa', sol: 'Enxergue sua operação com mais clareza.', text: 'Organize informações sobre clientes, vendas, compras, estoque e financeiro para acompanhar melhor o que acontece no seu negócio.', chips: [['Sistema de gestão', 'layout-dashboard', '#sol-gestao'], ['Operação conectada', 'layers', '#operacao']] }
+  ];
+  MODULES = [
+    { label: 'Clientes', icon: 'users', desc: 'Cadastro e histórico de cada cliente.', kpis: [['128', 'clientes cadastrados'], ['14', 'novos no mês'], ['32', 'retornos agendados']], rows: [['Cliente A', 'Orçamento enviado', 'Hoje'], ['Cliente B', 'Atendimento concluído', 'Ontem'], ['Cliente C', 'Aguardando retorno', '2 dias']] },
+    { label: 'Vendas', icon: 'shopping-cart', desc: 'Pedidos, propostas e acompanhamento.', kpis: [['46', 'pedidos no mês'], ['R$ 280', 'ticket médio'], ['12', 'propostas abertas']], rows: [['Pedido 1042', 'Pago', 'R$ 420'], ['Pedido 1041', 'Em separação', 'R$ 190'], ['Proposta 88', 'Em negociação', 'R$ 1.200']] },
+    { label: 'Compras', icon: 'shopping-bag', desc: 'Pedidos a fornecedores e recebimentos.', kpis: [['8', 'pedidos a fornecedores'], ['3', 'em trânsito'], ['5', 'recebidos']], rows: [['Fornecedor A', 'Em trânsito', 'Sex.'], ['Fornecedor B', 'Recebido', 'Ontem'], ['Fornecedor C', 'Aguardando cotação', '—']] },
+    { label: 'Estoque', icon: 'package', desc: 'Entradas, saídas e alertas de reposição.', kpis: [['312', 'itens ativos'], ['6', 'abaixo do mínimo'], ['54', 'movimentações']], rows: [['Produto A', '4 unidades', 'Repor'], ['Produto B', '38 unidades', 'Ok'], ['Produto C', '2 unidades', 'Repor']] },
+    { label: 'Financeiro', icon: 'wallet', desc: 'Contas a pagar, a receber e saldo.', kpis: [['R$ 18,4 mil', 'entradas'], ['R$ 11,2 mil', 'saídas'], ['R$ 7,2 mil', 'saldo do mês']], rows: [['Aluguel', 'Vence em 3 dias', 'R$ 2.400'], ['Pedido 1042', 'Recebido', 'R$ 420'], ['Fornecedor A', 'Agendado', 'R$ 1.150']] },
+    { label: 'Resultados', icon: 'trending-up', desc: 'Visão geral do desempenho da empresa.', kpis: [['+12%', 'vendas vs. mês anterior'], ['3,1x', 'giro de estoque'], ['92%', 'contas em dia']], bars: [[38, 'Jan'], [52, 'Fev'], [47, 'Mar'], [64, 'Abr'], [72, 'Mai'], [88, 'Jun']] }
+  ];
+  AUTO = [['message-circle', 'Mensagem recebida', 'WhatsApp · 09:12'], ['inbox', 'Solicitação registrada', 'Ficha criada com histórico'], ['calendar', 'Agendamento organizado', 'Qui, 14h · confirmado'], ['bell', 'Equipe notificada', 'Recepção recebeu o aviso']];
+  SITE_CATS = [['Site institucional', 'building-2', 'Apresenta a empresa, seus diferenciais e formas de contato.'], ['Site para serviços', 'wrench', 'Destaca cada serviço e leva o visitante ao pedido de orçamento.'], ['Catálogo digital', 'shopping-bag', 'Organiza produtos por categoria, com pedido direto pelo WhatsApp.']];
+  SVC = [['zap', 'Elétrica'], ['wrench', 'Hidráulica'], ['layers', 'Pintura'], ['box', 'Montagem']];
+  CAT = [['Luminária Arco', 'R$ 289', '#E2E2E2', '50% 50% 8% 8%'], ['Vaso Duna', 'R$ 119', '#CFCFCF', '40% 40% 30% 30%'], ['Manta Linho', 'R$ 159', '#D9D9D9', '6%'], ['Jogo Americano', 'R$ 89', '#C4C4C4', '50%'], ['Pendente Globo', 'R$ 349', '#D4D4D4', '50%'], ['Vaso Seixo', 'R$ 99', '#E6E6E6', '45% 45% 40% 40%'], ['Almofada Trama', 'R$ 79', '#BEBEBE', '18%'], ['Bandeja Oval', 'R$ 139', '#DDDDDD', '50% / 30%']];
+  ADS_PATHS = [
+    [['target', 'Anúncio', 'Google, Instagram ou Facebook'], ['monitor', 'Página de serviços', 'Conhece sua empresa'], ['inbox', 'Pedido de orçamento', 'Chega à sua equipe']],
+    [['target', 'Anúncio', 'Google, Instagram ou Facebook'], ['social-whatsapp', 'Conversa iniciada', 'Já com interesse'], ['users', 'Atendimento', 'Sua equipe responde']],
+    [['target', 'Anúncio', 'Google, Instagram ou Facebook'], ['compass', 'Mapa e rota', 'Endereço e horário'], ['store', 'Visita à loja', 'Atendimento presencial']]
+  ];
+  FLOW_DONE = 'Tudo conectado: a empresa inteira trabalha com as mesmas informações.';
+  FLOW = [
+    { label: 'Site', icon: 'globe', x: 15, y: 18, cap: 'O cliente encontra sua empresa no site e pede um orçamento.' },
+    { label: 'Atendimento', icon: 'message-square', x: 15, y: 82, cap: 'A mensagem é respondida na hora e o contato fica registrado.' },
+    { label: 'Vendas', icon: 'shopping-cart', x: 85, y: 82, cap: 'A proposta vira venda, com o histórico do cliente à mão.' },
+    { label: 'Gestão', icon: 'trending-up', x: 85, y: 18, cap: 'Financeiro, estoque e resultados atualizados automaticamente.' }
+  ];
+  SEGMENTS = [
+    { slot: 'seg-clinicas', icon: 'heart-pulse', title: 'Clínicas e Saúde', desc: 'Mais organização, atendimento e controle de pacientes.', intro: 'Agenda, atendimento e informações dos pacientes organizados, com menos tempo gasto ao telefone.', apps: ['Agendamento online com lembretes automáticos', 'Confirmação de consultas por mensagem', 'Cadastro e histórico de pacientes', 'Controle financeiro da clínica'], benefits: ['Agenda organizada', 'Atendimento mais rápido', 'Financeiro claro'] },
+    { slot: 'seg-imobiliarias', icon: 'building-2', title: 'Imobiliárias', desc: 'Gestão de imóveis, contatos e oportunidades.', intro: 'Imóveis, interessados e visitas em um só lugar, com resposta rápida para cada contato.', apps: ['Site com vitrine de imóveis e filtros', 'Captação e distribuição de contatos', 'Agenda de visitas', 'Acompanhamento de propostas'], benefits: ['Nenhum contato perdido', 'Visitas organizadas', 'Propostas sob controle'] },
+    { slot: 'seg-comercios', icon: 'store', title: 'Comércios', desc: 'Controle de vendas, estoque e resultados.', intro: 'Vendas, estoque e caixa conectados para você saber o que vende, o que falta e quanto sobra.', apps: ['Loja ou catálogo online', 'Estoque atualizado a cada venda', 'Atendimento automático para pedidos', 'Relatórios de vendas'], benefits: ['Estoque sem surpresas', 'Pedidos mais rápidos', 'Resultados visíveis'] },
+    { slot: 'seg-servicos', icon: 'wrench', title: 'Prestadores de Serviços', desc: 'Orçamentos, agenda e clientes.', intro: 'Orçamentos, agenda e cobranças padronizados para atender mais clientes com menos retrabalho.', apps: ['Orçamentos padronizados', 'Agenda de serviços', 'Cobranças e lembretes', 'Histórico por cliente'], benefits: ['Menos retrabalho', 'Agenda cheia e organizada', 'Recebimentos em dia'] }
+  ];
+  PILOTO = [
+    { title: 'Projeto', icon: 'target', desc: 'Entendemos seu negócio e seus desafios.', cube: 'Projeto cria o núcleo.' },
+    { title: 'Interface', icon: 'monitor', desc: 'Desenhamos a melhor experiência para sua operação.', cube: 'Interface acrescenta as faces.' },
+    { title: 'Lógica', icon: 'code', desc: 'Definimos como tudo deve funcionar.', cube: 'Lógica conecta os elementos.' },
+    { title: 'Organização', icon: 'layers', desc: 'Conectamos informações e processos.', cube: 'Organização encaixa os módulos.' },
+    { title: 'Tirar do papel', icon: 'rocket', desc: 'Construímos e colocamos a solução em prática.', cube: 'Tirar do papel completa o cubo.' },
+    { title: 'Operar', icon: 'activity', desc: 'Acompanhamos, otimizamos e evoluímos.', cube: 'Operar ilumina a marca C3.' }
+  ];
+  AGENTS = [
+    { img: 'assets/max.png', name: 'MAX', role: 'Inteligência Estratégica', verbs: ['Analisar', 'Planejar', 'Orientar'], desc: 'Identifica necessidades e estrutura soluções.', mission: 'Analisar, planejar e orientar.', resp: ['Entender o contexto e os objetivos da empresa', 'Identificar necessidades e prioridades', 'Estruturar soluções e próximos passos'], apps: [['Análise do diagnóstico', 'Planejado'], ['Plano de soluções por prioridade', 'Planejado'], ['Orientação estratégica contínua', 'Planejado']] },
+    { img: 'assets/clara.png', name: 'CLARA', role: 'Inteligência Comercial', verbs: ['Atender', 'Qualificar', 'Converter'], desc: 'Responsável por leads, clientes, relacionamento e oportunidades.', mission: 'Atender, qualificar e converter.', resp: ['Atender e qualificar novos contatos', 'Cuidar do relacionamento com clientes', 'Transformar conversas em oportunidades'], apps: [['Diagnóstico guiado neste site', 'Funcional nesta prévia'], ['Atendimento por WhatsApp', 'Planejado'], ['Registro de leads e oportunidades', 'Planejado']] },
+    { img: 'assets/core.png', name: 'CORE', role: 'Inteligência de Desenvolvimento', verbs: ['Criar', 'Conectar', 'Evoluir'], desc: 'Agente que apoia sistemas, integrações e automações.', mission: 'Criar, conectar e evoluir.', resp: ['Apoiar a criação de sistemas e sites', 'Conectar ferramentas e integrações', 'Manter e evoluir automações'], apps: [['Apoio a integrações entre sistemas', 'Planejado'], ['Monitoramento de automações', 'Planejado'], ['Sugestões de melhoria contínua', 'Planejado']] }
+  ];
+  CHALLENGES = ['Perco oportunidades de venda', 'Não consigo visualizar bem meus gastos', 'Minha equipe perde tempo com tarefas repetitivas', 'Minha empresa precisa de mais organização e controle', 'Ainda não sei, quero orientação'];
+  SEGS = ['Clínicas e Saúde', 'Imobiliárias', 'Comércios', 'Prestadores de Serviços', 'Outro segmento'];
+  SIZES = ['Só eu', '2 a 9 pessoas', '10 a 49 pessoas', '50 ou mais'];
+  COND = [
+    { q1: 'Por onde chegam seus clientes hoje?', o1: ['WhatsApp', 'Instagram', 'Indicação', 'Site', 'Telefone'], q2: 'Sua empresa tem site?', o2: ['Não tenho', 'Tenho, mas está desatualizado', 'Sim, atualizado'] },
+    { q1: 'Onde você controla o financeiro hoje?', o1: ['Planilha', 'Caderno', 'Algum sistema', 'Não controlo'], q2: 'Você trabalha com estoque?', o2: ['Sim', 'Não'] },
+    { q1: 'Quais tarefas tomam mais tempo?', o1: ['Responder mensagens', 'Agendamentos', 'Orçamentos', 'Cadastro de clientes', 'Cobranças'], q2: 'Quantas mensagens recebem por dia?', o2: ['Até 20', '20 a 100', 'Mais de 100'] },
+    { q1: 'Quais informações faltam para decidir?', o1: ['Vendas', 'Despesas', 'Clientes', 'Estoque', 'Desempenho da equipe'], q2: 'Onde ficam os dados hoje?', o2: ['Planilhas', 'Vários sistemas', 'Papel', 'Na cabeça do dono'] },
+    { q1: 'O que mais incomoda hoje?', o1: ['Atendimento lento', 'Poucos clientes novos', 'Desorganização', 'Retrabalho'], q2: 'Já usa algum sistema?', o2: ['Sim', 'Não', 'Não sei'] }
+  ];
+  SOL = {
+    site: ['Sites profissionais', 'Um site que apresenta sua marca e facilita pedidos de orçamento.'],
+    ads: ['Anúncios e tráfego pago', 'Campanhas no Google, Instagram e Facebook para alcançar pessoas interessadas.'],
+    auto: ['Atendimento e tarefas no automático', 'Respostas, agendamentos e cadastros sem trabalho manual.'],
+    gest: ['Sua empresa organizada em um só sistema', 'Clientes, vendas, estoque e financeiro no mesmo lugar.'],
+    talk: ['Conversa de diagnóstico com especialista', 'Um primeiro encontro para mapear sua operação e prioridades.']
+  };
+
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onResize = () => { this.setState({ isMobile: window.innerWidth < 820, vw: window.innerWidth, vh: window.innerHeight }); setTimeout(() => this.ensureObservers(), 60); };
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    this.onScroll = () => { if (this.tick) return; this.tick = requestAnimationFrame(() => { this.tick = null; this.handleScroll(); }); };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.handleScroll();
+    if (!this.reduce) this.flowTimer = setInterval(() => { if (this.opVisible && !this.state.flowPaused && !document.hidden) this.setState(s => ({ flowStep: (s.flowStep + 1) % 5 })); }, 2000);
+    this.ensureObservers();
+    this.obsT = setTimeout(() => this.ensureObservers(), 400);
+    if (this.reduce) this.setStatText(1);
+  }
+  componentDidUpdate() { this.ensureObservers(); }
+  ensureObservers() {
+    if (!('IntersectionObserver' in window)) { this.opVisible = true; this.setStatText(1); return; }
+    if (!this.opIO && this.opRef.current) {
+      this.opIO = new IntersectionObserver(es => { this.opVisible = es[0].isIntersecting; }, { threshold: 0.2 });
+      this.opIO.observe(this.opRef.current);
+    }
+    const pl = this.pilotoListRef.current;
+    if (pl !== this.pEl) { if (this.pIO) this.pIO.disconnect(); this.pIO = null; this.pEl = pl; }
+    if (pl && !this.pIO) {
+      const items = pl.querySelectorAll('[data-pidx]');
+      if (items.length) {
+        this.pIO = new IntersectionObserver(es => {
+          const add = es.filter(e => e.isIntersecting).map(e => Number(e.target.dataset.pidx)).filter(i => !this.state.pSeen.includes(i));
+          if (add.length) this.setState(s => ({ pSeen: [...new Set([...s.pSeen, ...add])] }));
+        }, { threshold: 0.2 });
+        items.forEach(n => this.pIO.observe(n));
+      }
+    }
+    if (!this.statIO && this.statsRef.current) {
+      this.armed = true;
+      this.statIO = new IntersectionObserver(es => es.forEach(e => {
+        if (this.reduce) return this.setStatText(1);
+        if (e.intersectionRatio >= 0.35 && this.armed) { this.armed = false; this.countUp(); }
+        else if (!e.isIntersecting) { this.armed = true; cancelAnimationFrame(this.cuRaf); this.setStatText(0); }
+      }), { threshold: [0, 0.35] });
+      this.statIO.observe(this.statsRef.current);
+    }
+  }
+  setStatText(k) { this.STATS.forEach((s, i) => { const el = this.statRefs[i].current; if (el) el.textContent = String(Math.round(s.n * k)); }); }
+  countUp() {
+    cancelAnimationFrame(this.cuRaf);
+    const t0 = performance.now(), D = 800;
+    const step = now => { const p = Math.min(1, (now - t0) / D); this.setStatText(1 - Math.pow(1 - p, 3)); if (p < 1) this.cuRaf = requestAnimationFrame(step); };
+    this.setStatText(0);
+    this.cuRaf = requestAnimationFrame(step);
+    clearTimeout(this.cuT); this.cuT = setTimeout(() => { if (!this.armed) this.setStatText(1); }, D + 120);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll);
+    clearInterval(this.flowTimer); clearTimeout(this.toastT); clearTimeout(this.focusT); (this.autoT || []).forEach(clearTimeout);
+    cancelAnimationFrame(this.cuRaf); [this.opIO, this.statIO, this.pIO].forEach(o => o && o.disconnect());
+  }
+  handleScroll() {
+    this.ensureObservers();
+    const y = window.scrollY;
+    if (this.heroParallax.current && !this.reduce && y < 1000) this.heroParallax.current.style.transform = `translateY(${(Math.min(y, 700) * 0.06).toFixed(1)}px)`;
+    const el = this.pilotoRef.current;
+    if (el && !this.state.isMobile) {
+      const r = el.getBoundingClientRect(), range = r.height - window.innerHeight;
+      const p = Math.max(0, Math.min(0.999, (64 - r.top) / Math.max(1, range)));
+      const step = Math.floor(p * 6);
+      if (step !== this.state.piloto) this.setState({ piloto: step });
+    }
+    const ids = ['solucoes', 'segmentos', 'metodo', 'agentes', 'operacao'];
+    let active = '';
+    ids.forEach(id => { const s = document.getElementById(id); if (s) { const r = s.getBoundingClientRect(); if (r.top < 140 && r.bottom > 140) active = id; } });
+    if (active !== this.state.navActive) this.setState({ navActive: active });
+  }
+  scrollToId(id, offset = 64) {
+    const el = document.getElementById(id); if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  goPiloto(i) {
+    const el = this.pilotoRef.current; if (!el) return;
+    const range = el.offsetHeight - window.innerHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - 64 + range * ((i + 0.5) / 6);
+    window.scrollTo({ top, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  openDiag(pre = {}, step = 0) {
+    this.setState(s => ({ diagOpen: true, dDone: false, dErr: '', dStep: step, menuOpen: false, d: { ...s.d, ...pre } }));
+    setTimeout(() => this.scrollToId(this.state.isMobile ? 'diagnostico-form' : 'diagnostico', this.state.isMobile ? 76 : 64), 40);
+    clearTimeout(this.focusT);
+    this.focusT = setTimeout(() => {
+      const root = this.formRef.current; if (!root) return;
+      const el = root.querySelector('[data-first] button, [data-first] input') || root.querySelector('button');
+      el && el.focus({ preventScroll: true });
+    }, this.reduce ? 80 : 750);
+  }
+  showToast(msg) {
+    clearTimeout(this.toastT);
+    this.setState({ toast: msg });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 6000);
+  }
+  setD(patch) { this.setState(s => ({ d: { ...s.d, ...patch }, dErr: '' })); }
+  simulateAuto() {
+    if (this.state.autoRunning) return;
+    (this.autoT || []).forEach(clearTimeout);
+    this.setState({ autoStep: 0, autoRunning: true });
+    this.autoT = [1, 2, 3].map(i => setTimeout(() => this.setState({ autoStep: i }), i * (this.reduce ? 150 : 800)));
+    this.autoT.push(setTimeout(() => this.setState({ autoRunning: false }), 3 * (this.reduce ? 150 : 800) + 200));
+  }
+  rec(d) {
+    const items = [];
+    const add = (k, tag) => items.push({ title: this.SOL[k][0], why: this.SOL[k][1], tag });
+    const c = d.challenge, big = d.size >= 2;
+    const forced = d.intent && d.intentChal === c ? d.intent : null;
+    if (forced) { add(forced, 'Prioridade'); add({ site: 'ads', ads: 'site', auto: 'gest', gest: 'auto' }[forced], 'Complemento'); }
+    else if (c === 0) { if (d.q2 === 'Sim, atualizado') { add('auto', 'Prioridade'); add('site', 'Complemento'); } else { add('site', 'Prioridade'); add('auto', 'Complemento'); } }
+    else if (c === 1) { add('gest', 'Prioridade'); if (d.q2 === 'Sim') items[0].why = 'Financeiro e estoque conectados, com relatórios simples.'; }
+    else if (c === 2) { add('auto', 'Prioridade'); if (big) add('gest', 'Complemento'); }
+    else if (c === 3) { add('gest', 'Prioridade'); add('auto', 'Complemento'); }
+    else { add('talk', 'Prioridade'); }
+    if (big && c !== 2 && c !== 3 && c !== 4) items.push({ title: 'Integração entre setores', why: 'Com uma equipe maior, conectar as áreas evita retrabalho.', tag: 'A considerar' });
+    const seg = this.SEGMENTS[d.segment];
+    return {
+      items: items.map((it, i) => ({ ...it, bg: i === 0 ? '#FFFFFF' : 'transparent', fg: i === 0 ? '#000000' : '#FFFFFF' })),
+      segApp: seg ? `${seg.apps[0]} (${seg.title}).` : 'Definida na conversa inicial, conforme o seu segmento.',
+      next: 'Etapa Projeto do Método PILOTO: uma conversa para entender sua operação e definir escopo e prazo.'
+    };
+  }
+  validate(step, d) {
+    if (step === 0 && d.challenge === null) return 'Escolha o principal desafio para continuar.';
+    if (step === 1 && (d.segment === null || d.size === null)) return 'Informe o segmento e o tamanho da equipe.';
+    if (step === 2 && (!d.q1.length || d.q2 === null)) return 'Responda as duas perguntas para continuar.';
+    if (step === 4) {
+      if (d.name.trim().length < 2) return 'Informe seu nome.';
+      const digits = d.phone.replace(/\D/g, ''), hasPhone = digits.length > 0, hasEmail = d.email.trim().length > 0;
+      if (!hasPhone && !hasEmail) return 'Informe um telefone ou e-mail para contato.';
+      if (hasPhone && (digits.length < 10 || digits.length > 13)) return 'Confira o telefone: use DDD + número.';
+      if (hasEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) return 'Confira o e-mail informado.';
+      if (d.pref === 'WhatsApp' && !hasPhone) return 'Para contato por WhatsApp, informe um telefone.';
+      if (d.pref === 'E-mail' && !hasEmail) return 'Para contato por e-mail, informe o e-mail.';
+      if (!d.consent) return 'Confirme a autorização de contato.';
+    }
+    return '';
+  }
+
+  renderVals() {
+    const S = this.state, I = this.I, d = S.d, isMobile = S.isMobile;
+    const opt = sel => ({ bg: sel ? '#FFFFFF' : 'transparent', fg: sel ? '#000000' : '#FFFFFF', bd: sel ? '#FFFFFF' : 'rgba(255,255,255,0.3)', sel });
+    const nav = [['Soluções', 'solucoes'], ['Segmentos', 'segmentos'], ['Método PILOTO', 'metodo'], ['Agentes', 'agentes'], ['Sobre', 'operacao']];
+    const navLinks = nav.map(([label, id]) => ({ label, href: '#' + id, color: S.navActive === id ? '#FFFFFF' : '#D1D1D1', line: S.navActive === id ? '#FFFFFF' : 'transparent', onClick: () => this.setState({ menuOpen: false }) }));
+    const pending = msg => () => this.showToast(msg);
+
+    const probCols = S.vw >= 1200 ? 'repeat(4,minmax(0,1fr))' : S.vw >= 640 ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)';
+    const probRows = S.vw >= 640 ? '1fr' : 'auto';
+    const pcard = i => {
+      const on = S.problem === i, act = (on || S.probHover === i) && !this.reduce;
+      const A = s => act ? s : 'none';
+      return {
+        pressed: on,
+        bg: on ? '#000000' : 'linear-gradient(160deg,#FFFFFF 40%,#D1D1D1 220%)', fg: on ? '#FFFFFF' : '#000000', bd: on ? '#000000' : '#D1D1D1',
+        dim: on ? '#D1D1D1' : '#6B6B6B', line: on ? 'rgba(255,255,255,0.26)' : '#D1D1D1', scene: on ? 'rgba(255,255,255,0.05)' : '#FFFFFF',
+        chip: on ? 'rgba(255,255,255,0.08)' : '#F5F5F5', chipBd: on ? 'rgba(255,255,255,0.16)' : '#E4E4E4', dashc: on ? 'rgba(255,255,255,0.45)' : '#9A9A9A', barc: on ? 'rgba(255,255,255,0.75)' : '#6B6B6B', inner: on ? 'inset 0 1px 0 rgba(255,255,255,0.06)' : 'inset 0 1px 0 #FFFFFF',
+        filter: on ? 'invert(1)' : 'none', shadow: on ? '0 18px 36px rgba(0,0,0,0.22)' : '0 10px 24px rgba(0,0,0,0.05)',
+        onClick: () => this.setState({ problem: i }),
+        onEnter: () => { if (this.state.probHover !== i) this.setState({ probHover: i }); },
+        onLeave: () => { if (this.state.probHover === i) this.setState({ probHover: -1 }); },
+        a1: A('c3inOnce .45s ease both'), a2: A('c3inOnce .45s ease .18s both'), a3: A('c3inOnce .45s ease .36s both'),
+        b1: A('c3cyc 5.1s linear infinite'), b2: A('c3cyc 5.1s linear 1.7s infinite'), b3: A('c3cyc 5.1s linear 3.4s infinite'),
+        bl: A('c3blink 1.3s ease-in-out 6'),
+        p1: A('c3popOnce .45s ease both'), p2: A('c3popOnce .45s ease .15s both'), p3: A('c3popOnce .45s ease .3s both'), p4: A('c3popOnce .45s ease .45s both'),
+        d1: A('c3dash .7s linear infinite'),
+        g1: A('c3barOnce .5s ease both'), g2: A('c3barOnce .5s ease .1s both'), g3: A('c3barOnce .5s ease .2s both'), g4: A('c3barOnce .5s ease .3s both'),
+                w1: A('c3wob 1.5s ease-in-out 2'), w2: A('c3wob 1.5s ease-in-out .2s 2'), w3: A('c3wob 1.5s ease-in-out .4s 2'), w4: A('c3wob 1.5s ease-in-out .6s 2')
+      };
+    };
+    const ADS_DEST = [
+      { label: 'Site', icon: 'monitor', t: 'Página de serviços', s: 'A pessoa conhece sua empresa e pede orçamento pelo site.', m: 'as visitas ao site' },
+      { label: 'WhatsApp', icon: 'social-whatsapp', t: 'Conversa no WhatsApp', s: 'A pessoa inicia a conversa já interessada no que você oferece.', m: 'as conversas iniciadas' },
+      { label: 'Loja física', icon: 'store', t: 'Rota até a loja', s: 'A pessoa recebe o endereço e o caminho até o seu estabelecimento.', m: 'os pedidos de rota' }
+    ];
+    const adsDests = ADS_DEST.map((a, i) => { const on = S.adsDest === i; return { label: a.label, icon: I(a.icon), pressed: on, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#000000' : '#FFFFFF', bd: on ? '#FFFFFF' : 'rgba(255,255,255,0.3)', filter: on ? 'none' : 'invert(1)', onClick: () => this.setState({ adsDest: i }) }; });
+    const adsDest = { ...ADS_DEST[S.adsDest], icon: I(ADS_DEST[S.adsDest].icon) };
+    const P = this.PROBLEMS[S.problem];
+    const m = this.MODULES[S.solTab];
+    const mod = { label: m.label, desc: m.desc, kpis: m.kpis.map(([v, l]) => ({ v, l })), rows: (m.rows || []).map(([a, b, c]) => ({ a, b, c })), hasRows: !!m.rows, hasBars: !!m.bars, bars: (m.bars || []).map(([h, mm]) => ({ h, m: mm })) };
+    const solTabs = this.MODULES.map((t, i) => { const on = S.solTab === i; return { label: t.label, icon: I(t.icon), selected: on, bg: on ? '#FFFFFF' : 'rgba(255,255,255,0.04)', fg: on ? '#000000' : '#FFFFFF', bd: on ? '#FFFFFF' : 'rgba(255,255,255,0.14)', filter: on ? 'none' : 'invert(1)', onClick: () => this.setState({ solTab: i }) }; });
+    const autoSteps = this.AUTO.map(([icon, label, sub], i) => { const on = i <= S.autoStep; return { icon: I(icon), label, sub, sub2: on ? '#D1D1D1' : '#6B6B6B', bg: on ? '#000000' : '#FFFFFF', fg: on ? '#FFFFFF' : '#000000', bd: on ? '#000000' : '#D1D1D1', filter: on ? 'invert(1)' : 'none', checkOp: on ? 1 : 0 }; });
+    const siteCats = this.SITE_CATS.map(([label, icon], i) => { const on = S.siteCat === i; return { label, icon: I(icon), pressed: on, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#000000' : '#FFFFFF', bd: on ? '#FFFFFF' : 'transparent', filter: on ? 'none' : 'invert(1)', onClick: () => this.setState({ siteCat: i }) }; });
+    const svcItems = this.SVC.map(([icon, t]) => ({ icon: I(icon), t }));
+    const catItems = this.CAT.map(([n, p, tone, shape]) => ({ n, p, tone, shape }));
+    const solAdsDests = [['Site', 'monitor'], ['WhatsApp', 'social-whatsapp'], ['Loja física', 'store']].map(([label, icon], i) => { const on = S.solAds === i; return { label, icon: I(icon), pressed: on, bg: on ? '#000000' : '#FFFFFF', fg: on ? '#FFFFFF' : '#000000', bd: on ? '#000000' : '#D1D1D1', filter: on ? 'invert(1)' : 'none', onClick: () => this.setState({ solAds: i }) }; });
+    const adsNodes = this.ADS_PATHS[S.solAds].map(([icon, t, s], i) => ({ icon: I(icon), t, s, bg: i === 2 ? '#000000' : '#FFFFFF', filter: i === 2 ? 'invert(1)' : 'none', line: i < 2 ? '#000000' : 'transparent' }));
+    const ast = S.autoStep;
+
+    const F = this.FLOW[S.flowStep] || { x: 50, y: 50, cap: this.FLOW_DONE };
+    const fs = S.flowStep, allLit = fs === 4;
+    const flowNodes = this.FLOW.map((f, i) => { const on = fs === i || allLit, done = i < fs; return { label: f.label, icon: I(f.icon), x: f.x, y: f.y, active: fs === i, bg: on ? 'rgba(255,255,255,0.14)' : 'rgba(26,26,26,0.85)', bd: on ? '#FFFFFF' : done ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.28)', glow: fs === i ? '0 0 22px rgba(255,255,255,0.28)' : 'none', onClick: () => this.setState({ flowStep: i, flowPaused: true }) }; });
+    const flowSegs = [0, 1, 2].map(k => { const p = this.FLOW[k], q = this.FLOW[k + 1], lit = fs > k; return { x1: p.x, y1: p.y, x2: q.x, y2: q.y, op: lit ? 0.9 : 0.2, w: lit ? 1.6 : 1 }; });
+    const flowSpokes = this.FLOW.map((f, i) => ({ x: f.x, y: f.y, op: allLit ? 0.65 : (i === 3 && fs === 3 ? 0.3 : 0.1) }));
+
+    const segments = this.SEGMENTS.map((s, i) => { const on = S.segment === i; return { slot: s.slot, img: s.img || '', hasImg: !!s.img, noImg: !s.img, icon: I(s.icon), title: s.title, desc: s.desc, btn: on ? 'Selecionado' : 'Ver aplicações', pressed: on, bd: on ? '#000000' : 'transparent', shadow: on ? '0 0 0 3px #D1D1D1, 0 18px 36px rgba(0,0,0,0.2)' : '0 10px 24px rgba(0,0,0,0.12)', arrowBg: on ? '#FFFFFF' : 'transparent', arrowFg: on ? '#000000' : '#FFFFFF', onClick: () => this.setState({ segment: i }) }; });
+    const SG = this.SEGMENTS[S.segment];
+    const seg = { ...SG, cta: `Diagnóstico para ${SG.title}`, onCta: () => this.openDiag({ segment: S.segment }, d.challenge === null ? 0 : 1) };
+
+    const pc = { ...this.PILOTO[S.piloto], letter: 'PILOTO'[S.piloto] };
+    const pilotoSteps = this.PILOTO.map((p, i) => { const on = i === S.piloto, done = i < S.piloto; return { title: p.title, letter: 'PILOTO'[i], current: on ? 'step' : 'false', bg: on ? 'rgba(255,255,255,0.10)' : 'rgba(26,26,26,0.6)', bd: on ? '#FFFFFF' : done ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.14)', fill: on || done ? 100 : 0, lc: on || done ? '#FFFFFF' : '#6B6B6B', tc: on ? '#FFFFFF' : '#D1D1D1', onClick: () => this.goPiloto(i) }; });
+    const pilotoLetters = 'PILOTO'.split('').map((ch, i) => ({ ch, color: i === S.piloto ? '#FFFFFF' : '#6B6B6B', glow: i === S.piloto ? '0 0 24px rgba(255,255,255,0.45)' : 'none' }));
+    const noIO = typeof window === 'undefined' || !('IntersectionObserver' in window) || this.reduce;
+    const pilotoMobile = this.PILOTO.map((p, i) => { const seen = noIO || S.pSeen.includes(i); return { i, num: `0${i + 1}`, letter: 'PILOTO'[i], title: p.title, desc: p.desc, prog: i + 1, last: i === 5, notLast: i < 5, op: seen ? 1 : 0, ty: seen ? 0 : 16 }; });
+
+    const agents = this.AGENTS.map((a, i) => { const on = S.agent === i; return { ...a, alt: `${a.name}, ${a.role}`, pressed: on, bd: on ? '#000000' : '#D1D1D1', shadow: on ? '0 18px 36px rgba(0,0,0,0.16)' : 'none', onClick: () => this.setState({ agent: i }) }; });
+    const A = this.AGENTS[S.agent];
+    const agent = { ...A, alt: `${A.name}, ${A.role}`, apps: A.apps.map(([label, status]) => { const f = status !== 'Planejado'; return { label, status, tagBg: f ? '#FFFFFF' : 'transparent', tagFg: f ? '#000000' : '#D1D1D1', tagBd: f ? '#FFFFFF' : '#6B6B6B' }; }) };
+
+    const cond = this.COND[d.challenge ?? 0];
+    const stepNames = ['Desafio', 'Empresa', 'Perguntas', 'Direcionamento', 'Contato'];
+    const titles = ['Qual é o principal desafio do seu negócio hoje?', 'Conte sobre a sua empresa.', 'Algumas perguntas rápidas.', 'Seu direcionamento inicial', 'Para onde enviamos o retorno?'];
+    const R = this.rec(d);
+    const segName = d.segment !== null ? this.SEGS[d.segment] : '—';
+    const dSummary = [
+      { k: 'Desafio', v: d.challenge !== null ? this.CHALLENGES[d.challenge] : '—' },
+      { k: 'Segmento', v: segName },
+      { k: 'Equipe', v: d.size !== null ? this.SIZES[d.size] : '—' },
+      { k: cond.q1, v: d.q1.join(', ') || '—' },
+      { k: cond.q2, v: d.q2 || '—' },
+      { k: 'Direcionamento', v: R.items.map(i => i.title).join(' + ') },
+      { k: 'Contato', v: [d.name, d.company, d.phone, d.email].filter(Boolean).join(' · ') + ` (prefere ${d.pref})` }
+    ];
+    const dNext = () => {
+      const err = this.validate(S.dStep, d);
+      if (err) return this.setState({ dErr: err });
+      if (S.dStep === 4) return this.setState({ dDone: true, dErr: '' });
+      this.setState({ dStep: S.dStep + 1, dErr: '' });
+    };
+    const field = k => e => this.setD({ [k]: e.target.value });
+    const toastShow = !!S.toast;
+
+    return {
+      isMobile, notMobile: !isMobile, menuOpen: S.menuOpen, menuLabel: S.menuOpen ? 'Fechar menu' : 'Abrir menu', menuVisible: isMobile && S.menuOpen, menuClosed: !S.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      navLinks, openDiagTop: () => S.dDone ? this.scrollToId('diagnostico') : this.openDiag({}, S.dStep),
+      whatsClick: pending('O número oficial de WhatsApp ainda não foi informado nesta prévia. Enquanto isso, faça o diagnóstico com a Clara.'),
+      emailClick: pending('O e-mail oficial ainda não foi informado nesta prévia. Enquanto isso, faça o diagnóstico com a Clara.'),
+      legalClick: pending('Documento legal pendente: será publicado com o site oficial.'),
+      heroH: isMobile ? Math.round(Math.min(S.vw - 40, 560) * 0.86 * 420 / 560) : 500,
+      heroScale: isMobile ? Math.min(S.vw - 40, 560) * 0.86 / 560 : 1,
+      heroTop: isMobile ? -Math.round(Math.min(S.vw - 40, 560) * 0.86 / 560 * 30) : 0,
+      heroParallax: this.heroParallax,
+      services: [
+        { icon: I('monitor'), title: 'Presença Digital', desc: 'Mais visibilidade e clientes.', href: '#sol-sites' },
+        { icon: I('layers'), title: 'Gestão da Empresa', desc: 'Organização e controle total.', href: '#sol-gestao' },
+        { icon: I('zap'), title: 'Automação Inteligente', desc: 'Menos tarefas, mais resultados.', href: '#sol-auto' },
+        { icon: I('headphones'), title: 'Suporte Contínuo', desc: 'Acompanhamento próximo.', href: '#metodo' }
+      ],
+      pA: pcard(0), pE: pcard(1), pB: pcard(2), pD: pcard(3), probCols, probRows, adsDests, adsDest, problemSol: { title: P.sol, text: P.text, cta: P.cta, benefits: this.PROB_BEN[S.problem], chips: P.chips.map(([label, icon, href]) => ({ label, icon: I(icon), href })) },
+      probV0: S.problem === 0, probV1: S.problem === 1, probV2: S.problem === 2, probV3: S.problem === 3,
+      leadRows: [
+        { icon: I('message-square'), t: 'Nova mensagem', s: 'Cliente A · agora', tag: 'Respondida', bg: '#FFFFFF', fg: '#000000' },
+        { icon: I('globe'), t: 'Pedido de orçamento', s: 'Site · há 2 min', tag: 'Registrado', bg: 'transparent', fg: '#FFFFFF' },
+        { icon: I('bell'), t: 'Equipe avisada', s: 'Vendas · há 3 min', tag: 'Em andamento', bg: 'transparent', fg: '#FFFFFF' }
+      ],
+      autoSeq: [['file-text', 'Orçamento criado em formulário digital', 'digital'], ['send', 'Enviado ao cliente', 'automático'], ['list-checks', 'Etapas acompanhadas pela equipe', 'organizado'], ['bell', 'Lembrete de retorno programado', 'automático']].map(([ic, t, s], i) => ({ icon: I(ic), t, s, bg: i === 0 ? '#FFFFFF' : 'transparent', filter: i === 0 ? 'none' : 'invert(1)', line: i === 3 ? 'transparent' : 'rgba(255,255,255,0.25)' })),
+      hubMods: this.MODULES.map(m => ({ label: m.label, icon: I(m.icon) })),
+      continueProblem: () => this.openDiag({ challenge: P.chal, intent: ['site', 'ads', 'auto', 'gest'][S.problem], intentChal: P.chal, q1: d.challenge === P.chal ? d.q1 : [], q2: d.challenge === P.chal ? d.q2 : null }, 1),
+      siteCats, siteC0: S.siteCat === 0, siteC1: S.siteCat === 1, siteC2: S.siteCat === 2, siteNote: this.SITE_CATS[S.siteCat][2], svcItems, svcPhone: svcItems.slice(0, 3), catItems, catPhone: catItems.slice(0, 4), solAdsDests, adsNodes,
+      chatOp1: ast >= 0 ? 1 : 0.35, chatOp2: ast >= 1 ? 1 : 0, chatOp3: ast >= 2 ? 1 : 0, autoProgress: `${Math.max(0, ast + 1)}/4`,
+      gestOpen: S.gestOpen, toggleGest: () => this.setState(s => ({ gestOpen: !s.gestOpen })), gestToggleLabel: S.gestOpen ? 'Ocultar detalhes' : 'Ver detalhes do módulo', gestIcon: I(S.gestOpen ? 'minus' : 'plus'),
+      diagSite: () => this.openDiag({ challenge: 0, intent: 'site', intentChal: 0, q1: [], q2: null }, 1),
+      diagAds: () => this.openDiag({ challenge: 0, intent: 'ads', intentChal: 0, q1: [], q2: null }, 1),
+      diagAuto: () => this.openDiag({ challenge: 2, intent: 'auto', intentChal: 2, q1: [], q2: null }, 1),
+      solTabs, mod, autoSteps, simulateAuto: () => this.simulateAuto(), autoLabel: S.autoStep >= 3 && !S.autoRunning ? 'Simular de novo' : 'Simular atendimento',
+      diagGestao: () => this.openDiag({ challenge: 3, intent: 'gest', intentChal: 3, q1: [], q2: null }, 1),
+      opRef: this.opRef, statsRef: this.statsRef, formRef: this.formRef, pilotoListRef: this.pilotoListRef,
+      flowNodes, flowSegs, flowSpokes, dotX: F.x, dotY: F.y, flowCaption: F.cap, flowNum: `0${fs + 1}`,
+      flowLit: allLit, flowLight: allLit ? 1 : 0.35, flowHalo: allLit ? 0.16 : 0.05, flowPaused: S.flowPaused,
+      flowResume: () => this.setState({ flowPaused: false }),
+      benefits: [
+        { t: 'Tudo conectado. Nada perdido.', d: 'As informações acompanham o cliente.' },
+        { t: 'Menos tarefas. Mais tempo para crescer.', d: 'Automatize atividades repetitivas.' },
+        { t: 'Saiba o que acontece na sua empresa.', d: 'Acompanhe vendas, despesas e resultados.' },
+        { t: 'Cresça sem começar tudo de novo.', d: 'Amplie suas soluções conforme sua evolução.' }
+      ],
+      stats: this.STATS.map((s, i) => ({ ...s, ref: this.statRefs[i], init: (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? s.n : 0 })),
+      segOther: () => this.openDiag({ segment: 4 }, d.challenge === null ? 0 : 1),
+      segments, seg,
+      pilotoRef: this.pilotoRef, pilotoHeight: isMobile ? 'auto' : '350vh', pilotoProgress: S.piloto + 1, pilotoNum: `0${S.piloto + 1}`,
+      pilotoCube: S.vh && S.vh < 720 ? 170 : 220, pilotoGlow: 440, pilotoGlowOp: S.piloto === 5 ? 0.2 : 0.07,
+      pilotoCur: pc, pilotoSteps, pilotoLetters, pilotoMobile, pilotoMobileCta: () => this.openDiag({}, 0),
+      pilotoBtnLabel: S.piloto === 5 ? 'Solicitar diagnóstico' : S.piloto === 0 ? 'Conhecer o método' : 'Próxima etapa',
+      pilotoBtn: () => S.piloto === 5 ? this.openDiag({}, 0) : this.goPiloto(S.piloto + 1),
+      agents, agent,
+      diagFacts: [{ icon: I('zap'), t: 'Leva menos de 2 minutos.' }, { icon: I('list-checks'), t: 'Cinco etapas, com perguntas adaptadas ao seu desafio.' }, { icon: I('shield-check'), t: 'Nesta prévia, nenhum dado é enviado.' }],
+      formMinH: S.vw >= 1040 ? '600px' : 'auto', diagWide: S.vw >= 1040, diagNarrow: S.vw < 1040, dStepName: stepNames[S.dStep],
+      diagOpen: S.diagOpen, dDone: S.dDone, dNotDone: !S.dDone, d,
+      dPct: S.dDone ? 100 : (S.dStep / 5) * 100 + 4, dNum: S.dStep + 1, dTitle: titles[S.dStep],
+      dStepsNav: stepNames.map((label, i) => ({ label: isMobile ? `${i + 1}` : `${i + 1}. ${label}`, current: i === S.dStep && !S.dDone ? 'step' : 'false', bar: S.dDone || i <= S.dStep ? '#FFFFFF' : 'rgba(255,255,255,0.18)', fg: S.dDone || i <= S.dStep ? '#FFFFFF' : '#D1D1D1' })),
+      dS0: S.dStep === 0, dS1: S.dStep === 1, dS2: S.dStep === 2, dS3: S.dStep === 3, dS4: S.dStep === 4,
+      dChallengeOpts: this.CHALLENGES.map((label, i) => ({ label, ...opt(d.challenge === i), onClick: () => this.setD(d.challenge === i ? {} : { challenge: i, q1: [], q2: null }) })),
+      dSegOpts: this.SEGS.map((label, i) => ({ label, ...opt(d.segment === i), onClick: () => this.setD({ segment: i }) })),
+      dSizeOpts: this.SIZES.map((label, i) => ({ label, ...opt(d.size === i), onClick: () => this.setD({ size: i }) })),
+      dQ1Label: cond.q1, dQ2Label: cond.q2,
+      dQ1Opts: cond.o1.map(label => ({ label, ...opt(d.q1.includes(label)), onClick: () => this.setD({ q1: d.q1.includes(label) ? d.q1.filter(x => x !== label) : [...d.q1, label] }) })),
+      dQ2Opts: cond.o2.map(label => ({ label, ...opt(d.q2 === label), onClick: () => this.setD({ q2: label }) })),
+      dPrefOpts: ['WhatsApp', 'Ligação', 'E-mail'].map(label => ({ label, ...opt(d.pref === label), onClick: () => this.setD({ pref: label }) })),
+      dRec: R, fName: field('name'), fCompany: field('company'), fPhone: field('phone'), fEmail: field('email'),
+      fConsent: e => this.setD({ consent: e.target.checked }),
+      hasErr: !!S.dErr, dErr: S.dErr,
+      dBack: () => S.dStep > 0 && this.setState({ dStep: S.dStep - 1, dErr: '' }), dBackDisabled: S.dStep === 0, dBackOp: S.dStep === 0 ? 0.35 : 1,
+      dNext, dNextLabel: S.dStep === 3 ? 'Quero receber o contato' : S.dStep === 4 ? 'Enviar solicitação' : 'Continuar',
+      dSummary, dFirstName: d.name.trim().split(' ')[0] || '',
+      dRestart: () => this.setState({ dDone: false, dStep: 0, dErr: '', d: { challenge: null, segment: null, size: null, q1: [], q2: null, name: '', company: '', phone: '', email: '', pref: 'WhatsApp', consent: false } }),
+      faqs: [
+        ['Quais serviços a CORE 3 oferece?', 'Criamos sites, automações de atendimento e tarefas, sistemas de gestão, integrações entre ferramentas e soluções com inteligência artificial. Tudo pensado para melhorar vendas, atendimento e organização da sua empresa.'],
+        ['Como funciona o diagnóstico?', 'Você responde algumas perguntas sobre o seu negócio e os seus desafios. Com isso, indicamos um primeiro caminho e combinamos uma conversa. Nesta versão do site, o diagnóstico usa regras simples e não envia dados.'],
+        ['Vocês atendem todo o Brasil?', 'A abrangência de atendimento será confirmada pela equipe CORE 3.', true],
+        ['Como funciona o atendimento depois da entrega?', 'Na etapa Operar do Método PILOTO, acompanhamos a solução em uso, fazemos ajustes e planejamos as próximas evoluções.'],
+        ['Quanto tempo leva para um projeto?', 'Depende do tamanho do projeto. O prazo é definido depois do diagnóstico, na etapa Projeto, junto com o escopo.'],
+        ['Como entro em contato?', 'Pelo diagnóstico com a Clara aqui no site, pelo WhatsApp ou por e-mail. Os canais oficiais serão publicados no lançamento.', true]
+      ].map(([q, a, provisional], i) => { const open = S.faq === i; return { q, a, provisional: !!provisional, open, id: `faq-${i}`, sign: open ? '−' : '+', signBg: open ? '#000000' : 'transparent', signFg: open ? '#FFFFFF' : '#000000', bd: open ? '#000000' : '#D1D1D1', onClick: () => this.setState({ faq: open ? -1 : i }) }; }),
+      footCols: [
+        { title: 'Soluções', links: [['Presença Digital', '#sol-sites'], ['Gestão da Empresa', '#sol-gestao'], ['Automação Inteligente', '#sol-auto'], ['Suporte Contínuo', '#metodo']] },
+        { title: 'Segmentos', links: this.SEGMENTS.map(s => [s.title, '#segmentos']) },
+        { title: 'Método', links: [['PILOTO', '#metodo']] },
+        { title: 'Agentes', links: [['MAX — Estratégia', '#agentes'], ['CLARA — Comercial', '#agentes'], ['CORE — Desenvolvimento', '#agentes']] },
+        { title: 'CORE 3', links: [['Sobre', '#operacao'], ['Dúvidas', '#faq'], ['Contato', '#diagnostico']] }
+      ].map(c => ({ title: c.title, links: c.links.map(([label, href]) => ({ label, href })) })),
+      socials: [['instagram', 'Instagram'], ['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['linkedin', 'LinkedIn'], ['whatsapp', 'WhatsApp']].map(([k, label]) => ({ label, icon: ['tiktok', 'whatsapp'].includes(k) ? `assets/icons/social-${k}.svg` : I(k), filter: ['tiktok', 'whatsapp'].includes(k) ? 'none' : 'invert(1)', onClick: pending(`Perfil oficial de ${label} ainda não informado nesta prévia.`) })),
+      year: new Date().getFullYear(),
+      toast: S.toast, toastShow, toastClose: () => this.setState({ toast: null }), toastAction: () => { this.setState({ toast: null }); this.openDiag({}, 0); }
+    };
+  }
+}
+</script>
+</body>
+</html>
